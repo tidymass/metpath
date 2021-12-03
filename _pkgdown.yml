@@ -1,0 +1,66 @@
+destination: docs
+
+url: https://tidymass.github.io/metpath/
+
+home:
+  strip_header: false
+  title: metpath
+  links:
+  - text: Find me
+    href: https://www.shenxt.info/
+
+development:
+  mode: auto
+  version_label: danger
+  version_tooltip: "Under development"
+
+template:
+  params:
+    docsearch:
+      api_key: 21ff2860978c5d2ceb7d4150364070ff
+      index_name: metpath
+    bootswatch: flatly
+    ganalytics: UA-000000-01
+
+reference:
+  - title: Get database
+    desc: get databases.
+    contents:
+    - get_kegg_compound
+    - get_hmdb_compound
+    - get_kegg_pathway
+    - get_hmdb_pathway
+
+navbar:
+  title: "sparklyr"
+  structure:
+    left: [home, references, articles, news, contact]
+    right: [github, twitter]
+  components:
+    articles:
+      text: Help documents
+      menu:
+      - text: "Brief introduction"
+      - text: "Brief introduction of metpath"
+        href: articles/metpath.html
+      - text: -------
+      - text: "Pathways and metabolite sets in metpath"
+        href: articles/pathway_database.html
+      - text: -------
+      - text: "HMDB pathway enrichment"
+        href: articles/hmdb_pathway_enrichment.html
+      - text: "KEGG pathway enrichment"
+        href: articles/kegg_pathway_enrichment.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/JasperShen1990
+    contact:
+      text: Contact us
+      href: articles/contact_us.html
+    news:
+      text: News
+      menu:
+      - text: "Change log"
+        href: news/index.html
+toc:
+  depth: 3
