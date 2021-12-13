@@ -3,10 +3,10 @@
 #' @slot pathway_database pathway_database
 #' @slot pathway_version pathway_version
 #' @slot result result
-#' @exportClass enrich_result_class
+#' @exportClass enrich_result
 
 setClass(
-  Class = "enrich_result_class",
+  Class = "enrich_result",
   representation(
     pathway_database = "character",
     pathway_version = "character",
@@ -21,7 +21,7 @@ setClass(
 
 setMethod(
   f = "show",
-  signature = "enrich_result_class",
+  signature = "enrich_result",
   definition = function(object) {
     pathway_version <- try(object@pathway_version, silent = TRUE)
     pathway_database <- try(object@pathway_database, silent = TRUE)
@@ -51,10 +51,10 @@ setMethod(
 
 
 #' @title enrich_bar_plot
-#' @description Barplot for enrich_result_class
+#' @description Barplot for enrich_result
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}
-#' @param object enrich_result_class object.
+#' @param object enrich_result object.
 #' @param x_axis "p_value_adjust or "p_value"
 #' @param cutoff cutoff for p_value_adjust or p_value.
 #' @param top top pathways to show.
@@ -65,8 +65,8 @@ enrich_bar_plot = function(object,
                            cutoff = 0.05,
                            top = 10) {
   x_axis = match.arg(x_axis)
-  if (class(object) != "enrich_result_class") {
-    stop("Only for enrich_result_class")
+  if (class(object) != "enrich_result") {
+    stop("Only for enrich_result")
   }
   
   temp_data =
@@ -114,10 +114,10 @@ enrich_bar_plot = function(object,
 
 
 #' @title enrich_bar_plot
-#' @description Barplot for enrich_result_class
+#' @description Barplot for enrich_result
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}
-#' @param object enrich_result_class object.
+#' @param object enrich_result object.
 #' @param x_axis "mapped_number or "mapped_percentage"
 #' @param y_axis "p_value_adjust or "p_value"
 #' @param point_size "all_number" or "mapped_percentage"
@@ -141,8 +141,8 @@ enrich_scatter_plot = function(object,
   y_axis = match.arg(y_axis)
   point_size = match.arg(point_size)
   
-  if (class(object) != "enrich_result_class") {
-    stop("Only for enrich_result_class")
+  if (class(object) != "enrich_result") {
+    stop("Only for enrich_result")
   }
   
   temp_data =
@@ -224,7 +224,7 @@ enrich_scatter_plot = function(object,
 #' @description Network for enriched pathways
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}
-#' @param object enrich_result_class object.
+#' @param object enrich_result object.
 #' @param point_size point_size.
 #' @param label label
 #' @param label_size label size
@@ -241,8 +241,8 @@ enrich_network = function(object,
                           only_significant_pathway = TRUE,
                           threads = 4) {
   # browser()
-  if (class(object) != "enrich_result_class") {
-    stop("Only for enrich_result_class")
+  if (class(object) != "enrich_result") {
+    stop("Only for enrich_result")
   }
 
   point_size = match.arg(point_size)

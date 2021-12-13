@@ -16,7 +16,7 @@ enrich_scatter_plot(
 )
 }
 \arguments{
-\item{object}{enrich_result_class object.}
+\item{object}{enrich_result object.}
 
 \item{x_axis}{"mapped_number or "mapped_percentage"}
 
@@ -33,7 +33,7 @@ enrich_scatter_plot(
 \item{label_size}{label size}
 }
 \description{
-Barplot for enrich_result_class
+Barplot for enrich_result
 }
 \author{
 Xiaotao Shen

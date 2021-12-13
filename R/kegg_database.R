@@ -28,7 +28,7 @@ get_kegg_compound <-
         names() %>%
         unique() %>%
         stringr::str_replace_all(., "cpd:", "")
-
+      
       temp_fun = function(x) {
         KEGGREST::keggGet(dbentries = x)[[1]]
       }
@@ -36,7 +36,7 @@ get_kegg_compound <-
         pbapply::pblapply(compound_ID, function(x) {
           KEGGREST::keggGet(dbentries = x)[[1]]
         })
-
+      
       future::plan(future::multisession, workers = threads)
       kegg =
         kegg_compound_database %>%
@@ -54,18 +54,18 @@ get_kegg_compound <-
             }
             CAS.ID = stringr::str_replace(grep("CAS", x$DBLINKS, value = TRUE), "CAS: ", "") %>%
               stringr::str_trim(side = "both")
-
+            
             PubChem.ID = stringr::str_replace(grep("PubChem", x$DBLINKS, value = TRUE), "PubChem: ", "") %>%
               stringr::str_trim(side = "both")
-
+            
             if (length(CAS.ID) == 0) {
               CAS.ID = NA
             }
-
+            
             if (length(PubChem.ID) == 0) {
               PubChem.ID = NA
             }
-
+            
             data.frame(
               Lab.ID = KEGG.ID,
               Compound.name,
@@ -81,7 +81,7 @@ get_kegg_compound <-
         ) %>%
         do.call(rbind, .) %>%
         as.data.frame()
-
+      
       kegg =
         kegg %>%
         dplyr::filter(!is.na(mz)) %>%
@@ -106,7 +106,7 @@ get_kegg_compound <-
           Submitter,
           dplyr::everything()
         )
-
+      
       kegg$Compound.name =
         kegg$Compound.name %>%
         stringr::str_split(pattern = "\\{\\}") %>%
@@ -115,11 +115,11 @@ get_kegg_compound <-
         }) %>%
         unlist() %>%
         stringr::str_replace(pattern = ";", "")
-
+      
       openxlsx::write.xlsx(kegg, file = "kegg.xlsx", asTable = TRUE)
-
+      
       keggMS1datbase =
-        metid::construct_database(
+        metID::construct_database(
           path = ".",
           version = as.character(Sys.Date()),
           metabolite.info.name = "kegg.xlsx",
@@ -171,19 +171,19 @@ get_kegg_pathway <- function(local = TRUE,
       names() %>%
       unique() %>%
       stringr::str_replace_all(., "path:", "")
-
+    
     kegg_hsa_pathway_database <-
       pbapply::pblapply(pathway_ID, function(x) {
         KEGGREST::keggGet(dbentries = x)[[1]]
       })
-
+    
     pathway_id =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
         unname(x$ENTRY)
       }) %>%
       unlist()
-
+    
     pathway_name =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -193,26 +193,26 @@ get_kegg_pathway <- function(local = TRUE,
         # `[`(1)
       }) %>%
       unlist()
-
+    
     pathway_name =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
         unname(x$PATHWAY_MAP)
       }) %>%
       unlist()
-
+    
     describtion =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
         unname(x$DESCRIPTION)
       })
-
+    
     pathway_class =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
         unname(x$CLASS)
       })
-
+    
     gene_list =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -226,7 +226,7 @@ get_kegg_pathway <- function(local = TRUE,
           stringsAsFactors = FALSE
         )
       })
-
+    
     compound_list =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -236,7 +236,7 @@ get_kegg_pathway <- function(local = TRUE,
           stringsAsFactors = FALSE
         )
       })
-
+    
     reference_list =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -260,7 +260,7 @@ get_kegg_pathway <- function(local = TRUE,
           do.call(rbind, .) %>%
           as.data.frame()
       })
-
+    
     related_disease =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -270,8 +270,8 @@ get_kegg_pathway <- function(local = TRUE,
           stringsAsFactors = FALSE
         )
       })
-
-
+    
+    
     related_module =
       kegg_hsa_pathway_database %>%
       purrr::map(function(x) {
@@ -281,10 +281,10 @@ get_kegg_pathway <- function(local = TRUE,
           stringsAsFactors = FALSE
         )
       })
-
+    
     pathway =
       new(
-        Class = "pathway_database_class",
+        Class = "pathway_database",
         database_info = list(source = "KEGG",
                              version = as.character(Sys.Date())),
         pathway_id = pathway_id,

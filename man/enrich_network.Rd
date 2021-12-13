@@ -15,7 +15,7 @@ enrich_network(
 )
 }
 \arguments{
-\item{object}{enrich_result_class object.}
+\item{object}{enrich_result object.}
 
 \item{point_size}{point_size.}
 

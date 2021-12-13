@@ -7,7 +7,7 @@
 filter_pathway(object, class, remain_idx)
 }
 \arguments{
-\item{object}{pathway_database_class object.}
+\item{object}{pathway_database object.}
 
 \item{class}{class pathway class you want to remain.}
 

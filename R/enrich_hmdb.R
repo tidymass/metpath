@@ -344,7 +344,7 @@ enrich_hmdb = function(query_id,
   
   return_result =
     new(
-      Class = "enrich_result_class",
+      Class = "enrich_result",
       pathway_database = pathway_database@database_info$source,
       pathway_version = pathway_database@database_info$version,
       result = result

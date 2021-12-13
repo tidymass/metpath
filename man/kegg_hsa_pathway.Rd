@@ -22,7 +22,7 @@ kegg_hsa_pathway
 "hmdbMS1Database"
 ##------------------------------------------------------------------------------
 #' @title keggMS1database
-#' @description HkeggMS1database
+#' @description keggMS1database
 #' @author Xiaotao Shen
 #' \email{shenxt1990@163.com}
 #' @format keggMS1database

@@ -12,7 +12,7 @@ enrich_bar_plot(
 )
 }
 \arguments{
-\item{object}{enrich_result_class object.}
+\item{object}{enrich_result object.}
 
 \item{x_axis}{"p_value_adjust or "p_value"}
 
@@ -21,7 +21,7 @@ enrich_bar_plot(
 \item{top}{top pathways to show.}
 }
 \description{
-Barplot for enrich_result_class
+Barplot for enrich_result
 }
 \author{
 Xiaotao Shen

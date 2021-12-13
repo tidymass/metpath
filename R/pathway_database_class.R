@@ -1,5 +1,6 @@
 #' An S4 class to represent pathways
-#'
+#' @name pathway_database
+#' @docType class
 #' @slot database_info database_info
 #' @slot pathway_id pathway_id
 #' @slot pathway_name pathway_name
@@ -11,10 +12,10 @@
 #' @slot reference_list reference_list
 #' @slot related_disease related_disease
 #' @slot related_module related_module
-#' @exportClass pathway_database_class
+#' @exportClass pathway_database
 
 setClass(
-  Class = "pathway_database_class",
+  Class = "pathway_database",
   representation(
     database_info = "list",
     pathway_id = "vector",
@@ -43,9 +44,14 @@ setClass(
   )
 )
 
+
+#' @rdname pathway_database
+#' @return message
+#' @export
+#' @importFrom methods show
 setMethod(
   f = "show",
-  signature = "pathway_database_class",
+  signature = "pathway_database",
   definition = function(object) {
     version <- try(object@database_info$version, silent = TRUE)
     source <- try(object@database_info$source, silent = TRUE)
@@ -106,7 +112,7 @@ setMethod(
 #' @description filter pathways according to pathway class
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}
-#' @param object pathway_database_class object.
+#' @param object pathway_database object.
 #' @param class class pathway class you want to remain.
 #' @param remain_idx Which pathways you want to remain (remain_idx).
 #' @export
@@ -115,8 +121,8 @@ filter_pathway =
   function(object,
            class,
            remain_idx) {
-    if (base::class(object) != "pathway_database_class"){
-      stop(crayon::red('Only for pathway_database_class object.\n'))
+    if (base::class(object) != "pathway_database"){
+      stop(crayon::red('Only for pathway_database object.\n'))
     }
     
     if (missing(class) & missing(remain_idx)) {

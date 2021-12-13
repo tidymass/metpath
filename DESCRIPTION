@@ -67,7 +67,7 @@ Imports:
     xml2,
     webchem,
     KEGGREST,
-    metid (>= 0.9.0),
+    metID,
     future,
     furrr,
     openxlsx,
@@ -90,5 +90,5 @@ VignetteBuilder: knitr
 Note:
 biocViews: Metabolomics, MassSpectrometry, Data processing, Data analysis.
 Remotes: 
-    tidymass/metid
+    tidymass/metID,
     tidymass/tinytools
