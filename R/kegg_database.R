@@ -137,7 +137,7 @@ get_kegg_compound <-
 
 
 
-#' @title get_kegg_metabolite_pathway
+#' @title get_kegg_pathway
 #' @description Get pathway from KEGG
 #' @author Xiaotao Shen
 #' \email{shenxt@@stanford.edu}

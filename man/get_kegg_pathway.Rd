@@ -2,7 +2,7 @@
 % Please edit documentation in R/kegg_database.R
 \name{get_kegg_pathway}
 \alias{get_kegg_pathway}
-\title{get_kegg_metabolite_pathway}
+\title{get_kegg_pathway}
 \usage{
 get_kegg_pathway(local = TRUE, organism = "hsa", threads = 3)
 }
