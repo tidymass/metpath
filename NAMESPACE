@@ -2,6 +2,7 @@
 
 S3method("[",pathway_database)
 S3method(filter,pathway_database)
+S3method(length,pathway_database)
 export(enrich_bar_plot)
 export(enrich_hmdb)
 export(enrich_kegg)

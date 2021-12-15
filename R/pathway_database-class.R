@@ -98,11 +98,20 @@ setMethod(
     )
     
     cat(crayon::green("Pathway class (top 10):",
-                      paste(unique(
-                        head(unlist(object@pathway_class), 10)
-                      ), collapse = ";"),
+                      paste(unique(head(
+                        unlist(object@pathway_class), 10
+                      )), collapse = ";"),
                       "\n"))
   }
 )
 
 
+
+#' @method length pathway_database
+#' @param x x
+#' @export
+#' @rdname pathway_database-class
+#' @return message
+length.pathway_database <- function(x) {
+  length(x@pathway_id)
+}
