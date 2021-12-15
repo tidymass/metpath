@@ -6,14 +6,15 @@
 #' @importFrom pbapply pblapply
 #' @importFrom future plan multisession
 #' @importFrom furrr future_map
-#' @importFrom metID construct_database
+#' @importFrom metid construct_database
 #' @importFrom stringr str_replace str_split str_replace_all str_trim
 #' @importFrom crayon yellow red num_colors blue col_align col_nchar
 #' @importFrom dplyr filter mutate select everything case_when
 #' @importFrom purrr map
 #' @importFrom openxlsx write.xlsx
 #' @importFrom rstudioapi isAvailable hasFun getThemeInfo
-#' @importFrom utils packageDescription
+#' @importFrom utils packageDescription head
+#' @importFrom rlang quos !!!
 #' @import ggplot2
 #' @import ggraph
 #' @importFrom tidygraph tbl_graph

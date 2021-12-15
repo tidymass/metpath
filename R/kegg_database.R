@@ -119,7 +119,7 @@ get_kegg_compound <-
       openxlsx::write.xlsx(kegg, file = "kegg.xlsx", asTable = TRUE)
       
       keggMS1datbase =
-        metID::construct_database(
+        metid::construct_database(
           path = ".",
           version = as.character(Sys.Date()),
           metabolite.info.name = "kegg.xlsx",
@@ -298,6 +298,31 @@ get_kegg_pathway <- function(local = TRUE,
         related_disease = related_disease,
         related_module = related_module
       )
+    
+    if(length(pathway@gene_list) == 0){
+      pathway@gene_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
+        purrr::map(function(x){
+          x = data.frame()
+          x
+        })
+    }
+    
+    if(length(pathway@compound_list) == 0){
+      pathway@compound_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
+        purrr::map(function(x){
+          x = data.frame()
+          x
+        })
+    }
+    
+    if(length(pathway@protein_list) == 0){
+      pathway@protein_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
+        purrr::map(function(x){
+          x = data.frame()
+          x
+        })
+    }
+    
     return(pathway)
   }
 }

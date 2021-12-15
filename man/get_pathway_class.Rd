@@ -12,6 +12,13 @@ get_pathway_class(object)
 \description{
 Extract the class of pathways.
 }
+\examples{
+library(metpath)
+kegg_hsa_pathway = get_kegg_pathway(local = TRUE, organism = "hsa")
+kegg_hsa_pathway
+
+get_pathway_class(kegg_hsa_pathway)
+}
 \author{
 Xiaotao Shen
 \email{shenxt@stanford.edu}

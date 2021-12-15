@@ -67,7 +67,7 @@ Imports:
     xml2,
     webchem,
     KEGGREST,
-    metID,
+    metid,
     future,
     furrr,
     openxlsx,
@@ -78,7 +78,8 @@ Imports:
     htmlwidgets,
     ggraph,
     ggrepel,
-    tidygraph
+    tidygraph,
+    rlang
 License: GPL-2 | file LICENSE
 RoxygenNote: 7.1.1
 Suggests: knitr,
@@ -90,5 +91,5 @@ VignetteBuilder: knitr
 Note:
 biocViews: Metabolomics, MassSpectrometry, Data processing, Data analysis.
 Remotes: 
-    tidymass/metID,
+    tidymass/metid,
     tidymass/tinytools
