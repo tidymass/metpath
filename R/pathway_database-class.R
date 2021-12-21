@@ -115,3 +115,4 @@ setMethod(
 length.pathway_database <- function(x) {
   length(x@pathway_id)
 }
+
