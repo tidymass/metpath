@@ -16,7 +16,7 @@
     <loc>https://tidymass.github.io/metpath//reference/enrich_network.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_result_class-class.html</loc>
+    <loc>https://tidymass.github.io/metpath//reference/enrich_result-class.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath//reference/enrich_scatter_plot.html</loc>
@@ -46,19 +46,25 @@
     <loc>https://tidymass.github.io/metpath//reference/kegg_hsa_pathway.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metpath//reference/metpath_conflicts.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metpath//reference/metpath_logo.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath//reference/metpath_packages.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/pathway_database_class-class.html</loc>
+    <loc>https://tidymass.github.io/metpath//reference/pathway_database-class.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath//reference/query_id_hmdb.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath//reference/query_id_kegg.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath//reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath//reference/set_label.html</loc>

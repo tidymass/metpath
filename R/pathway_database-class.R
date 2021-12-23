@@ -1,6 +1,4 @@
 #' An S4 class to represent pathways
-#' @name pathway_database
-#' @docType class
 #' @slot database_info database_info
 #' @slot pathway_id pathway_id
 #' @slot pathway_name pathway_name
@@ -45,10 +43,6 @@ setClass(
 )
 
 
-#' @rdname pathway_database
-#' @return message
-#' @export
-#' @importFrom methods show
 setMethod(
   f = "show",
   signature = "pathway_database",

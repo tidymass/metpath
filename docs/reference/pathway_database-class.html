@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>get_pathway_class — get_pathway_class • metpath</title>
+<title>An S4 class to represent pathways — pathway_database-class • metpath</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,8 +52,8 @@
 
 
 
-<meta property="og:title" content="get_pathway_class — get_pathway_class" />
-<meta property="og:description" content="Extract the class of pathways." />
+<meta property="og:title" content="An S4 class to represent pathways — pathway_database-class" />
+<meta property="og:description" content="An S4 class to represent pathways" />
 <meta property="og:image" content="https://tidymass.github.io/metpath/logo.png" />
 
 
@@ -186,63 +186,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>get_pathway_class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymass/metpath/blob/master/R/pathway_database-methods.R'><code>R/pathway_database-methods.R</code></a></small>
-    <div class="hidden name"><code>get_pathway_class.Rd</code></div>
+    <h1>An S4 class to represent pathways</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymass/metpath/blob/master/R/pathway_database-class.R'><code>R/pathway_database-class.R</code></a>, <a href='https://github.com/tidymass/metpath/blob/master/R/pathway_database-methods.R'><code>R/pathway_database-methods.R</code></a></small>
+    <div class="hidden name"><code>pathway_database-class.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Extract the class of pathways.</p>
+    <p>An S4 class to represent pathways</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_pathway_class</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
+    <pre class="usage"># S3 method for pathway_database
+length(x)
+
+# S3 method for pathway_database
+[(x, i, ...)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>pathway_class object.</p></td>
+      <th>x</th>
+      <td><p>x</p></td>
+    </tr>
+    <tr>
+      <th>i</th>
+      <td><p>i</p></td>
+    </tr>
+    <tr>
+      <th>j</th>
+      <td><p>j</p></td>
+    </tr>
+    <tr>
+      <th>drop</th>
+      <td><p>drop</p></td>
+    </tr>
+    <tr>
+      <th>..</th>
+      <td><p>..</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Xiaotao Shen
-<a href='mailto:shenxt@stanford.edu'>shenxt@stanford.edu</a></p>
+    <p>message</p>
+<p>pathway_database</p>
+    <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymass/metpath'>metpath</a></span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>kegg_hsa_pathway</span> <span class='op'>=</span> <span class='fu'><a href='get_kegg_pathway.html'>get_kegg_pathway</a></span><span class='op'>(</span>local <span class='op'>=</span> <span class='cn'>TRUE</span>, organism <span class='op'>=</span> <span class='st'>"hsa"</span><span class='op'>)</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #BBBB00;'>This database is downloaded in 2021-12-13</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-in'><span class='va'>kegg_hsa_pathway</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>---------Pathway source&amp;version---------</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>KEGG &amp; 2021-12-13 </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>-----------Pathway information------------</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>345 pathways </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>334 pathways have genes </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>0 pathways have proteins </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>281 pathways have compounds </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>Pathway class (top 10): Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism </span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-in'></span>
-<span class='r-in'><span class='fu'>get_pathway_class</span><span class='op'>(</span><span class='va'>kegg_hsa_pathway</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 43 × 2</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    class                                                                       n</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                                                                   <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> Cellular Processes; Cell growth and death                                   8</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> Cellular Processes; Cell motility                                           1</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> Cellular Processes; Cellular community - eukaryotes                         5</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> Cellular Processes; Transport and catabolism                                7</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> Environmental Information Processing; Membrane transport                    1</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> Environmental Information Processing; Signal transduction                  26</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> Environmental Information Processing; Signaling molecules and interact…     5</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> Genetic Information Processing; Folding, sorting and degradation            7</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> Genetic Information Processing; Replication and repair                      7</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> Genetic Information Processing; Transcription                               3</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 33 more rows</span></span>
-</pre>
+    
+
+<dl>
+<dt><code>database_info</code></dt><dd><p>database_info</p></dd>
+
+<dt><code>pathway_id</code></dt><dd><p>pathway_id</p></dd>
+
+<dt><code>pathway_name</code></dt><dd><p>pathway_name</p></dd>
+
+<dt><code>describtion</code></dt><dd><p>describtion</p></dd>
+
+<dt><code>pathway_class</code></dt><dd><p>pathway_class</p></dd>
+
+<dt><code>gene_list</code></dt><dd><p>gene_list</p></dd>
+
+<dt><code>compound_list</code></dt><dd><p>compound_list</p></dd>
+
+<dt><code>protein_list</code></dt><dd><p>protein_list</p></dd>
+
+<dt><code>reference_list</code></dt><dd><p>reference_list</p></dd>
+
+<dt><code>related_disease</code></dt><dd><p>related_disease</p></dd>
+
+<dt><code>related_module</code></dt><dd><p>related_module</p></dd>
+
+</dl>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
