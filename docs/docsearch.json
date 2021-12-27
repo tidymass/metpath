@@ -2,21 +2,21 @@
   "index_name": "metpath",
   "start_urls": [
     {
-      "url": "https://tidymass.github.io/metpath//index.html",
+      "url": "https://tidymass.github.io/metpath/index.html",
       "selectors_key": "homepage",
       "tags": [
         "homepage"
       ]
     },
     {
-      "url": "https://tidymass.github.io/metpath//reference",
+      "url": "https://tidymass.github.io/metpath/reference",
       "selectors_key": "reference",
       "tags": [
         "reference"
       ]
     },
     {
-      "url": "https://tidymass.github.io/metpath//articles",
+      "url": "https://tidymass.github.io/metpath/articles",
       "selectors_key": "articles",
       "tags": [
         "articles"
@@ -30,7 +30,7 @@
     "/articles/index.html"
   ],
   "sitemap_urls": [
-    "https://tidymass.github.io/metpath//sitemap.xml"
+    "https://tidymass.github.io/metpath/sitemap.xml"
   ],
   "selectors": {
     "homepage": {

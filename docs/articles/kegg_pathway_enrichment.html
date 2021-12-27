@@ -34,6 +34,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,18 +48,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Under development">0.0.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Help documents
@@ -70,11 +66,13 @@
       <a href="../articles/metpath.html">Brief introduction of metpath</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/pathway_database.html">Pathways and metabolite sets in metpath</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../articles/hmdb_pathway_enrichment.html">HMDB pathway enrichment</a>
     </li>
     <li>
@@ -95,24 +93,21 @@
   </ul>
 </li>
 <li>
-  <a href="../articles/contact_us.html">Contact us</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../articles/metpath.html">Get started</a>
+  <a href="../articles/contact_us.html">Contact us</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidymass/metpath/">
+  <a href="https://github.com/tidymass/metpath/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990">
+  <a href="https://twitter.com/JasperShen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -133,15 +128,15 @@
 
       
 
-      </header><script src="kegg_pathway_enrichment_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>KEGG pathway enrichment</h1>
-                        <h4 class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-23</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymass/metpath/blob/master/vignettes/kegg_pathway_enrichment.Rmd"><code>vignettes/kegg_pathway_enrichment.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymass/metpath/blob/HEAD/vignettes/kegg_pathway_enrichment.Rmd" class="external-link"><code>vignettes/kegg_pathway_enrichment.Rmd</code></a></small>
       <div class="hidden name"><code>kegg_pathway_enrichment.Rmd</code></div>
 
     </div>
@@ -149,71 +144,73 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath">metpath</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span>
 <span class="co">#&gt; Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.6)</span>
 <span class="co">#&gt; than is installed on your system (1.0.7). This might lead to errors</span>
 <span class="co">#&gt; when loading mzR. If you encounter such issues, please send a report,</span>
 <span class="co">#&gt; including the output of sessionInfo() to the Bioc support forum at </span>
 <span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
 <span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span>
-<span class="co">#&gt; ── Attaching packages ───────────────────────────────────────── metpath 0.0.1 ──</span>
-<span class="co">#&gt; ✓ metid     1.1.0     ✓ tinytools 0.9.1</span>
-<span class="co">#&gt; ── Conflicts ──────────────────────────────────────────── metpath_conflicts() ──</span>
-<span class="co">#&gt; x methods::body&lt;-()    masks base::body&lt;-()</span>
-<span class="co">#&gt; x metpath::filter()    masks stats::filter()</span>
-<span class="co">#&gt; x methods::kronecker() masks base::kronecker()</span>
+<span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ───────────────────────────────────────── metpath 0.0.1 ──</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid    </span> 1.1.0     <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">tinytools</span> 0.9.1</span>
+<span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ──────────────────────────────────────────── metpath_conflicts() ──</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>          masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span>      masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>       masks <span style="color: #0000BB;">base</span>::kronecker()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">mz_rt_match()</span> masks <span style="color: #0000BB;">tinytools</span>::mz_rt_match()</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'metpath'</span>
 <span class="co">#&gt; The following object is masked from 'package:stats':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     filter</span></code></pre></div>
-<div id="load-packages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-packages" class="anchor"></a><strong>Load packages</strong>
+<div class="section level2">
+<h2 id="load-packages">
+<strong>Load packages</strong><a class="anchor" aria-label="anchor" href="#load-packages"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath">metpath</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
-<div id="load-kegg-pathway-human-database" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-kegg-pathway-human-database" class="anchor"></a><strong>Load KEGG pathway human database</strong>
+<div class="section level2">
+<h2 id="load-kegg-pathway-human-database">
+<strong>Load KEGG pathway human database</strong><a class="anchor" aria-label="anchor" href="#load-kegg-pathway-human-database"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"kegg_hsa_pathway"</span>, package <span class="op">=</span> <span class="st">"metpath"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"kegg_hsa_pathway"</span>, package <span class="op">=</span> <span class="st">"metpath"</span><span class="op">)</span>
 <span class="va">kegg_hsa_pathway</span>
-<span class="co">#&gt; ---------Pathway source&amp;version---------</span>
-<span class="co">#&gt; KEGG &amp; 2021-03-02 </span>
-<span class="co">#&gt; -----------Pathway information------------</span>
-<span class="co">#&gt; 342 pathways </span>
-<span class="co">#&gt; 332 pathways have genes </span>
-<span class="co">#&gt; 0 pathways have proteins </span>
-<span class="co">#&gt; 280 pathways have compounds </span>
-<span class="co">#&gt; Pathway class: Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism;Metabolism; Metabolism of cofactors and vitamins;Metabolism; Energy metabolism;Metabolism; Amino acid metabolism;Metabolism; Nucleotide metabolism;Metabolism; Biosynthesis of other secondary metabolites;Metabolism; Metabolism of other amino acids;Metabolism; Glycan biosynthesis and metabolism;Metabolism; Metabolism of terpenoids and polyketides;Genetic Information Processing; Translation;Metabolism; Xenobiotics biodegradation and metabolism;Human Diseases; Drug resistance: antineoplastic;Environmental Information Processing; Membrane transport;Genetic Information Processing; Folding, sorting and degradation;Genetic Information Processing; Transcription;Genetic Information Processing; Replication and repair;Organismal Systems; Endocrine system;Environmental Information Processing; Signal transduction;Environmental Information Processing; Signaling molecules and interaction;Organismal Systems; Immune system;Cellular Processes; Cell growth and death;Cellular Processes; Transport and catabolism;Organismal Systems; Aging;Organismal Systems; Circulatory system;Organismal Systems; Development and regeneration;Cellular Processes; Cellular community - eukaryotes;Organismal Systems; Environmental adaptation;Organismal Systems; Nervous system;Organismal Systems; Sensory system;Cellular Processes; Cell motility;Human Diseases; Endocrine and metabolic disease;Organismal Systems; Excretory system;Organismal Systems; Digestive system;Human Diseases; Neurodegenerative disease;Human Diseases; Substance dependence;Human Diseases; Infectious disease: bacterial;Human Diseases; Infectious disease: parasitic;Human Diseases; Infectious disease: viral;Human Diseases; Cancer: overview;Human Diseases; Cancer: specific types;Human Diseases; Immune disease;Human Diseases; Cardiovascular disease</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BB00;">---------Pathway source&amp;version---------</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; KEGG &amp; 2021-12-13 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; -----------Pathway information------------</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 345 pathways </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 334 pathways have genes </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 0 pathways have proteins </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 281 pathways have compounds </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Pathway class (top 10): Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/get_pathway_class.html">get_pathway_class</a></span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 43 × 2</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 43 × 2</span></span>
 <span class="co">#&gt;    class                                                                       n</span>
-<span class="co">#&gt;    &lt;chr&gt;                                                                   &lt;int&gt;</span>
-<span class="co">#&gt;  1 Cellular Processes; Cell growth and death                                   8</span>
-<span class="co">#&gt;  2 Cellular Processes; Cell motility                                           1</span>
-<span class="co">#&gt;  3 Cellular Processes; Cellular community - eukaryotes                         5</span>
-<span class="co">#&gt;  4 Cellular Processes; Transport and catabolism                                7</span>
-<span class="co">#&gt;  5 Environmental Information Processing; Membrane transport                    1</span>
-<span class="co">#&gt;  6 Environmental Information Processing; Signal transduction                  26</span>
-<span class="co">#&gt;  7 Environmental Information Processing; Signaling molecules and interact…     5</span>
-<span class="co">#&gt;  8 Genetic Information Processing; Folding, sorting and degradation            7</span>
-<span class="co">#&gt;  9 Genetic Information Processing; Replication and repair                      7</span>
-<span class="co">#&gt; 10 Genetic Information Processing; Transcription                               3</span>
-<span class="co">#&gt; # … with 33 more rows</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Cellular Processes; Cell growth and death                                   8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Cellular Processes; Cell motility                                           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Cellular Processes; Cellular community - eukaryotes                         5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Cellular Processes; Transport and catabolism                                7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Environmental Information Processing; Membrane transport                    1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Environmental Information Processing; Signal transduction                  26</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Environmental Information Processing; Signaling molecules and interact…     5</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Genetic Information Processing; Folding, sorting and degradation            7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Genetic Information Processing; Replication and repair                      7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Genetic Information Processing; Transcription                               3</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 33 more rows</span></span></code></pre></div>
 </div>
-<div id="pathway-enrichment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pathway-enrichment" class="anchor"></a><strong>Pathway enrichment</strong>
+<div class="section level2">
+<h2 id="pathway-enrichment">
+<strong>Pathway enrichment</strong><a class="anchor" aria-label="anchor" href="#pathway-enrichment"></a>
 </h2>
 <p>We use the demo compound list from <code>metpath</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"query_id_kegg"</span>, package <span class="op">=</span> <span class="st">"metpath"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_kegg"</span>, package <span class="op">=</span> <span class="st">"metpath"</span><span class="op">)</span>
 <span class="va">query_id_kegg</span>
 <span class="co">#&gt;  [1] "C00164" "C00099" "C00300" "C01026" "C00122" "C00037" "C05330" "C00097"</span>
 <span class="co">#&gt;  [9] "C00079" "C00065" "C00188" "C00082" "C00183" "C00166" "C00163" "C00022"</span>
@@ -221,11 +218,11 @@
 <p>Remove the disease pathways:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">remain_idx</span> <span class="op">=</span>
-  <span class="va">kegg_hsa_pathway</span><span class="op">@</span><span class="va">pathway_class</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">`!`</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">kegg_hsa_pathway</span><span class="op">@</span><span class="va">pathway_class</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">`!`</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">pathway_database</span> <span class="op">=</span>
   <span class="fu"><a href="../reference/filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">kegg_hsa_pathway</span>, remain_idx <span class="op">=</span> <span class="va">remain_idx</span><span class="op">)</span></code></pre></div>
@@ -241,16 +238,17 @@
 <p>Check the result:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span>
-<span class="co">#&gt; ---------Pathway database&amp;version---------</span>
-<span class="co">#&gt; KEGG &amp; 2021-03-02 </span>
-<span class="co">#&gt; -----------Enrichment result------------</span>
-<span class="co">#&gt; 195 pathways are enriched </span>
-<span class="co">#&gt; 28 pathways p-values &lt; 0.05 </span>
-<span class="co">#&gt; Glycolysis / Gluconeogenesis;Citrate cycle (TCA cycle);Pentose phosphate pathway;Pentose and glucuronate interconversions;Fructose and mannose metabolism ... (only top 5 shows)</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BB00;">---------Pathway database&amp;version---------</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; KEGG &amp; 2021-12-13 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; -----------Enrichment result------------</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 191 pathways are enriched </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; 28 pathways p-values &lt; 0.05 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Glycolysis / Gluconeogenesis;Citrate cycle (TCA cycle);Pentose phosphate pathway;Pentose and glucuronate interconversions;Fructose and mannose metabolism ... (only top 5 shows)</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 </div>
-<div id="plot-to-show-pathway-enrichment" class="section level2">
-<h2 class="hasAnchor">
-<a href="#plot-to-show-pathway-enrichment" class="anchor"></a><strong>Plot to show Pathway enrichment</strong>
+<div class="section level2">
+<h2 id="plot-to-show-pathway-enrichment">
+<strong>Plot to show Pathway enrichment</strong><a class="anchor" aria-label="anchor" href="#plot-to-show-pathway-enrichment"></a>
 </h2>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/enrich_bar_plot.html">enrich_bar_plot</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">result</span><span class="op">)</span></code></pre></div>
@@ -275,11 +273,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Xiaotao Shen, Chuchu Wang.</p>
+  <p></p>
+<p>metpath Developed by Xiaotao Shen, Chuchu Wang. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

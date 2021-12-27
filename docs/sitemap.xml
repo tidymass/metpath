@@ -1,87 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tidymass.github.io/metpath//index.html</loc>
+    <loc>https://tidymass.github.io/metpath/404.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_bar_plot.html</loc>
+    <loc>https://tidymass.github.io/metpath/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_hmdb.html</loc>
+    <loc>https://tidymass.github.io/metpath/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_kegg.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/contact_us.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_network.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/hmdb_pathway_enrichment.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_result-class.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/enrich_scatter_plot.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/kegg_pathway_enrichment.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/filter_pathway.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/metpath.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/get_hmdb_compound.html</loc>
+    <loc>https://tidymass.github.io/metpath/articles/pathways_database.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/get_hmdb_pathway.html</loc>
+    <loc>https://tidymass.github.io/metpath/authors.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/get_kegg_compound.html</loc>
+    <loc>https://tidymass.github.io/metpath/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/get_kegg_pathway.html</loc>
+    <loc>https://tidymass.github.io/metpath/news/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/get_pathway_class.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_bar_plot.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/hmdb_pathway.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_hmdb.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/kegg_hsa_pathway.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_kegg.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/metpath_conflicts.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_network.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/metpath_logo.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_result-class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/metpath_packages.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_result_class-class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/pathway_database-class.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/enrich_scatter_plot.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/query_id_hmdb.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/filter_pathway.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/query_id_kegg.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/get_hmdb_compound.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/reexports.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/get_hmdb_pathway.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//reference/set_label.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/get_kegg_compound.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//articles/contact_us.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/get_kegg_pathway.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//articles/hmdb_pathway_enrichment.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/get_pathway_class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//articles/kegg_pathway_enrichment.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/hmdb_pathway.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//articles/metpath.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metpath//articles/pathways_database.html</loc>
+    <loc>https://tidymass.github.io/metpath/reference/kegg_hsa_pathway.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/metpath_conflicts.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/metpath_logo.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/metpath_packages.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/pathway_database-class.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/pathway_database_class-class.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/query_id_hmdb.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/query_id_kegg.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/set_label.html</loc>
   </url>
 </urlset>

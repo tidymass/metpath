@@ -26,17 +26,16 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metpath)
 ```
 
 ## **Load HMDB pathway database**
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("hmdb_pathway", package = "metpath")
-hmdb_pathway
 ```
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 get_pathway_class(hmdb_pathway)
 ```
 
@@ -44,13 +43,13 @@ get_pathway_class(hmdb_pathway)
 
 We use the demo compound list from `metpath`.
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("query_id_hmdb", package = "metpath")
 query_id_hmdb
 ```
 
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result = 
 enrich_hmdb(query_id = query_id_hmdb, 
             query_type = "compound", 
@@ -64,14 +63,14 @@ enrich_hmdb(query_id = query_id_hmdb,
 
 Check the result:
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result
 ```
 
 
 ## **Plot to show Pathway enrichment**
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_bar_plot(
   object = result,
   x_axis = "p_value_adjust",
@@ -80,11 +79,11 @@ enrich_bar_plot(
 )
 ```
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_scatter_plot(object = result)
 ```
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_network(object = result)
 ```
 
