@@ -2,7 +2,7 @@
 #' @title get_kegg_compound
 #' @description Get compound from KEGG
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param local Use have downloaded database or from online.
 #' @param threads threads
 #' @importFrom KEGGREST keggList keggGet
@@ -12,15 +12,15 @@ get_kegg_compound <-
   function(local = TRUE,
            threads = 3) {
     if (local) {
-      data("keggMS1database", envir = environment())
+      data("kegg_compound_database", envir = environment())
       message(
         crayon::yellow(
           "This database is downloaded in",
-          keggMS1database@database.info$Version
+          kegg_compound_database@database.info$Version
         )
       )
       cat("\n")
-      return(keggMS1database)
+      return(kegg_compound_database)
     } else{
       message(crayon::yellow("It may take a while...\n"))
       compound_ID <-
@@ -52,10 +52,15 @@ get_kegg_compound <-
             if (is.null(x$EXACT_MASS)) {
               mz = NA
             }
-            CAS.ID = stringr::str_replace(grep("CAS", x$DBLINKS, value = TRUE), "CAS: ", "") %>%
+            CAS.ID = stringr::str_replace(grep("CAS", 
+                                               x$DBLINKS, 
+                                               value = TRUE), 
+                                          "CAS: ", "") %>%
               stringr::str_trim(side = "both")
             
-            PubChem.ID = stringr::str_replace(grep("PubChem", x$DBLINKS, value = TRUE), "PubChem: ", "") %>%
+            PubChem.ID = stringr::str_replace(grep("PubChem", 
+                                                   x$DBLINKS, value = TRUE), 
+                                              "PubChem: ", "") %>%
               stringr::str_trim(side = "both")
             
             if (length(CAS.ID) == 0) {
@@ -140,7 +145,7 @@ get_kegg_compound <-
 #' @title get_kegg_pathway
 #' @description Get pathway from KEGG
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param local Use have downloaded database or from online.
 #' @param organism organism
 #' @param threads threads
@@ -299,25 +304,28 @@ get_kegg_pathway <- function(local = TRUE,
         related_module = related_module
       )
     
-    if(length(pathway@gene_list) == 0){
-      pathway@gene_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
-        purrr::map(function(x){
+    if (length(pathway@gene_list) == 0) {
+      pathway@gene_list = vector(mode = "list", 
+                                 length = length(pathway@pathway_id)) %>%
+        purrr::map(function(x) {
           x = data.frame()
           x
         })
     }
     
-    if(length(pathway@compound_list) == 0){
-      pathway@compound_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
-        purrr::map(function(x){
+    if (length(pathway@compound_list) == 0) {
+      pathway@compound_list = vector(mode = "list", 
+                                     length = length(pathway@pathway_id)) %>%
+        purrr::map(function(x) {
           x = data.frame()
           x
         })
     }
     
-    if(length(pathway@protein_list) == 0){
-      pathway@protein_list = vector(mode = "list", length = length(object@pathway_id)) %>% 
-        purrr::map(function(x){
+    if (length(pathway@protein_list) == 0) {
+      pathway@protein_list = vector(mode = "list", 
+                                    length = length(pathway@pathway_id)) %>%
+        purrr::map(function(x) {
           x = data.frame()
           x
         })

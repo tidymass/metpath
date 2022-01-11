@@ -1,7 +1,7 @@
 #' @title filter_pathway
 #' @description filter pathways according to pathway class
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param object pathway_database object.
 #' @param class class pathway class you want to remain.
 #' @param remain_idx Which pathways you want to remain (remain_idx).

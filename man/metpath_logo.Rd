@@ -6,10 +6,13 @@
 \usage{
 metpath_logo()
 }
+\value{
+logo
+}
 \description{
 Get the detailed of metpath package.
 }
 \author{
 Xiaotao Shen
-\email{shenxt@stanford.edu}
+\email{shenxt1990@outlook.com}
 }

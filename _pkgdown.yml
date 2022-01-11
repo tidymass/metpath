@@ -23,13 +23,6 @@ template:
     ganalytics: UA-000000-01
 
 reference:
-  - title: Get database
-    desc: get databases.
-    contents:
-    - get_kegg_compound
-    - get_hmdb_compound
-    - get_kegg_pathway
-    - get_hmdb_pathway
 
 navbar:
   title: "sparklyr"
@@ -40,10 +33,6 @@ navbar:
     articles:
       text: Help documents
       menu:
-      - text: "Brief introduction"
-      - text: "Brief introduction of metpath"
-        href: articles/metpath.html
-      - text: -------
       - text: "Pathways and metabolite sets in metpath"
         href: articles/pathway_database.html
       - text: -------
@@ -53,7 +42,7 @@ navbar:
         href: articles/kegg_pathway_enrichment.html
     twitter:
       icon: "fab fa-twitter fa-lg"
-      href: https://twitter.com/JasperShen1990
+      href: https://twitter.com/xiaotaoshen1990
     contact:
       text: Contact us
       href: articles/contact_us.html

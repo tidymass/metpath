@@ -25,5 +25,5 @@ Barplot for enrich_result
 }
 \author{
 Xiaotao Shen
-\email{shenxt@stanford.edu}
+\email{shenxt1990@outlook.com}
 }

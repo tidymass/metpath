@@ -61,12 +61,6 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Brief introduction</li>
-    <li>
-      <a href="../articles/metpath.html">Brief introduction of metpath</a>
-    </li>
-    <li class="divider">
-    </li>
 <li>
       <a href="../articles/pathway_database.html">Pathways and metabolite sets in metpath</a>
     </li>
@@ -107,7 +101,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -134,7 +128,7 @@
       <h1 data-toc-skip>KEGG pathway enrichment</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-01-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metpath/blob/HEAD/vignettes/kegg_pathway_enrichment.Rmd" class="external-link"><code>vignettes/kegg_pathway_enrichment.Rmd</code></a></small>
       <div class="hidden name"><code>kegg_pathway_enrichment.Rmd</code></div>
@@ -152,12 +146,13 @@
 <span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
 <span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span>
 <span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ───────────────────────────────────────── metpath 0.0.1 ──</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid    </span> 1.1.0     <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">tinytools</span> 0.9.1</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid</span> 1.1.0</span>
 <span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ──────────────────────────────────────────── metpath_conflicts() ──</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>          masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span>      masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>       masks <span style="color: #0000BB;">base</span>::kronecker()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">mz_rt_match()</span> masks <span style="color: #0000BB;">tinytools</span>::mz_rt_match()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>     masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">head()</span>   masks <span style="color: #0000BB;">utils</span>::head()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>  masks <span style="color: #0000BB;">base</span>::kronecker()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">tail()</span>   masks <span style="color: #0000BB;">utils</span>::tail()</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'metpath'</span>
 <span class="co">#&gt; The following object is masked from 'package:stats':</span>

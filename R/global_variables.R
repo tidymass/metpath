@@ -31,6 +31,7 @@ globalVariables(
     "p_value",
     "mapped_number",
     "all_number",
-    "object"
+    "object",
+    "hmdb_compound_database"
   )
 )

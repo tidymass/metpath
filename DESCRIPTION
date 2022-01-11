@@ -12,7 +12,6 @@ Authors@R: c(
            family = "Wang",
            role = c("aut", "ctb"))
            )
-Maintainer: Xiaotao Shen <shenxt@stanford.edu>
 Description: This package is used to do statistical data analysis for and pathway enrichment analysi for metabolomics data.
 URL: https://github.com/tidymass/metpath
 BugReports: https://github.com/tidymass/metpath/issues
@@ -23,59 +22,29 @@ Imports:
     BiocParallel,
     cli,
     crayon,
-    clisymbols,
     dplyr,
-    faahKO,
     ggplot2,
     ggsci,
-    ggfortify,
     graphics,
     grDevices,
-    pcaMethods,
-    httr,
-    impute,
-    missForest,
     magrittr,
-    scatterplot3d,
     pbapply,
-    pheatmap,
     plyr,
     purrr,
-    beeswarm,
-    ellipse,
-    patchwork,
-    pls,
-    plsdepot,
-    pROC,
-    e1071,
     snow,
     methods,
-    MSnbase,
-    mzR,
-    pander,
     utils,
-    rvest,
     stats,
-    readr,
-    readxl,
-    RColorBrewer,
-    plotly,
     stringr,
-    tibble,
     tidyr,
     tidyverse,
-    xml2,
-    webchem,
     KEGGREST,
     metid,
     future,
     furrr,
     openxlsx,
     rstudioapi,
-    tinytools,
-    htmltools,
     leaflet,
-    htmlwidgets,
     ggraph,
     ggrepel,
     tidygraph,
@@ -89,7 +58,6 @@ Suggests: knitr,
     BiocGenerics
 VignetteBuilder: knitr
 Note:
-biocViews: Metabolomics, MassSpectrometry, Data processing, Data analysis.
+biocViews: Metabolomics, MassSpectrometry
 Remotes: 
-    tidymass/metid,
-    tidymass/tinytools
+    tidymass/metid

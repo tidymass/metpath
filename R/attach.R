@@ -1,4 +1,4 @@
-core <- c("metid", "tinytools")
+core <- c("metid")
 
 metpath_core_unloaded <- function() {
   search <- paste0("package:", core)

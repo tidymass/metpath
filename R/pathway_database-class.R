@@ -100,13 +100,3 @@ setMethod(
 )
 
 
-
-#' @method length pathway_database
-#' @param x x
-#' @export
-#' @rdname pathway_database-class
-#' @return message
-length.pathway_database <- function(x) {
-  length(x@pathway_id)
-}
-

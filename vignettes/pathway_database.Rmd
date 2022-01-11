@@ -1,0 +1,154 @@
+---
+title: "Pathways and metabolite sets in metpath"
+author:
+- name: Xiaotao Shen PhD (https://www.shenxt.info/)
+date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{pahtway_database}
+  %\VignettePackage{metpath}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+```{r setup}
+library(metpath)
+```
+
+# **Brief introduction**
+
+Two widely used metabolic pathways are utilized in `metpath`, namely [`KEGG`](https://www.genome.jp/kegg/) and [`HMDB`/`SMPDB`](https://smpdb.ca/).
+
+# **KEGG pathway**
+
+We can just download the `KEGG` online or from the `metpaht` pacakge.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+library(metpath)
+```
+
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_hsa_pathway = 
+  get_kegg_pathway(local = TRUE, organism = "hsa", threads = 3)
+```
+
+The date when the pathway database is downloaded will show.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_hsa_pathway
+```
+
+Just type the pathway and the information of it will show.
+
+We can also download the latest version of `KEGG` pathway. Make sure the internet is good and it will take a while to download.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_hsa_pathway2 = 
+  get_kegg_pathway(local = FALSE, organism = "hsa", threads = 3)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_hsa_pathway2
+```
+
+# **KEGG compound**
+
+We can also get the KEGG compound database using `metpath`.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_compound = 
+  get_kegg_compound(local = TRUE, threads = 5)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_compound
+```
+
+We can also download the online `KEGG` compound database. But it will take a long time.
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_compound2 = 
+  get_kegg_compound(local = FALSE, threads = 5)
+```
+
+
+# **HMDB pathway**
+
+We can just download the `HMDB` online or from the `metpaht` pacakge.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+hmdb_hsa_pathway = 
+  get_hmdb_pathway(threads = 3)
+```
+
+The date when the pathway database is downloaded will show.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+hmdb_hsa_pathway
+```
+
+Just type the pathway and the information of it will show.
+
+
+# **HMDB compound**
+
+We can also get the HMDB compound database using `metpath`.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+hmdb_compound = 
+  get_hmdb_compound(threads = 5)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+hmdb_compound
+```
+
+
+# **Processing of pathway class**
+
+## Brief information of pathway database
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+length(kegg_hsa_pathway)
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+get_pathway_class(kegg_hsa_pathway)
+```
+
+## Accessor
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+kegg_hsa_pathway[1:5]
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+head(names(kegg_hsa_pathway))
+```
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+names(kegg_hsa_pathway[c("hsa00010", "hsa00020")])
+```
+
+
+## Extract data
+
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+database_info(kegg_hsa_pathway)
+```

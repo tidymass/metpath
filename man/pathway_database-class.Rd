@@ -4,32 +4,39 @@
 \docType{class}
 \name{pathway_database-class}
 \alias{pathway_database-class}
-\alias{length.pathway_database}
 \alias{[.pathway_database}
+\alias{names.pathway_database}
+\alias{length.pathway_database}
 \title{An S4 class to represent pathways}
 \usage{
-\method{length}{pathway_database}(x)
-
 \method{[}{pathway_database}(x, i, ...)
+
+\method{names}{pathway_database}(x)
+
+\method{length}{pathway_database}(x)
 }
 \arguments{
 \item{x}{x}
 
 \item{i}{i}
 
-\item{j}{j}
-
-\item{drop}{drop}
-
-\item{..}{..}
+\item{...}{other parameters}
 }
 \value{
-message
-
 pathway_database
+
+ID of pathways
+
+message
 }
 \description{
 An S4 class to represent pathways
+
+[ method
+
+names method
+
+length method
 }
 \section{Slots}{
 
@@ -57,3 +64,13 @@ An S4 class to represent pathways
 \item{\code{related_module}}{related_module}
 }}
 
+\author{
+Xiaotao Shen
+\email{shenxt1990@outlook.com}
+
+Xiaotao Shen
+\email{shenxt1990@outlook.com}
+
+Xiaotao Shen
+\email{shenxt1990@outlook.com}
+}

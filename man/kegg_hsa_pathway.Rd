@@ -13,23 +13,8 @@ kegg_hsa_pathway
 \description{
 kegg_hsa_pathway
 }
-\details{
-#' @title hmdbMS1Database
-#' @description hmdbMS1Database
-#' @author Xiaotao Shen
-#' \email{shenxt1990@163.com}
-#' @format hmdbMS1Database.
-"hmdbMS1Database"
-##------------------------------------------------------------------------------
-#' @title keggMS1database
-#' @description keggMS1database
-#' @author Xiaotao Shen
-#' \email{shenxt1990@163.com}
-#' @format keggMS1database
-"keggMS1database"
-}
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }
 \keyword{datasets}

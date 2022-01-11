@@ -13,8 +13,7 @@
 
 ## About
 
-`metpath` is a R package which is used for absolute quantification for
-lipidomics data.
+`metpath` is a R package which is used for pathway analysis of metabolomics data.
 
 <img src="man/figures/Figure_2.jpg" align="left" alt="" width="100%" />
 
@@ -32,19 +31,18 @@ devtools::install_github("tidymass/metpath")
 
 ## Usage
 
-Please see the [Get
-started](https://tidymass.github.io/metpath/articles/metpath.html)
+Please see the [Help document](https://tidymass.github.io/metpath/articles/metpath.html)
 page to get the instruction of `metpath`.
 
 ## Need help?
 
-If you have any quesitions about `metpath`, please don’t hesitate to
-email me (<shenxt@stanford.edu>).
+If you have any questions about `metpath`, please don’t hesitate to
+email me (<shenxt1990@outlook.com>).
 
 <i class="fa fa-weixin"></i>
 [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg)
 
-<i class="fa fa-envelope"></i> <shenxt@stanford.edu>
+<i class="fa fa-envelope"></i> <shenxt1990@outlook.com>
 
 <i class="fa fa-twitter"></i>
 [Twitter](https://twitter.com/JasperShen1990)

@@ -1,27 +1,27 @@
 #' @title get_hmdb_pathway
 #' @description Get compound from HMDB (SMPDB)
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param threads threads
 #' @export
 
 get_hmdb_compound <- function(threads = 3) {
-  data("hmdbMS1Database", envir = environment())
+  data("hmdb_compound_database", envir = environment())
   message(
     crayon::yellow(
       "This database is downloaded in",
-      hmdbMS1Database@database.info$Version
+      hmdb_compound_database@database.info$Version
     )
   )
   cat("\n")
-  return(hmdbMS1Database)
+  return(hmdb_compound_database)
 }
 
 
 #' @title get_hmdb_pathway
 #' @description Get pathways from HMDB (SMPDB)
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param threads threads
 #' @export
 # load("data/hmdb_pathway.rda")
@@ -33,7 +33,8 @@ get_hmdb_compound <- function(threads = 3) {
 #   hmdb_pathway@pathway_class
 #
 # for(x in idx){
-#   pathway_class[[x]] = paste(pathway_class[[x]], "primary_pathway", sep = ";")
+#   pathway_class[[x]] = paste(pathway_class[[x]], 
+#   "primary_pathway", sep = ";")
 # }
 #
 #

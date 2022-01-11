@@ -31,8 +31,12 @@ setMethod(
     }
     cat(crayon::green("-----------Enrichment result------------\n"))
     cat(crayon::green(nrow(object@result), "pathways are enriched", "\n"))
-    cat(crayon::green(nrow(object@result %>% 
-                             dplyr::filter(p_value < 0.05)), "pathways p-values < 0.05", "\n"))
+    cat(crayon::green(
+      nrow(object@result %>%
+             dplyr::filter(p_value < 0.05)),
+      "pathways p-values < 0.05",
+      "\n"
+    ))
     if (nrow(object@result) > 0) {
       if (nrow(object@result) > 5) {
         pathway_name = object@result$pathway_name[1:5]
@@ -53,7 +57,7 @@ setMethod(
 #' @title enrich_bar_plot
 #' @description Barplot for enrich_result
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param object enrich_result object.
 #' @param x_axis "p_value_adjust or "p_value"
 #' @param cutoff cutoff for p_value_adjust or p_value.
@@ -78,7 +82,7 @@ enrich_bar_plot = function(object,
     dplyr::mutate(pathway_name = factor(pathway_name, levels = pathway_name))
   
   if (nrow(temp_data) > top) {
-    temp_data = temp_data[1:top, ]
+    temp_data = temp_data[1:top,]
   }
   
   plot =
@@ -116,7 +120,7 @@ enrich_bar_plot = function(object,
 #' @title enrich_bar_plot
 #' @description Barplot for enrich_result
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param object enrich_result object.
 #' @param x_axis "mapped_number or "mapped_percentage"
 #' @param y_axis "p_value_adjust or "p_value"
@@ -127,12 +131,14 @@ enrich_bar_plot = function(object,
 #' @param label_size label size
 #' @export
 
-# enrich_scatter_plot(object = object, x_axis = "mapped_percentage", y_axis_cutoff = 0.5)
+# enrich_scatter_plot(object = object,
+# x_axis = "mapped_percentage", y_axis_cutoff = 0.5)
 
 enrich_scatter_plot = function(object,
                                x_axis = c("mapped_percentage", "mapped_number"),
                                y_axis = c("p_value_adjust", "p_value"),
-                               point_size = c("mapped_percentage", "all_number"),
+                               point_size = c("mapped_percentage", 
+                                              "all_number"),
                                x_axis_cutoff = 0,
                                y_axis_cutoff = 0.05,
                                label = TRUE,
@@ -174,7 +180,9 @@ enrich_scatter_plot = function(object,
     geom_point(aes(size = point_size, fill = class),
                show.legend = FALSE,
                shape = 21) +
-    scale_fill_manual(values = c("yes" = ggsci::pal_aaas()(n = 10)[2], "no" = "grey")) +
+    scale_fill_manual(values =
+                        c("yes" = ggsci::pal_aaas()(n = 10)[2],
+                          "no" = "grey")) +
     labs(
       y = ifelse(
         y_axis == "p_value_adjust",
@@ -223,7 +231,7 @@ enrich_scatter_plot = function(object,
 #' @title enrich_network
 #' @description Network for enriched pathways
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param object enrich_result object.
 #' @param point_size point_size.
 #' @param label label
@@ -244,60 +252,66 @@ enrich_network = function(object,
   if (class(object) != "enrich_result") {
     stop("Only for enrich_result")
   }
-
+  
   point_size = match.arg(point_size)
   
   temp_data =
     object@result %>%
     dplyr::rename("point_size" = point_size) %>%
     dplyr::mutate(point_size = -log(point_size, 10)) %>%
-    dplyr::mutate(class = case_when(
-      point_size > -log(p_cutoff, 10) ~ "yes",
-      TRUE ~ "no"
-    ))
+    dplyr::mutate(class = case_when(point_size > -log(p_cutoff, 10) ~ "yes",
+                                    TRUE ~ "no"))
   
-  if(only_significant_pathway){
+  if (only_significant_pathway) {
     temp_data =
       temp_data %>%
       dplyr::filter(class == "yes")
   }
   
-  node_data = 
-    temp_data %>% 
+  node_data =
+    temp_data %>%
     dplyr::select(pathway_name, mapped_id, point_size, class)
   
   future::plan(strategy = future::multisession, workers = threads)
-  edge_data = 
-    furrr::future_map(1:(length(node_data$pathway_name)-1), 
-                      .f = function(idx1){
-      id1 = stringr::str_split(temp_data$mapped_id[idx1], ";")[[1]]
-      temp = 
-      furrr::future_map(.x = (idx1+1):length(node_data$pathway_name), 
-                        .f = function(idx2){
-        id2 = stringr::str_split(temp_data$mapped_id[idx2], ";")[[1]]
-        length(intersect(id1, idx2))/length(union(id1, id2))
-      }) %>% 
-        unlist()
-      
-      names(temp) = node_data$pathway_name[(idx1+1):length(node_data$pathway_name)]
-      temp
-    })
+  edge_data =
+    furrr::future_map(
+      1:(length(node_data$pathway_name) - 1),
+      .f = function(idx1) {
+        id1 = stringr::str_split(temp_data$mapped_id[idx1], ";")[[1]]
+        temp =
+          furrr::future_map(
+            .x = (idx1 + 1):length(node_data$pathway_name),
+            .f = function(idx2) {
+              id2 = stringr::str_split(temp_data$mapped_id[idx2], ";")[[1]]
+              length(intersect(id1, idx2)) / length(union(id1, id2))
+            }
+          ) %>%
+          unlist()
+        
+        names(temp) =
+          node_data$pathway_name[(idx1 + 1):length(node_data$pathway_name)]
+        temp
+      }
+    )
   
-  names(edge_data) = node_data$pathway_name[1:(length(node_data$pathway_name)-1)]
+  names(edge_data) =
+    node_data$pathway_name[1:(length(node_data$pathway_name) - 1)]
   
-  edge_data = 
-  furrr::future_map2(
-    .x = names(edge_data),
-    .y = edge_data,
-    .f = function(x, y) {
-      data.frame(from = x, to = names(y), jaccard_index = y)
-    }
-  ) %>% 
-    do.call(rbind, .) %>% 
+  edge_data =
+    furrr::future_map2(
+      .x = names(edge_data),
+      .y = edge_data,
+      .f = function(x, y) {
+        data.frame(from = x,
+                   to = names(y),
+                   jaccard_index = y)
+      }
+    ) %>%
+    do.call(rbind, .) %>%
     as.data.frame()
   
-  edge_data = 
-    edge_data %>% 
+  edge_data =
+    edge_data %>%
     dplyr::filter(jaccard_index > 0)
   
   graph_data =
@@ -305,19 +319,22 @@ enrich_network = function(object,
                          edges = edge_data,
                          directed = FALSE)
   
-  plot = 
-  ggraph::ggraph(graph_data,
-         layout = 'kk') +
+  plot =
+    ggraph::ggraph(graph_data,
+                   layout = 'kk') +
     ggraph::geom_edge_link(
-                  aes(edge_width = jaccard_index),
-                  alpha = 1,
-                  color = "black",
-                  show.legend = TRUE) +
-    ggraph::geom_node_point(aes(fill = class, 
-                        size = point_size), 
-                    shape = 21, 
-                    alpha = 1, 
-                    show.legend = TRUE) +
+      aes(edge_width = jaccard_index),
+      alpha = 1,
+      color = "black",
+      show.legend = TRUE
+    ) +
+    ggraph::geom_node_point(
+      aes(fill = class,
+          size = point_size),
+      shape = 21,
+      alpha = 1,
+      show.legend = TRUE
+    ) +
     guides(size = guide_legend(
       title =
         ifelse(
@@ -326,15 +343,17 @@ enrich_network = function(object,
           "-log(P-values, 10)"
         )
     ), fill = FALSE) +
-    ggraph::scale_edge_width(range = c(0.5,2)) +
+    ggraph::scale_edge_width(range = c(0.5, 2)) +
     scale_size_continuous(range = c(1, 8)) +
-    scale_fill_manual(values = c("yes" = ggsci::pal_aaas()(n = 10)[2], 
+    scale_fill_manual(values = c("yes" = ggsci::pal_aaas()(n = 10)[2],
                                  "no" = "grey")) +
     ggraph::theme_graph() +
-    theme(plot.background = element_rect(fill = "transparent", color = NA), 
-          panel.background = element_rect(fill = "transparent", color = NA),
-          legend.position = "right",
-          legend.background = element_rect(fill = "transparent", color = NA)) 
+    theme(
+      plot.background = element_rect(fill = "transparent", color = NA),
+      panel.background = element_rect(fill = "transparent", color = NA),
+      legend.position = "right",
+      legend.background = element_rect(fill = "transparent", color = NA)
+    )
   
   if (label) {
     plot =

@@ -1,7 +1,7 @@
 #' @title enrich_kegg
 #' @description Pathway enrichment for metabolomics.
 #' @author Xiaotao Shen
-#' \email{shenxt@@sioc.ac.cn}
+#' \email{shenxt1990@@outlook.com}
 #' @param query_id The vector of query IDs.
 #' @param query_type "compound" or "gene"
 #' @param id_type HMDB
@@ -15,12 +15,12 @@
 #' @export
 
 # load("data/hmdb_pathway.rda")
-# 
+#
 # get_pathway_class(object = hmdb_pathway)
-# 
+#
 # pathway_database =
 #   filter_pathway(object = hmdb_pathway, class = "Metabolic;primary_pathway")
-# 
+#
 # query_id_hmdb = c(
 #   "HMDB0000060",
 #   "HMDB0000056",
@@ -40,7 +40,7 @@
 #   "HMDB0000243",
 #   "HMDB0000271"
 # )
-# 
+#
 # hmdb_enrichment =
 #   enrich_hmdb(
 #     query_id = query_id_hmdb,
@@ -53,7 +53,7 @@
 #     method = "hypergeometric",
 #     threads = 5
 #   )
-# 
+#
 # hmdb_enrichment@result$pathway_name
 
 enrich_hmdb = function(query_id,
@@ -221,11 +221,14 @@ enrich_hmdb = function(query_id,
         a1 <-
           sum(sig_matrix[, i])# significant and including pathway
         a2 <-
-          sum(all_matrix2[, i]) - sum(sig_matrix[, i])# not significant and including pathway
+          sum(all_matrix2[, i]) - sum(sig_matrix[, i])
+        # not significant and including pathway
         a3 <-
-          length(sig_id) - a1# significant and not including pathway
+          length(sig_id) - a1
+        # significant and not including pathway
         a4 <-
-          (length(all_id) - length(sig_id)) - a2# not significant and not including pathway
+          (length(all_id) - length(sig_id)) - a2
+        # not significant and not including pathway
         
         tab <- t(matrix(c(a1, a2, a3, a4), 2))
         if (method == "hypergeometric") {
@@ -320,22 +323,22 @@ enrich_hmdb = function(query_id,
   #   dplyr::filter(p_value <= p_cutoff)
   
   ##remove the duplicated pathways
-  result = 
-  result %>% 
-    plyr::dlply(.variables = plyr::.(pathway_name)) %>% 
-    purrr::map(function(x){
-      if(nrow(x) == 1){
+  result =
+    result %>%
+    plyr::dlply(.variables = plyr::.(pathway_name)) %>%
+    purrr::map(function(x) {
+      if (nrow(x) == 1) {
         return(x)
-      }else{
-        x = 
-        x %>% 
-          dplyr::filter(p_value_adjust == min(p_value_adjust)) %>% 
-          dplyr::filter(mapped_number == max(mapped_number)) %>% 
+      } else{
+        x =
+          x %>%
+          dplyr::filter(p_value_adjust == min(p_value_adjust)) %>%
+          dplyr::filter(mapped_number == max(mapped_number)) %>%
           dplyr::filter(all_number == max(all_number))
-        x[1,,drop = FALSE]
+        x[1, , drop = FALSE]
       }
-    }) %>% 
-    do.call(rbind, .) %>% 
+    }) %>%
+    do.call(rbind, .) %>%
     as.data.frame()
   
   result =
@@ -357,7 +360,7 @@ enrich_hmdb = function(query_id,
 #' @title set_label
 #' @description set_label
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param query_id query_id
 #' @param database database
 #' @param threads threads

@@ -44,5 +44,5 @@ Pathway enrichment for metabolomics.
 }
 \author{
 Xiaotao Shen
-\email{shenxt@sioc.ac.cn}
+\email{shenxt1990@outlook.com}
 }

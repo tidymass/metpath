@@ -1,18 +1,15 @@
-
 #' @title get_pathway_class
 #' @description Extract the class of pathways.
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @param object pathway_class object.
 #' @export
-#' @examples 
+#' @examples
 #' library(metpath)
 #' kegg_hsa_pathway = get_kegg_pathway(local = TRUE, organism = "hsa")
 #' kegg_hsa_pathway
-#' 
+#'
 #' get_pathway_class(kegg_hsa_pathway)
-
-
 
 get_pathway_class = function(object) {
   object@pathway_class %>%
@@ -23,12 +20,15 @@ get_pathway_class = function(object) {
     dplyr::ungroup()
 }
 
+
+
+#' @title [ method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
 #' @method [ pathway_database
 #' @param x x
 #' @param i i
-#' @param j j
-#' @param drop drop
-#' @param .. ..
+#' @param ... other parameters
 #' @export
 #' @rdname pathway_database-class
 #' @return pathway_database
@@ -39,15 +39,15 @@ get_pathway_class = function(object) {
     }
     
     if (!missing(i)) {
-      if(sum(duplicated(i)) > 0){
+      if (sum(duplicated(i)) > 0) {
         stop("No duplicated i allowed.\n")
       }
       if (is.character(i)) {
         i1 <- match(i, x@pathway_id)
         i2 <- match(i, x@pathway_name)
-        if(any(is.na(i1))){
+        if (any(is.na(i1))) {
           i = i2
-        }else{
+        } else{
           i = i1
         }
       }
@@ -76,3 +76,240 @@ get_pathway_class = function(object) {
     
     return(x)
   }
+
+
+#' @title names method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method names pathway_database
+#' @param x pathway_database class object
+#' @export
+#' @rdname pathway_database-class
+#' @return ID of pathways
+names.pathway_database <-
+  function(x) {
+    x@pathway_id
+  }
+
+
+#' @title length method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method length pathway_database
+#' @param x x
+#' @export
+#' @rdname pathway_database-class
+#' @return message
+length.pathway_database <- function(x) {
+  length(x@pathway_id)
+}
+
+
+
+##database_info
+#' @title database_info method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method database_info pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A list (database_info)
+setMethod(
+  f = "database_info",
+  signature = "pathway_database",
+  definition = function(object) {
+    object@database_info
+  }
+)
+
+
+
+##pathway_id
+#' @title pathway_id method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method pathway_id pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (pathway_id)
+setMethod(
+  f = "pathway_id",
+  signature = "pathway_database",
+  definition = function(object) {
+    object@pathway_id
+  }
+)
+
+
+##pathway_name
+#' @title pathway_name method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method pathway_name pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (pathway_name)
+setMethod(
+  f = "pathway_name",
+  signature = "pathway_database",
+  definition = function(object) {
+    pathway_name = object@pathway_name
+    names(pathway_name) = object@pathway_id
+    pathway_name
+  }
+)
+
+##describtion
+#' @title describtion method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method describtion pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (describtion)
+setMethod(
+  f = "describtion",
+  signature = "pathway_database",
+  definition = function(object) {
+    describtion = object@describtion
+    names(describtion) = object@pathway_id
+    describtion
+  }
+)
+
+
+##pathway_class
+#' @title pathway_class method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method pathway_class pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (pathway_class)
+setMethod(
+  f = "pathway_class",
+  signature = "pathway_database",
+  definition = function(object) {
+    pathway_class = object@pathway_class
+    names(pathway_class) = object@pathway_id
+    pathway_class
+  }
+)
+
+
+##gene_list
+#' @title gene_list method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method gene_list pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (gene_list)
+setMethod(
+  f = "gene_list",
+  signature = "pathway_database",
+  definition = function(object) {
+    gene_list = object@gene_list
+    names(gene_list) = object@pathway_id
+    gene_list
+  }
+)
+
+
+##compound_list
+#' @title compound_list method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method compound_list pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (compound_list)
+setMethod(
+  f = "compound_list",
+  signature = "pathway_database",
+  definition = function(object) {
+    compound_list = object@compound_list
+    names(compound_list) = object@pathway_id
+    compound_list
+  }
+)
+
+
+
+
+##reference_list
+#' @title reference_list method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method reference_list pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (reference_list)
+setMethod(
+  f = "reference_list",
+  signature = "pathway_database",
+  definition = function(object) {
+    reference_list = object@reference_list
+    names(reference_list) = object@pathway_id
+    reference_list
+  }
+)
+
+
+
+##related_disease
+#' @title related_disease method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method related_disease pathway_database
+#' @docType methods
+#' @rdname extract-pathway_database
+#' @export
+#' @param object (required) pathway_database class object
+#' @return A vector (related_disease)
+setMethod(
+  f = "related_disease",
+  signature = "pathway_database",
+  definition = function(object) {
+    related_disease = object@related_disease
+    names(related_disease) = object@pathway_id
+    related_disease
+  }
+)
+
+
+##related_module
+#' @title related_module method
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @method related_module pathway_database
+#' @docType methods
+#' @export
+#' @rdname extract-pathway_database
+#' @param object (required) pathway_database class object
+#' @return A vector (related_module)
+setMethod(
+  f = "related_module",
+  signature = "pathway_database",
+  definition = function(object) {
+    related_module = object@related_module
+    names(related_module) = object@pathway_id
+    related_module
+  }
+)

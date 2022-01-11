@@ -18,5 +18,5 @@ Get pathway from KEGG
 }
 \author{
 Xiaotao Shen
-\email{shenxt@stanford.edu}
+\email{shenxt1990@outlook.com}
 }

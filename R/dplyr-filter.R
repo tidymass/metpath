@@ -6,7 +6,8 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   dots <- quos(...)
   # browser()
   if (length(.data@gene_list) == 0) {
-    .data@gene_list = vector(mode = "list", length = length(.data@pathway_id)) %>%
+    .data@gene_list = vector(mode = "list", 
+                             length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
         x
@@ -14,7 +15,8 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   }
   
   if (length(.data@compound_list) == 0) {
-    .data@compound_list = vector(mode = "list", length = length(.data@pathway_id)) %>%
+    .data@compound_list = vector(mode = "list", 
+                                 length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
         x
@@ -22,7 +24,8 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   }
   
   if (length(.data@protein_list) == 0) {
-    .data@protein_list = vector(mode = "list", length = length(.data@pathway_id)) %>%
+    .data@protein_list = vector(mode = "list", 
+                                length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
         x

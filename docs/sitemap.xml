@@ -25,6 +25,9 @@
     <loc>https://tidymass.github.io/metpath/articles/metpath.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metpath/articles/pathway_database.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metpath/articles/pathways_database.html</loc>
   </url>
   <url>
@@ -58,6 +61,9 @@
     <loc>https://tidymass.github.io/metpath/reference/enrich_scatter_plot.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metpath/reference/extract-pathway_database.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metpath/reference/filter_pathway.html</loc>
   </url>
   <url>
@@ -76,10 +82,16 @@
     <loc>https://tidymass.github.io/metpath/reference/get_pathway_class.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metpath/reference/hmdb_compound_database.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metpath/reference/hmdb_pathway.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metpath/reference/kegg_compound_database.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metpath/reference/kegg_hsa_pathway.html</loc>

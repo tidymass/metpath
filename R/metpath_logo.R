@@ -1,7 +1,7 @@
 #' @title metpath_logo
 #' @description Get the detailed of metpath package.
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @importFrom KEGGREST keggList keggGet
 #' @importFrom pbapply pblapply
 #' @importFrom future plan multisession
@@ -23,16 +23,13 @@
 #' @importFrom stats p.adjust fisher.test phyper
 #' @importFrom utils data str
 #' @importFrom magrittr %>%
+#' @return logo
 #' @export
 
 metpath_logo <- function() {
   cat(crayon::green("Thank you for using metpath!\n"))
   cat(crayon::green("Version 0.0.1 (20200406)\n"))
-  cat(
-    crayon::green(
-      "More information can be found at https://tidymass.github.io/metpath/\n"
-    )
-  )
+  cat(crayon::green("More information: google tidymass metpath.\n"))
   cat(crayon::green(
     c(
       "                 _   _____      _   _     ",
