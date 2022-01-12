@@ -25,14 +25,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-## **Load packages**
+# **Load packages**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metpath)
 library(tidyverse)
 ```
 
-## **Load KEGG pathway human database**
+# **Load KEGG pathway human database**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("kegg_hsa_pathway", package = "metpath")
@@ -42,7 +42,7 @@ kegg_hsa_pathway
 get_pathway_class(kegg_hsa_pathway)
 ```
 
-## **Pathway enrichment**
+# **Pathway enrichment**
 
 We use the demo compound list from `metpath`.
 
@@ -54,17 +54,25 @@ query_id_kegg
 Remove the disease pathways:
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-##get the class of pathways
-metpath::pahtway_class(kegg_hsa_pathway)
+#get the class of pathways
+pathway_class = 
+  metpath::pathway_class(kegg_hsa_pathway)
+
+head(pathway_class)
+
 remain_idx =
-  kegg_hsa_pathway@pathway_class %>%
+  pathway_class %>%
   unlist() %>%
   stringr::str_detect("Disease") %>%
   `!`() %>%
   which()
 
+remain_idx
+
 pathway_database =
-  filter_pathway(object = kegg_hsa_pathway, remain_idx = remain_idx)
+  kegg_hsa_pathway[remain_idx]
+
+pathway_database
 ```
 
 
@@ -86,7 +94,7 @@ result
 ```
 
 
-## **Plot to show Pathway enrichment**
+# **Plot to show pathway enrichment**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_bar_plot(object = result)
@@ -98,4 +106,11 @@ enrich_scatter_plot(object = result)
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_network(object = result)
+```
+
+
+# **Session information**
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+sessionInfo()
 ```
