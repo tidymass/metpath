@@ -106,10 +106,6 @@ length.pathway_database <- function(x) {
 
 
 
-##database_info
-#' @title database_info method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method database_info pathway_database
 #' @docType methods
 #' @export
@@ -127,9 +123,6 @@ setMethod(
 
 
 ##pathway_id
-#' @title pathway_id method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method pathway_id pathway_database
 #' @docType methods
 #' @export
@@ -146,9 +139,6 @@ setMethod(
 
 
 ##pathway_name
-#' @title pathway_name method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method pathway_name pathway_database
 #' @docType methods
 #' @export
@@ -166,9 +156,6 @@ setMethod(
 )
 
 ##describtion
-#' @title describtion method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method describtion pathway_database
 #' @docType methods
 #' @export
@@ -187,9 +174,6 @@ setMethod(
 
 
 ##pathway_class
-#' @title pathway_class method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method pathway_class pathway_database
 #' @docType methods
 #' @export
@@ -208,9 +192,6 @@ setMethod(
 
 
 ##gene_list
-#' @title gene_list method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method gene_list pathway_database
 #' @docType methods
 #' @export
@@ -229,9 +210,6 @@ setMethod(
 
 
 ##compound_list
-#' @title compound_list method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method compound_list pathway_database
 #' @docType methods
 #' @export
@@ -252,9 +230,6 @@ setMethod(
 
 
 ##reference_list
-#' @title reference_list method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method reference_list pathway_database
 #' @docType methods
 #' @export
@@ -274,9 +249,6 @@ setMethod(
 
 
 ##related_disease
-#' @title related_disease method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method related_disease pathway_database
 #' @docType methods
 #' @rdname extract-pathway_database
@@ -295,9 +267,6 @@ setMethod(
 
 
 ##related_module
-#' @title related_module method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
 #' @method related_module pathway_database
 #' @docType methods
 #' @export

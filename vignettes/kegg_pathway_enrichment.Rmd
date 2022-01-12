@@ -54,6 +54,8 @@ query_id_kegg
 Remove the disease pathways:
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+##get the class of pathways
+metpath::pahtway_class(kegg_hsa_pathway)
 remain_idx =
   kegg_hsa_pathway@pathway_class %>%
   unlist() %>%

@@ -12,7 +12,8 @@ Authors@R: c(
            family = "Wang",
            role = c("aut", "ctb"))
            )
-Description: This package is used to do statistical data analysis for and pathway enrichment analysi for metabolomics data.
+Description: This package is used to do statistical data analysis for and 
+             pathway enrichment analysi for metabolomics data.
 URL: https://github.com/tidymass/metpath
 BugReports: https://github.com/tidymass/metpath/issues
 Encoding: UTF-8
