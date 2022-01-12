@@ -26,16 +26,18 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metpath)
+library(tidyverse)
 ```
 
 ## **Load HMDB pathway database**
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("hmdb_pathway", package = "metpath")
+hmdb_pathway
 ```
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 get_pathway_class(hmdb_pathway)
 ```
 
@@ -43,13 +45,31 @@ get_pathway_class(hmdb_pathway)
 
 We use the demo compound list from `metpath`.
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("query_id_hmdb", package = "metpath")
 query_id_hmdb
 ```
 
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+Only remain the `Metabolic;primary_pathway`.
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+#get the class of pathways
+pathway_class = 
+  metpath::pathway_class(hmdb_pathway) 
+
+remain_idx = which(unlist(pathway_class) == "Metabolic;primary_pathway")
+
+remain_idx
+
+hmdb_pathway = 
+  hmdb_pathway[remain_idx]
+
+hmdb_pathway
+```
+
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result = 
 enrich_hmdb(query_id = query_id_hmdb, 
             query_type = "compound", 
@@ -63,14 +83,14 @@ enrich_hmdb(query_id = query_id_hmdb,
 
 Check the result:
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 result
 ```
 
 
-## **Plot to show Pathway enrichment**
+## **Plot to show pathway enrichment**
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_bar_plot(
   object = result,
   x_axis = "p_value_adjust",
@@ -79,11 +99,11 @@ enrich_bar_plot(
 )
 ```
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_scatter_plot(object = result)
 ```
 
-```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 enrich_network(object = result)
 ```
 
