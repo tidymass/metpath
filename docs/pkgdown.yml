@@ -4,10 +4,11 @@ pkgdown_sha: ~
 articles:
   contact_us: contact_us.html
   hmdb_pathway_enrichment: hmdb_pathway_enrichment.html
+  install: install.html
   kegg_pathway_enrichment: kegg_pathway_enrichment.html
   metpath: metpath.html
   pathway_database: pathway_database.html
-last_built: 2022-01-12T06:49Z
+last_built: 2022-01-12T06:55Z
 urls:
   reference: https://tidymass.github.io/metpath/reference
   article: https://tidymass.github.io/metpath/articles

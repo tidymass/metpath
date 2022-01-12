@@ -33,6 +33,8 @@ navbar:
     articles:
       text: Help documents
       menu:
+      - text: "Installation"
+        href: articles/install.html
       - text: "Pathways and metabolite sets in metpath"
         href: articles/pathway_database.html
       - text: -------
