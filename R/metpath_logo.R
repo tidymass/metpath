@@ -28,7 +28,7 @@
 
 metpath_logo <- function() {
   cat(crayon::green("Thank you for using metpath!\n"))
-  cat(crayon::green("Version 0.0.1 (20200406)\n"))
+  message(crayon::green("Version", metpath_version, "(", update_date, ')\n'))
   cat(crayon::green("More information: google tidymass metpath.\n"))
   cat(crayon::green(
     c(
@@ -44,3 +44,7 @@ metpath_logo <- function() {
     
   ), sep = "\n")
 }
+
+
+metpath_version = "0.99.2"
+update_date = as.character(Sys.time())
