@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
       <h1 data-toc-skip>Pathways and metabolite sets in metpath</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-01-11</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-02-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metpath/blob/HEAD/vignettes/pathway_database.Rmd" class="external-link"><code>vignettes/pathway_database.Rmd</code></a></small>
       <div class="hidden name"><code>pathway_database.Rmd</code></div>
@@ -142,35 +142,34 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.6)</span>
-<span class="co">#&gt; than is installed on your system (1.0.7). This might lead to errors</span>
+<span class="co">#&gt; Warning in fun(libname, pkgname): mzR has been built against a different Rcpp version (1.0.7)</span>
+<span class="co">#&gt; than is installed on your system (1.0.8). This might lead to errors</span>
 <span class="co">#&gt; when loading mzR. If you encounter such issues, please send a report,</span>
 <span class="co">#&gt; including the output of sessionInfo() to the Bioc support forum at </span>
 <span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
 <span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span>
-<span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ───────────────────────────────────────── metpath 0.0.1 ──</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid</span> 1.1.0</span>
+<span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ──────────────────────────────────────── metpath 0.99.2 ──</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid</span> 1.2.1</span>
 <span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ──────────────────────────────────────────── metpath_conflicts() ──</span>
 <span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>     masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
 <span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">head()</span>   masks <span style="color: #0000BB;">utils</span>::head()</span>
 <span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>  masks <span style="color: #0000BB;">base</span>::kronecker()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">tail()</span>   masks <span style="color: #0000BB;">utils</span>::tail()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">masstools</span>::<span style="color: #00BB00;">read_mgf()</span> masks <span style="color: #0000BB;">metid</span>::read_mgf()</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'metpath'</span>
 <span class="co">#&gt; The following object is masked from 'package:stats':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     filter</span></code></pre></div>
-<div class="section level1">
-<h1 id="brief-introduction">
+<div class="section level2">
+<h2 id="brief-introduction">
 <strong>Brief introduction</strong><a class="anchor" aria-label="anchor" href="#brief-introduction"></a>
-</h1>
+</h2>
 <p>Two widely used metabolic pathways are utilized in <code>metpath</code>, namely <a href="https://www.genome.jp/kegg/" class="external-link"><code>KEGG</code></a> and <a href="https://smpdb.ca/" class="external-link"><code>HMDB</code>/<code>SMPDB</code></a>.</p>
 </div>
-<div class="section level1">
-<h1 id="kegg-pathway">
+<div class="section level2">
+<h2 id="kegg-pathway">
 <strong>KEGG pathway</strong><a class="anchor" aria-label="anchor" href="#kegg-pathway"></a>
-</h1>
+</h2>
 <p>We can just download the <code>KEGG</code> online or from the <code>metpaht</code> pacakge.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span></code></pre></div>
@@ -197,7 +196,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kegg_hsa_pathway2</span>
 <span class="co">#&gt; <span style="color: #00BB00;">---------Pathway source&amp;version---------</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; KEGG &amp; 2022-01-11 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; KEGG &amp; 2022-02-19 </span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; -----------Pathway information------------</span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; 345 pathways </span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; 334 pathways have genes </span></span>
@@ -206,10 +205,10 @@
 <span class="co"><span style="color: #00BB00;">#&gt; Pathway class (top 10): Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism </span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="kegg-compound">
+<div class="section level2">
+<h2 id="kegg-compound">
 <strong>KEGG compound</strong><a class="anchor" aria-label="anchor" href="#kegg-compound"></a>
-</h1>
+</h2>
 <p>We can also get the KEGG compound database using <code>metpath</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kegg_compound</span> <span class="op">=</span> 
@@ -240,10 +239,10 @@
 <code class="sourceCode R"><span class="va">kegg_compound2</span> <span class="op">=</span> 
   <span class="fu"><a href="../reference/get_kegg_compound.html">get_kegg_compound</a></span><span class="op">(</span>local <span class="op">=</span> <span class="cn">FALSE</span>, threads <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="hmdb-pathway">
+<div class="section level2">
+<h2 id="hmdb-pathway">
 <strong>HMDB pathway</strong><a class="anchor" aria-label="anchor" href="#hmdb-pathway"></a>
-</h1>
+</h2>
 <p>We can just download the <code>HMDB</code> online or from the <code>metpaht</code> pacakge.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hmdb_hsa_pathway</span> <span class="op">=</span> 
@@ -262,10 +261,10 @@
 <span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 <p>Just type the pathway and the information of it will show.</p>
 </div>
-<div class="section level1">
-<h1 id="hmdb-compound">
+<div class="section level2">
+<h2 id="hmdb-compound">
 <strong>HMDB compound</strong><a class="anchor" aria-label="anchor" href="#hmdb-compound"></a>
-</h1>
+</h2>
 <p>We can also get the HMDB compound database using <code>metpath</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hmdb_compound</span> <span class="op">=</span> 
@@ -292,13 +291,13 @@
 <span class="co"><span style="color: #00BB00;">#&gt;  </span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 </div>
-<div class="section level1">
-<h1 id="processing-of-pathway-class">
-<strong>Processing of pathway class</strong><a class="anchor" aria-label="anchor" href="#processing-of-pathway-class"></a>
-</h1>
 <div class="section level2">
-<h2 id="brief-information-of-pathway-database">Brief information of pathway database<a class="anchor" aria-label="anchor" href="#brief-information-of-pathway-database"></a>
+<h2 id="processing-of-pathway-class">
+<strong>Processing of pathway class</strong><a class="anchor" aria-label="anchor" href="#processing-of-pathway-class"></a>
 </h2>
+<div class="section level3">
+<h3 id="brief-information-of-pathway-database">Brief information of pathway database<a class="anchor" aria-label="anchor" href="#brief-information-of-pathway-database"></a>
+</h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">)</span>
 <span class="co">#&gt; [1] 345</span></code></pre></div>
@@ -319,9 +318,9 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Genetic Information Processing; Transcription                               3</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 33 more rows</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="accessor">Accessor<a class="anchor" aria-label="anchor" href="#accessor"></a>
-</h2>
+<div class="section level3">
+<h3 id="accessor">Accessor<a class="anchor" aria-label="anchor" href="#accessor"></a>
+</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">kegg_hsa_pathway</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt; <span style="color: #00BB00;">---------Pathway source&amp;version---------</span></span>
@@ -340,9 +339,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hsa00010"</span>, <span class="st">"hsa00020"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
 <span class="co">#&gt; [1] "hsa00010" "hsa00020"</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="extract-data">Extract data<a class="anchor" aria-label="anchor" href="#extract-data"></a>
-</h2>
+<div class="section level3">
+<h3 id="extract-data">Extract data<a class="anchor" aria-label="anchor" href="#extract-data"></a>
+</h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">database_info</span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">)</span>
 <span class="co">#&gt; $source</span>

@@ -23,10 +23,10 @@ You can install `metpath` from
 [Github](https://github.com/tidymass/metpath).
 
 ``` r
-if(!require(devtools)){
-install.packages("devtools")
+if(!require(remotes)){
+install.packages("remotes")
 }
-devtools::install_github("tidymass/metpath")
+remotes::install_github("tidymass/metpath")
 ```
 
 ## Usage
