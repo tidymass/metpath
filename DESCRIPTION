@@ -64,6 +64,6 @@ VignetteBuilder: knitr
 Note:
 biocViews: Metabolomics, MassSpectrometry
 Remotes: 
-    gitlab::jaspershen/metid
+    gitlab::jaspershen/metid,
     gitlab::jaspershen/massdataset
 Config/testthat/edition: 3
