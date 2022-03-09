@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
+.RData
+
 summary/
 demo_data/
 example/

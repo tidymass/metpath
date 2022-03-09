@@ -15,5 +15,7 @@ An S4 class to represent pathways
 \item{\code{pathway_version}}{pathway_version}
 
 \item{\code{result}}{result}
+
+\item{\code{parameter}}{tidymass}
 }}
 

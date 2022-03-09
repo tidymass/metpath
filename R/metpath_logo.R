@@ -23,6 +23,7 @@
 #' @importFrom stats p.adjust fisher.test phyper
 #' @importFrom utils data str
 #' @importFrom magrittr %>%
+#' @importClassesFrom massdataset tidymass_parameter
 #' @return logo
 #' @export
 
@@ -46,5 +47,5 @@ metpath_logo <- function() {
 }
 
 
-metpath_version = "0.99.2"
+metpath_version = "0.99.3"
 update_date = as.character(Sys.time())

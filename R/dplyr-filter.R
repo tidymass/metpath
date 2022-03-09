@@ -6,7 +6,7 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   dots <- quos(...)
   # browser()
   if (length(.data@gene_list) == 0) {
-    .data@gene_list = vector(mode = "list", 
+    .data@gene_list = vector(mode = "list",
                              length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
@@ -15,7 +15,7 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   }
   
   if (length(.data@compound_list) == 0) {
-    .data@compound_list = vector(mode = "list", 
+    .data@compound_list = vector(mode = "list",
                                  length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
@@ -24,7 +24,7 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   }
   
   if (length(.data@protein_list) == 0) {
-    .data@protein_list = vector(mode = "list", 
+    .data@protein_list = vector(mode = "list",
                                 length = length(.data@pathway_id)) %>%
       purrr::map(function(x) {
         x = data.frame()
@@ -111,6 +111,24 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
   
   return(.data)
 }
+
+#' @method filter enrich_result
+#' @importFrom rlang quos !!!
+#' @importFrom dplyr filter
+#' @export
+filter.enrich_result <- function(.data, ..., .preserve = FALSE) {
+  dots <- quos(...)
+
+  .data@result =
+    dplyr::filter(.data@result, !!!dots, .preserve = .preserve)
+  return(.data)
+}
+
+#' @importFrom dplyr filter
+#' @export
+dplyr::filter
+
+
 
 #' @importFrom dplyr filter
 #' @export
