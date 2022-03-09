@@ -12,8 +12,9 @@
 #' @importFrom dplyr desc
 #' @importFrom utils tail
 #' @export
+#' @examples 
+#'\dontrun{
 #' data("kegg_hsa_pathway")
-#' 
 #' remain_idx =
 #'   kegg_hsa_pathway@pathway_class %>%
 #'   unlist() %>%
@@ -22,7 +23,7 @@
 #'   which()
 #' 
 #' pathway_database =
-#'   filter_pathway(object = kegg_hsa_pathway, 
+#'   filter_pathway(object = kegg_hsa_pathway,
 #'                  remain_idx = remain_idx[1:50])
 #' 
 #' data("query_id_kegg")
@@ -38,8 +39,7 @@
 #'     method = "hypergeometric",
 #'     threads = 5
 #'   )
-#' 
-#' enrich_bar_plot(kegg_enrichment)
+#' }
 
 enrich_bar_plot <-
   function(object,
@@ -94,8 +94,6 @@ enrich_bar_plot <-
       scale_fill_gradient(low = ggsci::pal_aaas()(n = 10)[2],
                           high = alpha(ggsci::pal_aaas()(n = 10)[2], 0.1))
     plot
-    
-    
   }
 
 #' @title enrich_scatter_plot
@@ -111,7 +109,8 @@ enrich_bar_plot <-
 #' @param label label
 #' @param label_size label size
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
 #' data("kegg_hsa_pathway")
 #' 
 #' remain_idx =
@@ -140,6 +139,7 @@ enrich_bar_plot <-
 #'   )
 #' 
 #' enrich_scatter_plot(kegg_enrichment)
+#' }
 
 enrich_scatter_plot <-
   function(object,

@@ -35,6 +35,38 @@ enrich_scatter_plot(
 \description{
 Scatter plot for enrich_result
 }
+\examples{
+\dontrun{
+data("kegg_hsa_pathway")
+
+remain_idx =
+  kegg_hsa_pathway@pathway_class \%>\%
+  unlist() \%>\%
+  stringr::str_detect("Disease") \%>\%
+  `!`() \%>\%
+  which()
+
+pathway_database =
+  filter_pathway(object = kegg_hsa_pathway, 
+                 remain_idx = remain_idx[1:50])
+
+data("query_id_kegg")
+
+kegg_enrichment =
+  enrich_kegg(
+    query_id = query_id_kegg,
+    query_type = "compound",
+    id_type = "KEGG",
+    pathway_database = pathway_database,
+    p_cutoff = 0.05,
+    p_adjust_method = "BH",
+    method = "hypergeometric",
+    threads = 5
+  )
+
+enrich_scatter_plot(kegg_enrichment)
+}
+}
 \author{
 Xiaotao Shen
 \email{shenxt1990@outlook.com}

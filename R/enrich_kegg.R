@@ -12,7 +12,8 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
 #' data("kegg_hsa_pathway")
 #' 
 #' remain_idx <-
@@ -41,6 +42,7 @@
 #'   )
 #' 
 #' object
+#' }
 
 enrich_kegg <-
   function(query_id,

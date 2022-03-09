@@ -13,17 +13,19 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' 
+#' @examples 
+#'\dontrun{
 #' data("hmdb_pathway")
+#' data("query_id_hmdb")
+#' 
 #' pathway_database =
 #'   filter_pathway(object = hmdb_pathway, class = "Metabolic;primary_pathway")
-#' 
 #' hmdb_enrichment =
 #'   enrich_hmdb(
 #'     query_id = query_id_hmdb,
 #'     query_type = "compound",
 #'     id_type = "HMDB",
-#'     pathway_database = hmdb_pathway,
+#'     pathway_database = pathway_database,
 #'     only_primary_pathway = TRUE,
 #'     p_cutoff = 0.05,
 #'     p_adjust_method = "BH",
@@ -32,6 +34,7 @@
 #'   )
 #' 
 #' hmdb_enrichment
+#' }
 
 enrich_hmdb <-
   function(query_id,
@@ -327,29 +330,8 @@ enrich_hmdb <-
       new(
         Class = "enrich_result",
         pathway_database = pathway_database@database_info$source,
-        pathway_version = metpath_version,
-        result = result,
-        parameter = new(
-          Class = "tidymass_parameter",
-          pacakge_name = "metpath",
-          function_name = "enrich_hmdb()",
-          parameter = list(
-            query_id = query_id,
-            query_type = "compound",
-            id_type = "HMDB",
-            pathway_database = paste(
-              pathway_database@database_info$source,
-              pathway_database@database_info$version,
-              sep = ","
-            ),
-            only_primary_pathway = only_primary_pathway,
-            p_cutoff = p_cutoff,
-            p_adjust_method = p_adjust_method,
-            method = method,
-            threads = threads
-          ),
-          time = Sys.time()
-        )
+        pathway_version = pathway_database@database_info$version,
+        result = result
       )
     
   }

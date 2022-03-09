@@ -47,5 +47,5 @@ metpath_logo <- function() {
 }
 
 
-metpath_version = "0.99.3"
+metpath_version = "0.99.4"
 update_date = as.character(Sys.time())
