@@ -37,7 +37,7 @@ remotes::install_github("tidymass/metpath")
 
 # Usage
 
-Please see the `Help document` page to get the instruction of `metpath`.
+Please see the `Help documents` page to get the instruction of `metpath`.
 
 # Need help?
 
@@ -58,7 +58,7 @@ Palo Alto, CA
 
 # Citation
 
-If you use `metpath` in you publication, please cite this publication:
+If you use `metpath` in your publications, please cite this paper:
 
 TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
 
