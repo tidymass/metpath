@@ -8,7 +8,7 @@ articles:
   kegg_pathway_enrichment: kegg_pathway_enrichment.html
   metpath: metpath.html
   pathway_database: pathway_database.html
-last_built: 2022-02-20T01:34Z
+last_built: 2022-03-22T00:05Z
 urls:
   reference: https://tidymass.github.io/metpath/reference
   article: https://tidymass.github.io/metpath/articles

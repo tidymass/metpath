@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
       </span>
     </div>
 
@@ -145,6 +145,31 @@
 <a href="mailto:shenxt1990@outlook.com">shenxt1990@outlook.com</a></p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmdb_pathway"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_hmdb"</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">pathway_database</span> <span class="op">=</span></span>
+<span class="r-in">  <span class="fu"><a href="filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">hmdb_pathway</span>, class <span class="op">=</span> <span class="st">"Metabolic;primary_pathway"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">hmdb_enrichment</span> <span class="op">=</span></span>
+<span class="r-in">  <span class="fu">enrich_hmdb</span><span class="op">(</span></span>
+<span class="r-in">    query_id <span class="op">=</span> <span class="va">query_id_hmdb</span>,</span>
+<span class="r-in">    query_type <span class="op">=</span> <span class="st">"compound"</span>,</span>
+<span class="r-in">    id_type <span class="op">=</span> <span class="st">"HMDB"</span>,</span>
+<span class="r-in">    pathway_database <span class="op">=</span> <span class="va">pathway_database</span>,</span>
+<span class="r-in">    only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span class="r-in">    p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span class="r-in">    p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>,</span>
+<span class="r-in">    method <span class="op">=</span> <span class="st">"hypergeometric"</span>,</span>
+<span class="r-in">    threads <span class="op">=</span> <span class="fl">5</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">hmdb_enrichment</span></span>
+<span class="r-in"><span class="op">}</span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -157,7 +182,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
+  <p></p><p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer></div>

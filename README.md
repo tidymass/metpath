@@ -11,30 +11,35 @@
 
 -------
 
-## About
+# About
 
 `metpath` is a R package which is used for pathway analysis of metabolomics data.
 
 <img src="man/figures/Figure_2.jpg" align="left" alt="" width="100%" />
 
-## Installation
+# Installation
 
 You can install `metpath` from
-[Github](https://github.com/tidymass/metpath).
+[GitLab](https://github.com/jaspershen/metpath).
 
 ``` r
 if(!require(remotes)){
 install.packages("remotes")
 }
+remotes::install_gitlab("jaspershen/metpath")
+```
+
+or [GitHub](https://github.com/tidymass/metpath).
+
+``` r
 remotes::install_github("tidymass/metpath")
 ```
 
-## Usage
+# Usage
 
-Please see the [Help document](https://tidymass.github.io/metpath/articles/metpath.html)
-page to get the instruction of `metpath`.
+Please see the `Help document` page to get the instruction of `metpath`.
 
-## Need help?
+# Need help?
 
 If you have any questions about `metpath`, please don’t hesitate to
 email me (<shenxt1990@outlook.com>).
@@ -51,15 +56,15 @@ email me (<shenxt1990@outlook.com>).
 Palo Alto, CA
 94304](https://www.google.com/maps/place/Alway+Building/@37.4322345,-122.1770883,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa4d335c3be37:0x9057931f3b312c29!8m2!3d37.4322345!4d-122.1748996)
 
-## Citation
+# Citation
 
-If you use metpath in you publication, please cite this publication:
+If you use `masspath` in you publication, please cite this publication:
 
-X. Shen, R. Wang, X. Xiong, Y. Yin, Y. Cai, Z. Ma, N. Liu, and Z.-J.
-Zhu\* (Corresponding Author), Metabolic Reaction Network-based Recursive
-Metabolite Annotation for Untargeted Metabolomics, Nature
-Communications, 2019, 10: 1516.  
-[Web Link](https://www.nature.com/articles/s41467-019-09550-x).
+TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
+
+Xiaotao Shen, Hong Yan, Chuchu Wang, Peng Gao, Caroline H. Johnson, Michael P. Snyder.
+
+[Web Link](https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1).
 
 Thanks very much!
 

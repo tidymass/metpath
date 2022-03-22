@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
       <h1 data-toc-skip>metpath</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-02-19</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-03-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metpath/blob/HEAD/vignettes/metpath.Rmd" class="external-link"><code>vignettes/metpath.Rmd</code></a></small>
       <div class="hidden name"><code>metpath.Rmd</code></div>
@@ -148,13 +148,19 @@
 <span class="co">#&gt; including the output of sessionInfo() to the Bioc support forum at </span>
 <span class="co">#&gt; https://support.bioconductor.org/. For details see also</span>
 <span class="co">#&gt; https://github.com/sneumann/mzR/wiki/mzR-Rcpp-compiler-linker-issue.</span>
-<span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ──────────────────────────────────────── metpath 0.99.2 ──</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid</span> 1.2.1</span>
+<span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ──────────────────────────────────────── metpath 0.99.4 ──</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✓</span> <span style="color: #0000BB;">metid</span> 1.2.4</span>
 <span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ──────────────────────────────────────────── metpath_conflicts() ──</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>     masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>  masks <span style="color: #0000BB;">base</span>::kronecker()</span>
-<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">masstools</span>::<span style="color: #00BB00;">read_mgf()</span> masks <span style="color: #0000BB;">metid</span>::read_mgf()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">apply()</span>     masks <span style="color: #0000BB;">base</span>::apply()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>        masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colMeans()</span>  masks <span style="color: #0000BB;">base</span>::colMeans()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colSums()</span>   masks <span style="color: #0000BB;">base</span>::colSums()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span>    masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">intersect()</span> masks <span style="color: #0000BB;">base</span>::intersect()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>     masks <span style="color: #0000BB;">base</span>::kronecker()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">ms2_plot()</span>  masks <span style="color: #0000BB;">masstools</span>::ms2_plot()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowMeans()</span>  masks <span style="color: #0000BB;">base</span>::rowMeans()</span>
+<span class="co">#&gt; <span style="color: #BB0000;">x</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowSums()</span>   masks <span style="color: #0000BB;">base</span>::rowSums()</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'metpath'</span>
 <span class="co">#&gt; The following object is masked from 'package:stats':</span>
@@ -177,7 +183,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>
