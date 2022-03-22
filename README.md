@@ -58,7 +58,7 @@ Palo Alto, CA
 
 # Citation
 
-If you use `masspath` in you publication, please cite this publication:
+If you use `metpath` in you publication, please cite this publication:
 
 TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
 
