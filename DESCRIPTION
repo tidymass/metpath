@@ -45,7 +45,6 @@ Imports:
     furrr,
     openxlsx,
     rstudioapi,
-    leaflet,
     ggraph,
     ggrepel,
     tidygraph,
