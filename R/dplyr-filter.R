@@ -91,7 +91,6 @@ filter.pathway_database <- function(.data, ..., .preserve = FALSE) {
       protein_number
     )
   
-  
   temp_data =
     dplyr::filter(temp_data, !!!dots, .preserve = .preserve)
   

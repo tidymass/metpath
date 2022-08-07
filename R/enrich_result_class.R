@@ -22,33 +22,32 @@ setMethod(
   definition = function(object) {
     pathway_version <- try(object@pathway_version, silent = TRUE)
     pathway_database <- try(object@pathway_database, silent = TRUE)
-    if (class(version) != "try-error") {
-      cat(crayon::green("---------Pathway database&version---------\n"))
-      cat(crayon::green(pathway_database, "&", pathway_version, "\n"))
+    if (!is(object = version, class2 = "try-error")) {
+      message(crayon::green("---------Pathway database&version---------"))
+      message(crayon::green(pathway_database, " & ", pathway_version, ""))
     }
-    cat(crayon::green("-----------Enrichment result------------\n"))
-    cat(crayon::green(nrow(object@result), "pathways are enriched", "\n"))
-    cat(crayon::green(
+    message(crayon::green("-----------Enrichment result------------"))
+    message(crayon::green(nrow(object@result), " pathways are enriched"))
+    message(crayon::green(
       nrow(object@result %>%
              dplyr::filter(p_value < 0.05)),
-      "pathways p-values < 0.05",
-      "\n"
+      " pathways p-values < 0.05"
     ))
     
     if (nrow(object@result) > 0) {
       if (nrow(object@result) > 5) {
         pathway_name = object@result$pathway_name[1:5]
-        cat(crayon::green(
+        message(crayon::green(
           paste(pathway_name, collapse = "\n"),
-          "... (only top 5 shows)\n"
+          "... (only top 5 shows)"
         ))
       } else{
         pathway_name = object@result$pathway_name
-        cat(crayon::green(paste(pathway_name, collapse = ";")))
+        message(crayon::green(paste(pathway_name, collapse = "; ")))
       }
     }
     
-    cat(crayon::green("-----------Parameters------------\n"))
+    message(crayon::green("-----------Parameters------------"))
     if (.hasSlot(object = object, name = "parameter")) {
       data.frame(
         "Package" = object@parameter@pacakge_name,
@@ -57,7 +56,7 @@ setMethod(
       ) %>%
         print()
     } else{
-      cat(crayon::yellow("-----------No parameters------------\n"))
+      message(crayon::yellow("-----------No parameters------------"))
     }
   }
 )

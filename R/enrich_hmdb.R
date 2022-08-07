@@ -230,7 +230,7 @@ enrich_hmdb <-
               NA
             })
             
-            if (class(check) != "htest") {
+            if (!is(object = check, class2 = "htest")) {
               return(1)
             } else{
               resfish <- fisher.test(tab, alternative = "greater")

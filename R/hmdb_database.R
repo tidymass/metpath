@@ -13,7 +13,7 @@ get_hmdb_compound <- function(threads = 3) {
       hmdb_compound_database@database.info$Version
     )
   )
-  cat("\n")
+  # cat("\n")
   return(hmdb_compound_database)
 }
 
@@ -33,7 +33,7 @@ get_hmdb_compound <- function(threads = 3) {
 #   hmdb_pathway@pathway_class
 #
 # for(x in idx){
-#   pathway_class[[x]] = paste(pathway_class[[x]], 
+#   pathway_class[[x]] = paste(pathway_class[[x]],
 #   "primary_pathway", sep = ";")
 # }
 #
@@ -45,14 +45,15 @@ get_hmdb_compound <- function(threads = 3) {
 #
 # save(hmdb_pathway, file = "data/hmdb_pathway.rda", )
 
-get_hmdb_pathway <- function(threads = 3) {
-  data("hmdb_pathway", envir = environment())
-  message(
-    crayon::yellow(
-      "This database is downloaded in",
-      hmdb_pathway@database_info$version
+get_hmdb_pathway <-
+  function(threads = 3) {
+    data("hmdb_pathway", envir = environment())
+    message(
+      crayon::yellow(
+        "This database is downloaded in",
+        hmdb_pathway@database_info$version
+      )
     )
-  )
-  cat("\n")
-  return(hmdb_pathway)
-}
+    # cat("\n")
+    return(hmdb_pathway)
+  }

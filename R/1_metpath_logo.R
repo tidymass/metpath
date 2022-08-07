@@ -28,10 +28,10 @@
 #' @export
 
 metpath_logo <- function() {
-  cat(crayon::green("Thank you for using metpath!\n"))
-  message(crayon::green("Version", metpath_version, "(", update_date, ')\n'))
-  cat(crayon::green("More information: google tidymass metpath.\n"))
-  cat(crayon::green(
+  message("Thank you for using metpath!")
+  message("Version ", metpath_version, " (", update_date, ')')
+  message("More information: metpath.tidymass.org")
+  cat(
     c(
       "                 _   _____      _   _     ",
       "                | | |  __ \\    | | | |    ",
@@ -41,11 +41,11 @@ metpath_logo <- function() {
       " |_| |_| |_|\\___|\\__|_|   \\__,_|\\__|_| |_|",
       "                                          ",
       "                                     "
-    )
-    
-  ), sep = "\n")
+    ), sep = "\n")
 }
 
 
-metpath_version = "0.99.4"
-update_date = as.character(Sys.time())
+metpath_version <-
+  as.character(utils::packageVersion(pkg = "metpath"))
+update_date <-
+  as.character(Sys.time())

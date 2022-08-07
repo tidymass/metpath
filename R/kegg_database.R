@@ -19,7 +19,7 @@ get_kegg_compound <-
           kegg_compound_database@database.info$Version
         )
       )
-      cat("\n")
+      # cat("\n")
       return(kegg_compound_database)
     } else{
       message(crayon::yellow("It may take a while...\n"))
@@ -165,7 +165,7 @@ get_kegg_pathway <- function(local = TRUE,
           kegg_hsa_pathway@database_info$version
         )
       )
-      cat("\n")
+      # cat("\n")
       return(kegg_hsa_pathway)
     }
   } else{

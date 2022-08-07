@@ -4,8 +4,11 @@
 .RData
 
 summary/
+summary
 demo_data/
+demo_data
 example/
+example
 
 LICENSE.md
 
@@ -18,3 +21,4 @@ _pkgdown.yml
 vignettes
 vignettes/*_cache
 pkgdown/
+pkgdown

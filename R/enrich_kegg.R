@@ -12,23 +12,23 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' @examples 
+#' @examples
 #'\dontrun{
 #' data("kegg_hsa_pathway")
-#' 
+#'
 #' remain_idx <-
 #'   kegg_hsa_pathway@pathway_class %>%
 #'   unlist() %>%
 #'   stringr::str_detect("Disease") %>%
 #'   `!`() %>%
 #'   which()
-#' 
+#'
 #' pathway_database <-
-#'   filter_pathway(object = kegg_hsa_pathway, 
+#'   filter_pathway(object = kegg_hsa_pathway,
 #'                  remain_idx = remain_idx[1:50])
-#' 
+#'
 #' data("query_id_kegg")
-#' 
+#'
 #' object <-
 #'   enrich_kegg(
 #'     query_id = query_id_kegg,
@@ -40,7 +40,7 @@
 #'     method = "hypergeometric",
 #'     threads = 5
 #'   )
-#' 
+#'
 #' object
 #' }
 
@@ -226,7 +226,7 @@ enrich_kegg <-
               NA
             })
             
-            if (class(check) != "htest") {
+            if (!is(object = check, class2 = "htest")) {
               return(1)
             } else{
               resfish <- fisher.test(tab, alternative = "greater")

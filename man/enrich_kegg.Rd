@@ -51,7 +51,7 @@ remain_idx <-
   which()
 
 pathway_database <-
-  filter_pathway(object = kegg_hsa_pathway, 
+  filter_pathway(object = kegg_hsa_pathway,
                  remain_idx = remain_idx[1:50])
 
 data("query_id_kegg")

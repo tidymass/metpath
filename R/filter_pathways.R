@@ -11,7 +11,7 @@ filter_pathway =
   function(object,
            class,
            remain_idx) {
-    if (base::class(object) != "pathway_database") {
+    if (!is(object = object, class2 = "pathway_database")) {
       stop(crayon::red('Only for pathway_database object.\n'))
     }
     

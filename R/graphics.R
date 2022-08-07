@@ -1,4 +1,5 @@
 
+
 #' @title enrich_bar_plot
 #' @description Bar plot for enrich_result
 #' @author Xiaotao Shen
@@ -12,7 +13,7 @@
 #' @importFrom dplyr desc
 #' @importFrom utils tail
 #' @export
-#' @examples 
+#' @examples
 #'\dontrun{
 #' data("kegg_hsa_pathway")
 #' remain_idx =
@@ -21,13 +22,13 @@
 #'   stringr::str_detect("Disease") %>%
 #'   `!`() %>%
 #'   which()
-#' 
+#'
 #' pathway_database =
 #'   filter_pathway(object = kegg_hsa_pathway,
 #'                  remain_idx = remain_idx[1:50])
-#' 
+#'
 #' data("query_id_kegg")
-#' 
+#'
 #' kegg_enrichment =
 #'   enrich_kegg(
 #'     query_id = query_id_kegg,
@@ -49,7 +50,7 @@ enrich_bar_plot <-
            axis.text.x.width = 15,
            axis.text.y.width = 15) {
     x_axis = match.arg(x_axis)
-    if (class(object) != "enrich_result") {
+    if (!is(object, "enrich_result")) {
       stop("Only for enrich_result")
     }
     
@@ -77,9 +78,15 @@ enrich_bar_plot <-
           "-log(P-values, 10)"
         )
       ) +
-      scale_x_continuous(expand = expansion(mult = c(0, 0.05)),
-                         labels = function(x) stringr::str_wrap(x, width = axis.text.x.width)) +
-      scale_y_discrete(labels = function(x) stringr::str_wrap(x, width = axis.text.x.width)) +
+      scale_x_continuous(
+        expand = expansion(mult = c(0, 0.05)),
+        labels = function(x)
+          stringr::str_wrap(x, width = axis.text.x.width)
+      ) +
+      scale_y_discrete(
+        labels = function(x)
+          stringr::str_wrap(x, width = axis.text.x.width)
+      ) +
       theme_bw() +
       theme(
         axis.text = element_text(size = 10),
@@ -109,23 +116,23 @@ enrich_bar_plot <-
 #' @param label label
 #' @param label_size label size
 #' @export
-#' @examples 
+#' @examples
 #'\dontrun{
 #' data("kegg_hsa_pathway")
-#' 
+#'
 #' remain_idx =
 #'   kegg_hsa_pathway@pathway_class %>%
 #'   unlist() %>%
 #'   stringr::str_detect("Disease") %>%
 #'   `!`() %>%
 #'   which()
-#' 
+#'
 #' pathway_database =
-#'   filter_pathway(object = kegg_hsa_pathway, 
+#'   filter_pathway(object = kegg_hsa_pathway,
 #'                  remain_idx = remain_idx[1:50])
-#' 
+#'
 #' data("query_id_kegg")
-#' 
+#'
 #' kegg_enrichment =
 #'   enrich_kegg(
 #'     query_id = query_id_kegg,
@@ -137,7 +144,7 @@ enrich_bar_plot <-
 #'     method = "hypergeometric",
 #'     threads = 5
 #'   )
-#' 
+#'
 #' enrich_scatter_plot(kegg_enrichment)
 #' }
 
@@ -155,7 +162,7 @@ enrich_scatter_plot <-
     y_axis = match.arg(y_axis)
     point_size = match.arg(point_size)
     
-    if (class(object) != "enrich_result") {
+    if (!is(object, "enrich_result")) {
       stop("Only for enrich_result")
     }
     
@@ -256,7 +263,7 @@ enrich_network <-
            only_significant_pathway = TRUE,
            threads = 4) {
     # browser()
-    if (class(object) != "enrich_result") {
+    if (!is(object, "enrich_result")) {
       stop("Only for enrich_result")
     }
     

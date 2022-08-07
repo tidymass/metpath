@@ -49,54 +49,48 @@ setMethod(
   definition = function(object) {
     version <- try(object@database_info$version, silent = TRUE)
     source <- try(object@database_info$source, silent = TRUE)
-    if (class(version) != "try-error") {
-      cat(crayon::green("---------Pathway source&version---------\n"))
-      cat(crayon::green(source, "&", version, "\n"))
+    if (!is(version, "try-error")) {
+      message(crayon::green("---------Pathway source&version---------"))
+      message(crayon::green(source, " & ", version))
     }
-    cat(crayon::green("-----------Pathway information------------\n"))
-    cat(crayon::green(length(object@pathway_id), "pathways", "\n"))
-    cat(
+    message(crayon::green("-----------Pathway information------------"))
+    message(crayon::green(length(object@pathway_id), " pathways"))
+    message(
       crayon::green(
         object@gene_list %>%
           lapply(nrow) %>%
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways have genes",
-        "\n"
+        " pathways have genes"
       )
     )
     
-    cat(
+    message(
       crayon::green(
         object@protein_list %>%
           lapply(nrow) %>%
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways have proteins",
-        "\n"
+        " pathways have proteins"
       )
     )
     
-    cat(
+    message(
       crayon::green(
         object@compound_list %>%
           lapply(nrow) %>%
           unlist() %>%
           `!=`(0) %>%
           sum(),
-        "pathways have compounds",
-        "\n"
+        " pathways have compounds"
       )
     )
     
-    cat(crayon::green("Pathway class (top 10):",
-                      paste(unique(head(
-                        unlist(object@pathway_class), 10
-                      )), collapse = ";"),
-                      "\n"))
+    message(crayon::green("Pathway class (top 10):",
+                          paste(unique(head(
+                            unlist(object@pathway_class), 10
+                          )), collapse = ";")))
   }
 )
-
-
