@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -49,7 +49,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -100,13 +100,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_pathway_class</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_pathway_class</span><span class="op">(</span><span class="va">object</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>pathway_class object.</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -116,22 +117,20 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">kegg_hsa_pathway</span> <span class="op">=</span> <span class="fu"><a href="get_kegg_pathway.html">get_kegg_pathway</a></span><span class="op">(</span>local <span class="op">=</span> <span class="cn">TRUE</span>, organism <span class="op">=</span> <span class="st">"hsa"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">kegg_hsa_pathway</span> <span class="op">=</span> <span class="fu"><a href="get_kegg_pathway.html">get_kegg_pathway</a></span><span class="op">(</span>local <span class="op">=</span> <span class="cn">TRUE</span>, organism <span class="op">=</span> <span class="st">"hsa"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">This database is downloaded in 2021-12-13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="va">kegg_hsa_pathway</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">---------Pathway source&amp;version---------</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">KEGG &amp; 2021-12-13 </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">-----------Pathway information------------</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">345 pathways </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">334 pathways have genes </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">0 pathways have proteins </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">281 pathways have compounds </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Pathway class (top 10): Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">get_pathway_class</span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">kegg_hsa_pathway</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">---------Pathway source&amp;version---------</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">KEGG  &amp;  2021-12-13</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">-----------Pathway information------------</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">345  pathways</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">334  pathways have genes</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">0  pathways have proteins</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">281  pathways have compounds</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Pathway class (top 10): Metabolism; Carbohydrate metabolism;Metabolism; Lipid metabolism</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">get_pathway_class</span><span class="op">(</span><span class="va">kegg_hsa_pathway</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 43 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    class                                                                       n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>

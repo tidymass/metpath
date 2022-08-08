@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -49,7 +49,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -100,33 +100,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">enrich_network</span><span class="op">(</span>
-  <span class="va">object</span>,
-  point_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p_value_adjust"</span>, <span class="st">"p_value"</span><span class="op">)</span>,
-  label <span class="op">=</span> <span class="cn">TRUE</span>,
-  label_size <span class="op">=</span> <span class="fl">4</span>,
-  p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,
-  only_significant_pathway <span class="op">=</span> <span class="cn">TRUE</span>,
-  threads <span class="op">=</span> <span class="fl">4</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">enrich_network</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p_value_adjust"</span>, <span class="st">"p_value"</span><span class="op">)</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  label_size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  only_significant_pathway <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>enrich_result object.</p></dd>
+
+
 <dt>point_size</dt>
 <dd><p>point_size.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>label</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>label size</p></dd>
+
+
 <dt>p_cutoff</dt>
 <dd><p>p_cutoff</p></dd>
+
+
 <dt>only_significant_pathway</dt>
 <dd><p>only_significant_pathway</p></dd>
+
+
 <dt>threads</dt>
 <dd><p>threads</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>

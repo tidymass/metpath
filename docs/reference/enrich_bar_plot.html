@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -49,7 +49,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -100,30 +100,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">enrich_bar_plot</span><span class="op">(</span>
-  <span class="va">object</span>,
-  x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p_value_adjust"</span>, <span class="st">"p_value"</span><span class="op">)</span>,
-  cutoff <span class="op">=</span> <span class="fl">0.05</span>,
-  top <span class="op">=</span> <span class="fl">10</span>,
-  axis.text.x.width <span class="op">=</span> <span class="fl">15</span>,
-  axis.text.y.width <span class="op">=</span> <span class="fl">15</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">enrich_bar_plot</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"p_value_adjust"</span>, <span class="st">"p_value"</span><span class="op">)</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  top <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  axis.text.x.width <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  axis.text.y.width <span class="op">=</span> <span class="fl">15</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>enrich_result object.</p></dd>
+
+
 <dt>x_axis</dt>
 <dd><p>"p_value_adjust or "p_value"</p></dd>
+
+
 <dt>cutoff</dt>
 <dd><p>cutoff for p_value_adjust or p_value.</p></dd>
+
+
 <dt>top</dt>
 <dd><p>top pathways to show.</p></dd>
+
+
 <dt>axis.text.x.width</dt>
 <dd><p>axis.text.x.width</p></dd>
+
+
 <dt>axis.text.y.width</dt>
 <dd><p>axis.text.y.width</p></dd>
+
 </dl></div>
     <div id="author">
     <h2>Author</h2>
@@ -133,33 +144,33 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"kegg_hsa_pathway"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">remain_idx</span> <span class="op">=</span></span>
-<span class="r-in">  <span class="va">kegg_hsa_pathway</span><span class="op">@</span><span class="va">pathway_class</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu">`!`</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pathway_database</span> <span class="op">=</span></span>
-<span class="r-in">  <span class="fu"><a href="filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">kegg_hsa_pathway</span>,</span>
-<span class="r-in">                 remain_idx <span class="op">=</span> <span class="va">remain_idx</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_kegg"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">kegg_enrichment</span> <span class="op">=</span></span>
-<span class="r-in">  <span class="fu"><a href="enrich_kegg.html">enrich_kegg</a></span><span class="op">(</span></span>
-<span class="r-in">    query_id <span class="op">=</span> <span class="va">query_id_kegg</span>,</span>
-<span class="r-in">    query_type <span class="op">=</span> <span class="st">"compound"</span>,</span>
-<span class="r-in">    id_type <span class="op">=</span> <span class="st">"KEGG"</span>,</span>
-<span class="r-in">    pathway_database <span class="op">=</span> <span class="va">pathway_database</span>,</span>
-<span class="r-in">    p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
-<span class="r-in">    p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>,</span>
-<span class="r-in">    method <span class="op">=</span> <span class="st">"hypergeometric"</span>,</span>
-<span class="r-in">    threads <span class="op">=</span> <span class="fl">5</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"kegg_hsa_pathway"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">remain_idx</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="va">kegg_hsa_pathway</span><span class="op">@</span><span class="va">pathway_class</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="st">"Disease"</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu">`!`</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pathway_database</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">kegg_hsa_pathway</span>,</span></span>
+<span class="r-in"><span>                 remain_idx <span class="op">=</span> <span class="va">remain_idx</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_kegg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">kegg_enrichment</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="enrich_kegg.html">enrich_kegg</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    query_id <span class="op">=</span> <span class="va">query_id_kegg</span>,</span></span>
+<span class="r-in"><span>    query_type <span class="op">=</span> <span class="st">"compound"</span>,</span></span>
+<span class="r-in"><span>    id_type <span class="op">=</span> <span class="st">"KEGG"</span>,</span></span>
+<span class="r-in"><span>    pathway_database <span class="op">=</span> <span class="va">pathway_database</span>,</span></span>
+<span class="r-in"><span>    p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
+<span class="r-in"><span>    p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"hypergeometric"</span>,</span></span>
+<span class="r-in"><span>    threads <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

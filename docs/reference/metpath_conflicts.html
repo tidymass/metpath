@@ -24,13 +24,13 @@ and other packages that you have loaded."><meta property="og:image" content="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -50,7 +50,7 @@ and other packages that you have loaded."><meta property="og:image" content="htt
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -102,12 +102,14 @@ and other packages that you have loaded.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">metpath_conflicts</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">metpath_conflicts</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="value">
     <h2>Value</h2>
-    <p>metpath_conflicts</p>
+    
+
+<p>metpath_conflicts</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -120,18 +122,11 @@ existing code.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">metpath_conflicts</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">metpath_conflicts</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Conflicts</span> ──────────────────────────────────────────── metpath_conflicts() ──</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">apply()</span>     masks <span style="color: #0000BB;">base</span>::apply()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>        masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colMeans()</span>  masks <span style="color: #0000BB;">base</span>::colMeans()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colSums()</span>   masks <span style="color: #0000BB;">base</span>::colSums()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span>    masks <span style="color: #0000BB;">metpath</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">intersect()</span> masks <span style="color: #0000BB;">base</span>::intersect()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>     masks <span style="color: #0000BB;">base</span>::kronecker()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">ms2_plot()</span>  masks <span style="color: #0000BB;">masstools</span>::ms2_plot()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowMeans()</span>  masks <span style="color: #0000BB;">base</span>::rowMeans()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowSums()</span>   masks <span style="color: #0000BB;">base</span>::rowSums()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>    masks <span style="color: #0000BB;">base</span>::body&lt;-()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">metpath</span>::<span style="color: #00BB00;">filter()</span>    masks <span style="color: #0000BB;">stats</span>::filter()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span> masks <span style="color: #0000BB;">base</span>::kronecker()</span>
 </code></pre></div>
     </div>
   </div>

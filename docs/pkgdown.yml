@@ -1,5 +1,5 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: '2.18'
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   contact_us: contact_us.html
@@ -8,7 +8,7 @@ articles:
   kegg_pathway_enrichment: kegg_pathway_enrichment.html
   metpath: metpath.html
   pathway_database: pathway_database.html
-last_built: 2022-03-22T00:05Z
+last_built: 2022-08-08T03:18Z
 urls:
   reference: https://tidymass.github.io/metpath/reference
   article: https://tidymass.github.io/metpath/articles

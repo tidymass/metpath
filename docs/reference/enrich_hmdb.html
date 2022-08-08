@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metpath</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -49,7 +49,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -100,44 +100,63 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">enrich_hmdb</span><span class="op">(</span>
-  <span class="va">query_id</span>,
-  query_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"compound"</span>, <span class="st">"protein"</span><span class="op">)</span>,
-  id_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HMDB"</span><span class="op">)</span>,
-  <span class="va">pathway_database</span>,
-  only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,
-  p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,
-  p_adjust_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"holm"</span>, <span class="st">"hochberg"</span>, <span class="st">"hommel"</span>, <span class="st">"bonferroni"</span>, <span class="st">"BH"</span>, <span class="st">"BY"</span>, <span class="st">"fdr"</span>,
-    <span class="st">"none"</span><span class="op">)</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hypergeometric"</span>, <span class="st">"fisher"</span><span class="op">)</span>,
-  threads <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">enrich_hmdb</span><span class="op">(</span></span>
+<span>  <span class="va">query_id</span>,</span>
+<span>  query_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"compound"</span>, <span class="st">"protein"</span><span class="op">)</span>,</span>
+<span>  id_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HMDB"</span><span class="op">)</span>,</span>
+<span>  <span class="va">pathway_database</span>,</span>
+<span>  only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  p_adjust_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"holm"</span>, <span class="st">"hochberg"</span>, <span class="st">"hommel"</span>, <span class="st">"bonferroni"</span>, <span class="st">"BH"</span>, <span class="st">"BY"</span>, <span class="st">"fdr"</span>,</span>
+<span>    <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hypergeometric"</span>, <span class="st">"fisher"</span><span class="op">)</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>query_id</dt>
 <dd><p>The vector of query IDs.</p></dd>
+
+
 <dt>query_type</dt>
 <dd><p>"compound" or "gene"</p></dd>
+
+
 <dt>id_type</dt>
 <dd><p>HMDB</p></dd>
+
+
 <dt>pathway_database</dt>
 <dd><p>KEGG or other metabolomics pathway database.</p></dd>
+
+
 <dt>only_primary_pathway</dt>
 <dd><p>only_primary_pathway</p></dd>
+
+
 <dt>p_cutoff</dt>
 <dd><p>p_cutoff</p></dd>
+
+
 <dt>p_adjust_method</dt>
 <dd><p>p_adjust_method</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Hypergeometric or fisher test.</p></dd>
+
+
 <dt>threads</dt>
 <dd><p>threads</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The MSE analysis result.</p>
+    
+
+<p>The MSE analysis result.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -147,27 +166,27 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmdb_pathway"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_hmdb"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pathway_database</span> <span class="op">=</span></span>
-<span class="r-in">  <span class="fu"><a href="filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">hmdb_pathway</span>, class <span class="op">=</span> <span class="st">"Metabolic;primary_pathway"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">hmdb_enrichment</span> <span class="op">=</span></span>
-<span class="r-in">  <span class="fu">enrich_hmdb</span><span class="op">(</span></span>
-<span class="r-in">    query_id <span class="op">=</span> <span class="va">query_id_hmdb</span>,</span>
-<span class="r-in">    query_type <span class="op">=</span> <span class="st">"compound"</span>,</span>
-<span class="r-in">    id_type <span class="op">=</span> <span class="st">"HMDB"</span>,</span>
-<span class="r-in">    pathway_database <span class="op">=</span> <span class="va">pathway_database</span>,</span>
-<span class="r-in">    only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">    p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span>
-<span class="r-in">    p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>,</span>
-<span class="r-in">    method <span class="op">=</span> <span class="st">"hypergeometric"</span>,</span>
-<span class="r-in">    threads <span class="op">=</span> <span class="fl">5</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">hmdb_enrichment</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmdb_pathway"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"query_id_hmdb"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pathway_database</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="filter_pathway.html">filter_pathway</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">hmdb_pathway</span>, class <span class="op">=</span> <span class="st">"Metabolic;primary_pathway"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hmdb_enrichment</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="fu">enrich_hmdb</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    query_id <span class="op">=</span> <span class="va">query_id_hmdb</span>,</span></span>
+<span class="r-in"><span>    query_type <span class="op">=</span> <span class="st">"compound"</span>,</span></span>
+<span class="r-in"><span>    id_type <span class="op">=</span> <span class="st">"HMDB"</span>,</span></span>
+<span class="r-in"><span>    pathway_database <span class="op">=</span> <span class="va">pathway_database</span>,</span></span>
+<span class="r-in"><span>    only_primary_pathway <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    p_cutoff <span class="op">=</span> <span class="fl">0.05</span>,</span></span>
+<span class="r-in"><span>    p_adjust_method <span class="op">=</span> <span class="st">"BH"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"hypergeometric"</span>,</span></span>
+<span class="r-in"><span>    threads <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">hmdb_enrichment</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
