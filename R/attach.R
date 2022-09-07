@@ -1,4 +1,4 @@
-core <- c("metid")
+core <- c("metid", "masstools", "ggplot2", "dplyr", "magrittr", "massdataset")
 
 metpath_core_unloaded <- function() {
   search <- paste0("package:", core)
@@ -24,11 +24,11 @@ metpath_attach <- function() {
   if (length(to_load) == 0)
     return(invisible())
   
-  msg(cli::rule(
-    left = crayon::bold("Attaching packages"),
-    right = paste0("metpath ", metpath_package_version("metpath"))
-  ),
-  startup = TRUE)
+  # msg(cli::rule(
+  #   left = crayon::bold("Attaching packages"),
+  #   right = paste0("metpath ", metpath_package_version("metpath"))
+  # ),
+  # startup = TRUE)
   
   versions <-
     vapply(to_load, metpath_package_version, character(1))
@@ -46,7 +46,7 @@ metpath_attach <- function() {
   col1 <- seq_len(length(packages) / 2)
   info <- paste0(packages[col1], "     ", packages[-col1])
   
-  msg(paste(info, collapse = "\n"), startup = TRUE)
+  # msg(paste(info, collapse = "\n"), startup = TRUE)
   
   suppressPackageStartupMessages(lapply(to_load, same_library))
   
