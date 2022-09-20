@@ -13,11 +13,11 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' @examples 
+#' @examples
 #'\dontrun{
 #' data("hmdb_pathway")
 #' data("query_id_hmdb")
-#' 
+#'
 #' pathway_database =
 #'   filter_pathway(object = hmdb_pathway, class = "Metabolic;primary_pathway")
 #' hmdb_enrichment =
@@ -53,10 +53,10 @@ enrich_hmdb <-
                                "none"),
            method = c("hypergeometric", "fisher"),
            threads = 3) {
-    query_type = match.arg(query_type)
-    id_type = match.arg(id_type)
+    query_type <- match.arg(query_type)
+    id_type <- match.arg(id_type)
     method <- match.arg(method)
-    p_adjust_method = match.arg(p_adjust_method)
+    p_adjust_method <- match.arg(p_adjust_method)
     
     if (query_type == "compound") {
       if (pathway_database@database_info$source != "SMPDB") {
@@ -304,7 +304,7 @@ enrich_hmdb <-
     #   dplyr::filter(p_value <= p_cutoff)
     
     ##remove the duplicated pathways
-    result =
+    result <-
       result %>%
       plyr::dlply(.variables = plyr::.(pathway_name)) %>%
       purrr::map(function(x) {
@@ -322,7 +322,7 @@ enrich_hmdb <-
       do.call(rbind, .) %>%
       as.data.frame()
     
-    result =
+    result <-
       result %>%
       dplyr::arrange(p_value_adjust)
     
@@ -330,41 +330,28 @@ enrich_hmdb <-
       new(
         Class = "enrich_result",
         pathway_database = pathway_database@database_info$source,
-        pathway_version = pathway_database@database_info$version,
-        result = result
+        pathway_version = metpath_version,
+        result = result,
+        parameter = new(
+          Class = "tidymass_parameter",
+          pacakge_name = "metpath",
+          function_name = "enrich_hmdb()",
+          parameter = list(
+            query_id = query_id,
+            query_type = query_type,
+            id_type = id_type,
+            pathway_database = paste(
+              pathway_database@database_info$source,
+              pathway_database@database_info$version,
+              sep = ","
+            ),
+            p_cutoff = p_cutoff,
+            p_adjust_method = p_adjust_method,
+            method = method,
+            threads = threads
+          ),
+          time = Sys.time()
+        )
       )
     
-  }
-
-
-
-#' @title set_label
-#' @description set_label
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param query_id query_id
-#' @param database database
-#' @param threads threads
-#' @return  The MSE analysis result.
-
-set_label <-
-  function (query_id,
-            database,
-            threads = parallel::detectCores() - 2) {
-    future::plan(strategy = future::multisession, workers = threads)
-    return_result =
-      furrr::future_map(
-        .x = database,
-        .f = function(x) {
-          temp = match(query_id, x)
-          temp[!is.na(temp)] = 1
-          temp[is.na(temp)] = 0
-          temp
-        }
-      ) %>%
-      do.call(cbind, .) %>%
-      as.data.frame()
-    
-    rownames(return_result) = query_id
-    return_result
   }

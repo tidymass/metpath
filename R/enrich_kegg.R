@@ -310,8 +310,8 @@ enrich_kegg <-
           function_name = "enrich_kegg()",
           parameter = list(
             query_id = query_id,
-            query_type = "compound",
-            id_type = "KEGG",
+            query_type = query_type,
+            id_type = id_type,
             pathway_database = paste(
               pathway_database@database_info$source,
               pathway_database@database_info$version,
