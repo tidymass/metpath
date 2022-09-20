@@ -20,13 +20,13 @@
 # Installation
 
 You can install `metpath` from
-[GitLab](https://github.com/jaspershen/metpath).
+[GitLab](https://github.com/tidymass/metpath).
 
 ``` r
 if(!require(remotes)){
 install.packages("remotes")
 }
-remotes::install_gitlab("jaspershen/metpath")
+remotes::install_gitlab("tidymass/metpath")
 ```
 
 or [GitHub](https://github.com/tidymass/metpath).
