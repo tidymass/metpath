@@ -44,7 +44,6 @@ metpath_logo <- function() {
     ), sep = "\n")
 }
 
-
 metpath_version <-
   as.character(utils::packageVersion(pkg = "metpath"))
 update_date <-

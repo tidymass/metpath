@@ -1,5 +1,6 @@
 
 
+
 #' @title enrich_bar_plot
 #' @description Bar plot for enrich_result
 #' @author Xiaotao Shen
@@ -98,8 +99,8 @@ enrich_bar_plot <-
                        "Adjusted P-values",
                        "P-values")
       )) +
-      scale_fill_gradient(low = ggsci::pal_aaas()(n = 10)[2],
-                          high = alpha(ggsci::pal_aaas()(n = 10)[2], 0.1))
+      scale_fill_gradient(low = "#EE0000FF",
+                          high = alpha("#EE0000FF", 0.1))
     plot
   }
 
@@ -196,7 +197,7 @@ enrich_scatter_plot <-
                  show.legend = FALSE,
                  shape = 21) +
       scale_fill_manual(values =
-                          c("yes" = ggsci::pal_aaas()(n = 10)[2],
+                          c("yes" = "#EE0000FF",
                             "no" = "grey")) +
       labs(
         y = ifelse(
@@ -359,7 +360,7 @@ enrich_network <-
       ), fill = FALSE) +
       ggraph::scale_edge_width(range = c(0.5, 2)) +
       scale_size_continuous(range = c(1, 8)) +
-      scale_fill_manual(values = c("yes" = ggsci::pal_aaas()(n = 10)[2],
+      scale_fill_manual(values = c("yes" = "#EE0000FF",
                                    "no" = "grey")) +
       ggraph::theme_graph() +
       theme(
@@ -383,7 +384,7 @@ enrich_network <-
           size = label_size,
           show.legend = FALSE
         ) +
-        scale_color_manual(values = c("yes" = ggsci::pal_aaas()(n = 10)[2],
+        scale_color_manual(values = c("yes" = "#EE0000FF",
                                       "no" = "grey")) +
         guides(color = FALSE)
     }

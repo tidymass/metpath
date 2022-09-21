@@ -1,7 +1,7 @@
 Package: metpath
 Type: Package
 Title: Pathway analysis for metabolomics data
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -24,7 +24,6 @@ Imports:
     crayon,
     dplyr,
     ggplot2,
-    ggsci,
     grDevices,
     magrittr,
     pbapply,

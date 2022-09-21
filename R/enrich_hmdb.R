@@ -32,7 +32,7 @@
 #'     method = "hypergeometric",
 #'     threads = 5
 #'   )
-#' 
+#'
 #' hmdb_enrichment
 #' }
 

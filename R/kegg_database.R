@@ -32,13 +32,14 @@ get_kegg_compound <-
       temp_fun = function(x) {
         KEGGREST::keggGet(dbentries = x)[[1]]
       }
+      
       kegg_compound_database <-
         pbapply::pblapply(compound_ID, function(x) {
           KEGGREST::keggGet(dbentries = x)[[1]]
         })
       
       future::plan(future::multisession, workers = threads)
-      kegg =
+      kegg <-
         kegg_compound_database %>%
         furrr::future_map(
           .f = function(x) {
@@ -52,14 +53,14 @@ get_kegg_compound <-
             if (is.null(x$EXACT_MASS)) {
               mz = NA
             }
-            CAS.ID = stringr::str_replace(grep("CAS", 
-                                               x$DBLINKS, 
-                                               value = TRUE), 
+            CAS.ID = stringr::str_replace(grep("CAS",
+                                               x$DBLINKS,
+                                               value = TRUE),
                                           "CAS: ", "") %>%
               stringr::str_trim(side = "both")
             
-            PubChem.ID = stringr::str_replace(grep("PubChem", 
-                                                   x$DBLINKS, value = TRUE), 
+            PubChem.ID = stringr::str_replace(grep("PubChem",
+                                                   x$DBLINKS, value = TRUE),
                                               "PubChem: ", "") %>%
               stringr::str_trim(side = "both")
             
@@ -305,7 +306,7 @@ get_kegg_pathway <- function(local = TRUE,
       )
     
     if (length(pathway@gene_list) == 0) {
-      pathway@gene_list = vector(mode = "list", 
+      pathway@gene_list = vector(mode = "list",
                                  length = length(pathway@pathway_id)) %>%
         purrr::map(function(x) {
           x = data.frame()
@@ -314,7 +315,7 @@ get_kegg_pathway <- function(local = TRUE,
     }
     
     if (length(pathway@compound_list) == 0) {
-      pathway@compound_list = vector(mode = "list", 
+      pathway@compound_list = vector(mode = "list",
                                      length = length(pathway@pathway_id)) %>%
         purrr::map(function(x) {
           x = data.frame()
@@ -323,7 +324,7 @@ get_kegg_pathway <- function(local = TRUE,
     }
     
     if (length(pathway@protein_list) == 0) {
-      pathway@protein_list = vector(mode = "list", 
+      pathway@protein_list = vector(mode = "list",
                                     length = length(pathway@pathway_id)) %>%
         purrr::map(function(x) {
           x = data.frame()
