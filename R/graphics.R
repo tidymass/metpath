@@ -1,6 +1,9 @@
 
 
 
+
+
+
 #' @title enrich_bar_plot
 #' @description Bar plot for enrich_result
 #' @author Xiaotao Shen
@@ -62,6 +65,11 @@ enrich_bar_plot <-
       dplyr::arrange(dplyr::desc(x_value)) %>%
       dplyr::filter(x > -log(cutoff, 10)) %>%
       dplyr::mutate(pathway_name = factor(pathway_name, levels = pathway_name))
+    
+    if (nrow(temp_data) == 0) {
+      message("No pathways with ", x_axis, " < ", cutoff)
+      return(NULL)
+    }
     
     if (nrow(temp_data) > top) {
       temp_data = tail(temp_data, top)
@@ -167,7 +175,7 @@ enrich_scatter_plot <-
       stop("Only for enrich_result")
     }
     
-    temp_data =
+    temp_data <-
       object@result %>%
       dplyr::mutate("x_axis" = object@result[, x_axis]) %>%
       dplyr::mutate("y_axis" = object@result[, y_axis]) %>%
@@ -182,7 +190,12 @@ enrich_scatter_plot <-
         TRUE ~ "no"
       ))
     
-    plot =
+    if (nrow(temp_data) == 0) {
+      message("No pathways are enriched.")
+      return(NULL)
+    }
+    
+    plot <-
       temp_data %>%
       ggplot(aes(x = x_axis, y = y_axis, size = point_size)) +
       geom_hline(
@@ -270,15 +283,20 @@ enrich_network <-
     
     point_size = match.arg(point_size)
     
-    temp_data =
+    temp_data <-
       object@result %>%
       dplyr::rename("point_size" = point_size) %>%
       dplyr::mutate(point_size = -log(point_size, 10)) %>%
       dplyr::mutate(class = case_when(point_size > -log(p_cutoff, 10) ~ "yes",
                                       TRUE ~ "no"))
     
+    if (nrow(temp_data) == 0) {
+      message("No pathways with ", x_axis, " < ", cutoff)
+      return(NULL)
+    }
+    
     if (only_significant_pathway) {
-      temp_data =
+      temp_data <-
         temp_data %>%
         dplyr::filter(class == "yes")
     }

@@ -13,3 +13,7 @@
 # Version 1.0.3 (2022-09-20)
 
 * Fix bug in enrich_hmdb.
+
+# Version 1.0.5 (2022-09-21)
+
+* Fix bug in enrich_bar_plot and .
