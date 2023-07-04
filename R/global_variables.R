@@ -32,6 +32,9 @@ globalVariables(
     "mapped_number",
     "all_number",
     "object",
-    "hmdb_compound_database"
+    "hmdb_compound_database",
+    "x_axis",
+    "cutoff",
+    ""
   )
 )

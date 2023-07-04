@@ -147,6 +147,7 @@ enrich_hmdb <-
     
     ##remove the ID which is not in the all_id
     query_id <- query_id[which(is.element(query_id, all_id))]
+    query_id <- unique(query_id[!is.na(query_id)])
     
     if (length(query_id) == 0) {
       return(NULL)

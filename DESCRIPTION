@@ -1,7 +1,8 @@
 Package: metpath
 Type: Package
 Title: Pathway analysis for metabolomics data
-Version: 1.0.5
+Version: 1.0.8
+Date: 2023-07-03
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -45,18 +46,17 @@ Imports:
     rlang,
     massdataset
 License: GPL-2 | file LICENSE
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Suggests: 
     knitr,
     rmarkdown,
     BiocStyle,
     RUnit,
-    BiocGenerics,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Note:
 biocViews: Metabolomics, MassSpectrometry
 Remotes: 
-    gitlab::jaspershen/metid,
-    gitlab::jaspershen/massdataset
+    gitlab::tidymass/metid,
+    gitlab::tidymass/massdataset
 Config/testthat/edition: 3
