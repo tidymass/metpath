@@ -29,3 +29,7 @@
 # Version 1.0.8 (2023-07-03)
 
 * Fix bugs.
+
+# Version 1.0.9 (2025-03-03)
+
+* Add more pathways for enrich_pathways function.

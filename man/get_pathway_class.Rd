@@ -2,24 +2,19 @@
 % Please edit documentation in R/pathway_database-methods.R
 \name{get_pathway_class}
 \alias{get_pathway_class}
-\title{get_pathway_class}
+\title{Extract Pathway Class}
 \usage{
 get_pathway_class(object)
 }
 \arguments{
-\item{object}{pathway_class object.}
+\item{object}{A `pathway_database` class object.}
+}
+\value{
+A data frame with pathway classes and their counts.
 }
 \description{
-Extract the class of pathways.
-}
-\examples{
-library(metpath)
-kegg_hsa_pathway = get_kegg_pathway(local = TRUE, organism = "hsa")
-kegg_hsa_pathway
-
-get_pathway_class(kegg_hsa_pathway)
+Extracts the classification of pathways from a `pathway_database` object.
 }
 \author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+Xiaotao Shen (\email{shenxt1990@outlook.com})
 }

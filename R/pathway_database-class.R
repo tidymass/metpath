@@ -1,15 +1,20 @@
-#' An S4 class to represent pathways
-#' @slot database_info database_info
-#' @slot pathway_id pathway_id
-#' @slot pathway_name pathway_name
-#' @slot describtion describtion
-#' @slot pathway_class pathway_class
-#' @slot gene_list gene_list
-#' @slot compound_list compound_list
-#' @slot protein_list protein_list
-#' @slot reference_list reference_list
-#' @slot related_disease related_disease
-#' @slot related_module related_module
+#' @title Pathway Database Class
+#' @description Defines the `pathway_database` class, which stores information about biological pathways, including genes, compounds, proteins, references, and related diseases.
+#' 
+#' @author Xiaotao Shen (\email{shenxt1990@outlook.com})
+#'
+#' @slot database_info A list containing metadata about the pathway database, such as source and version.
+#' @slot pathway_id A vector of pathway IDs.
+#' @slot pathway_name A vector of pathway names.
+#' @slot describtion A list containing descriptions of the pathways.
+#' @slot pathway_class A list categorizing pathways into different functional classes.
+#' @slot gene_list A list of genes associated with each pathway.
+#' @slot compound_list A list of compounds (metabolites) associated with each pathway.
+#' @slot protein_list A list of proteins associated with each pathway.
+#' @slot reference_list A list of references (e.g., publications) linked to each pathway.
+#' @slot related_disease A list of diseases related to each pathway.
+#' @slot related_module A list of pathway modules that are related or interconnected.
+#' 
 #' @exportClass pathway_database
 
 setClass(

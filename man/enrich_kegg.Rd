@@ -39,38 +39,6 @@ The MSE analysis result.
 \description{
 Pathway enrichment for SMPDB database.
 }
-\examples{
-\dontrun{
-data("kegg_hsa_pathway")
-
-remain_idx <-
-  kegg_hsa_pathway@pathway_class \%>\%
-  unlist() \%>\%
-  stringr::str_detect("Disease") \%>\%
-  `!`() \%>\%
-  which()
-
-pathway_database <-
-  filter_pathway(object = kegg_hsa_pathway,
-                 remain_idx = remain_idx[1:50])
-
-data("query_id_kegg")
-
-object <-
-  enrich_kegg(
-    query_id = query_id_kegg,
-    query_type = "compound",
-    id_type = "KEGG",
-    pathway_database = pathway_database,
-    p_cutoff = 0.05,
-    p_adjust_method = "BH",
-    method = "hypergeometric",
-    threads = 5
-  )
-
-object
-}
-}
 \author{
 Xiaotao Shen
 \email{shenxt1990@outlook.com}

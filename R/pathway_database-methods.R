@@ -1,17 +1,10 @@
-#' @title get_pathway_class
-#' @description Extract the class of pathways.
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param object pathway_class object.
+#' @title Extract Pathway Class
+#' @description Extracts the classification of pathways from a `pathway_database` object.
+#' @author Xiaotao Shen (\email{shenxt1990@outlook.com})
+#' @param object A `pathway_database` class object.
+#' @return A data frame with pathway classes and their counts.
 #' @export
-#' @examples
-#' library(metpath)
-#' kegg_hsa_pathway = get_kegg_pathway(local = TRUE, organism = "hsa")
-#' kegg_hsa_pathway
-#'
-#' get_pathway_class(kegg_hsa_pathway)
-
-get_pathway_class = function(object) {
+get_pathway_class <- function(object) {
   object@pathway_class %>%
     unlist() %>%
     data.frame(class = .) %>%
@@ -19,8 +12,6 @@ get_pathway_class = function(object) {
     dplyr::summarise(n = dplyr::n()) %>%
     dplyr::ungroup()
 }
-
-
 
 #' @title [ method
 #' @author Xiaotao Shen
@@ -30,7 +21,7 @@ get_pathway_class = function(object) {
 #' @param i i
 #' @param ... other parameters
 #' @export
-#' @rdname pathway_database-class
+#' @rdname extract-pathway_database
 #' @return pathway_database
 `[.pathway_database` <-
   function(x, i, ...) {
@@ -78,94 +69,89 @@ get_pathway_class = function(object) {
   }
 
 
-#' @title names method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @method names pathway_database
-#' @param x pathway_database class object
+#' @title Get Pathway Names
+#' @description Returns pathway IDs from a `pathway_database` object.
+#' @author Xiaotao Shen (\email{shenxt1990@outlook.com})
+#' @param x A `pathway_database` class object.
+#' @return A vector of pathway IDs.
 #' @export
-#' @rdname pathway_database-class
-#' @return ID of pathways
+#' @rdname extract-pathway_database
 names.pathway_database <-
   function(x) {
     x@pathway_id
   }
 
 
-#' @title length method
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @method length pathway_database
-#' @param x x
+#' @title Get Pathway Database Length
+#' @description Returns the number of pathways in a `pathway_database` object.
+#' @author Xiaotao Shen (\email{shenxt1990@outlook.com})
+#' @param x A `pathway_database` class object.
+#' @return An integer indicating the number of pathways.
 #' @export
-#' @rdname pathway_database-class
-#' @return message
+#' @rdname extract-pathway_database
 length.pathway_database <- function(x) {
   length(x@pathway_id)
 }
 
 
 
-#' @method database_info pathway_database
-#' @docType methods
+#' @title Extract Database Information
+#' @description Extracts database metadata from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list containing database metadata.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A list (database_info)
 setMethod(
   f = "database_info",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     object@database_info
   }
 )
 
 
 
-##pathway_id
-#' @method pathway_id pathway_database
-#' @docType methods
+#' @title Extract Pathway IDs
+#' @description Extracts pathway IDs from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A character vector of pathway IDs.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (pathway_id)
 setMethod(
   f = "pathway_id",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     object@pathway_id
   }
 )
 
 
-##pathway_name
-#' @method pathway_name pathway_database
-#' @docType methods
+#' @title Extract Pathway Names
+#' @description Extracts pathway names from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A character vector of pathway names.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (pathway_name)
 setMethod(
   f = "pathway_name",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     pathway_name = object@pathway_name
     names(pathway_name) = object@pathway_id
     pathway_name
   }
 )
 
-##describtion
-#' @method describtion pathway_database
-#' @docType methods
+#' @title Extract Pathway Descriptions
+#' @description Extracts pathway descriptions from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A character vector of pathway descriptions.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (describtion)
 setMethod(
   f = "describtion",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     describtion = object@describtion
     names(describtion) = object@pathway_id
     describtion
@@ -173,17 +159,16 @@ setMethod(
 )
 
 
-##pathway_class
-#' @method pathway_class pathway_database
-#' @docType methods
+#' @title Extract Pathway Classes
+#' @description Extracts pathway classification from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A character vector of pathway classes.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (pathway_class)
 setMethod(
   f = "pathway_class",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     pathway_class = object@pathway_class
     names(pathway_class) = object@pathway_id
     pathway_class
@@ -191,17 +176,16 @@ setMethod(
 )
 
 
-##gene_list
-#' @method gene_list pathway_database
-#' @docType methods
+#' @title Extract Gene Lists
+#' @description Extracts lists of genes involved in pathways from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list of gene sets for each pathway.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (gene_list)
 setMethod(
   f = "gene_list",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     gene_list = object@gene_list
     names(gene_list) = object@pathway_id
     gene_list
@@ -209,17 +193,16 @@ setMethod(
 )
 
 
-##compound_list
-#' @method compound_list pathway_database
-#' @docType methods
+#' @title Extract Compound Lists
+#' @description Extracts lists of compounds involved in pathways from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list of compound sets for each pathway.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (compound_list)
 setMethod(
   f = "compound_list",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     compound_list = object@compound_list
     names(compound_list) = object@pathway_id
     compound_list
@@ -229,17 +212,16 @@ setMethod(
 
 
 
-##reference_list
-#' @method reference_list pathway_database
-#' @docType methods
+#' @title Extract Reference Lists
+#' @description Extracts literature references for pathways in a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list of references for each pathway.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (reference_list)
 setMethod(
   f = "reference_list",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     reference_list = object@reference_list
     names(reference_list) = object@pathway_id
     reference_list
@@ -248,17 +230,16 @@ setMethod(
 
 
 
-##related_disease
-#' @method related_disease pathway_database
-#' @docType methods
-#' @rdname extract-pathway_database
+#' @title Extract Related Diseases
+#' @description Extracts disease associations from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list of related diseases for each pathway.
 #' @export
-#' @param object (required) pathway_database class object
-#' @return A vector (related_disease)
+#' @rdname extract-pathway_database
 setMethod(
   f = "related_disease",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     related_disease = object@related_disease
     names(related_disease) = object@pathway_id
     related_disease
@@ -266,17 +247,16 @@ setMethod(
 )
 
 
-##related_module
-#' @method related_module pathway_database
-#' @docType methods
+#' @title Extract Related Modules
+#' @description Extracts related modules from a `pathway_database` object.
+#' @param object A `pathway_database` class object.
+#' @return A list of related modules for each pathway.
 #' @export
 #' @rdname extract-pathway_database
-#' @param object (required) pathway_database class object
-#' @return A vector (related_module)
 setMethod(
   f = "related_module",
   signature = "pathway_database",
-  definition = function(object) {
+  definition <- function(object) {
     related_module = object@related_module
     names(related_module) = object@pathway_id
     related_module

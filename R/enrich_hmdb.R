@@ -13,28 +13,6 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' @examples
-#'\dontrun{
-#' data("hmdb_pathway")
-#' data("query_id_hmdb")
-#'
-#' pathway_database =
-#'   filter_pathway(object = hmdb_pathway, class = "Metabolic;primary_pathway")
-#' hmdb_enrichment =
-#'   enrich_hmdb(
-#'     query_id = query_id_hmdb,
-#'     query_type = "compound",
-#'     id_type = "HMDB",
-#'     pathway_database = pathway_database,
-#'     only_primary_pathway = TRUE,
-#'     p_cutoff = 0.05,
-#'     p_adjust_method = "BH",
-#'     method = "hypergeometric",
-#'     threads = 5
-#'   )
-#'
-#' hmdb_enrichment
-#' }
 
 enrich_hmdb <-
   function(query_id,

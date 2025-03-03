@@ -41,7 +41,9 @@ metpath_logo <- function() {
       " |_| |_| |_|\\___|\\__|_|   \\__,_|\\__|_| |_|",
       "                                          ",
       "                                     "
-    ), sep = "\n")
+    ),
+    sep = "\n"
+  )
 }
 
 metpath_version <-

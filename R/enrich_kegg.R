@@ -12,37 +12,6 @@
 #' @param threads threads
 #' @return  The MSE analysis result.
 #' @export
-#' @examples
-#'\dontrun{
-#' data("kegg_hsa_pathway")
-#'
-#' remain_idx <-
-#'   kegg_hsa_pathway@pathway_class %>%
-#'   unlist() %>%
-#'   stringr::str_detect("Disease") %>%
-#'   `!`() %>%
-#'   which()
-#'
-#' pathway_database <-
-#'   filter_pathway(object = kegg_hsa_pathway,
-#'                  remain_idx = remain_idx[1:50])
-#'
-#' data("query_id_kegg")
-#'
-#' object <-
-#'   enrich_kegg(
-#'     query_id = query_id_kegg,
-#'     query_type = "compound",
-#'     id_type = "KEGG",
-#'     pathway_database = pathway_database,
-#'     p_cutoff = 0.05,
-#'     p_adjust_method = "BH",
-#'     method = "hypergeometric",
-#'     threads = 5
-#'   )
-#'
-#' object
-#' }
 
 enrich_kegg <-
   function(query_id,
@@ -328,34 +297,3 @@ enrich_kegg <-
     
   }
 
-#'
-#'
-#' #' @title set_label
-#' #' @description set_label
-#' #' @author Xiaotao Shen
-#' #' \email{shenxt1990@@outlook.com}
-#' #' @param query_id query_id
-#' #' @param database database
-#' #' @param threads threads
-#' #' @return  The MSE analysis result.
-#'
-#' set_label <- function (query_id,
-#'                        database,
-#'                        threads = parallel::detectCores() - 2) {
-#'   future::plan(strategy = future::multisession, workers = threads)
-#'   return_result =
-#'     furrr::future_map(
-#'       .x = database,
-#'       .f = function(x) {
-#'         temp = match(query_id, x)
-#'         temp[!is.na(temp)] = 1
-#'         temp[is.na(temp)] = 0
-#'         temp
-#'       }
-#'     ) %>%
-#'     do.call(cbind, .) %>%
-#'     as.data.frame()
-#'
-#'   rownames(return_result) = query_id
-#'   return_result
-#' }

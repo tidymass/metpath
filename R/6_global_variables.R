@@ -35,6 +35,8 @@ globalVariables(
     "hmdb_compound_database",
     "x_axis",
     "cutoff",
-    ""
+    "",
+    "temp.ID",
+    "query_type"
   )
 )

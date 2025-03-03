@@ -1,9 +1,3 @@
-
-
-
-
-
-
 #' @title enrich_bar_plot
 #' @description Bar plot for enrich_result
 #' @author Xiaotao Shen

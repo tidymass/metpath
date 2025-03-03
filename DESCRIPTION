@@ -1,8 +1,8 @@
 Package: metpath
 Type: Package
 Title: Pathway analysis for metabolomics data
-Version: 1.0.8
-Date: 2023-07-03
+Version: 1.0.9
+Date: 2025-03-03
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -46,7 +46,7 @@ Imports:
     rlang,
     massdataset
 License: GPL-2 | file LICENSE
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: 
     knitr,
     rmarkdown,

@@ -1,4 +1,5 @@
 
+
 msg <- function(..., startup = FALSE) {
   if (startup) {
     if (!isTRUE(getOption("metpath.quiet"))) {
