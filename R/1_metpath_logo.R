@@ -20,7 +20,7 @@
 #' @importFrom tidygraph tbl_graph
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom methods .hasSlot new
-#' @importFrom stats p.adjust fisher.test phyper
+#' @importFrom stats p.adjust fisher.test phyper ecdf rgamma rt
 #' @importFrom utils data str
 #' @importFrom magrittr %>%
 #' @importClassesFrom massdataset tidymass_parameter

@@ -190,9 +190,22 @@ enrich_metabolic_pathway <-
                                "none"),
            method = c("hypergeometric", "fisher"),
            threads = 3) {
+    # browser()
     id_type <- match.arg(id_type)
     method <- match.arg(method)
     p_adjust_method <- match.arg(p_adjust_method)
+    
+    remain_idx <-
+      pathway_database@compound_list %>%
+      purrr::map(function(x) {
+        nrow(x)
+      }) %>%
+      unlist() %>%
+      `>`(0) %>%
+      which()
+    
+    pathway_database <-
+      filter_pathway(object = pathway_database, remain_idx = remain_idx)
     
     has_metabolite_id <-
       lapply(pathway_database@compound_list, function(x) {
@@ -293,7 +306,7 @@ enrich_metabolic_pathway <-
         if (length(x) == 0) {
           return(NA)
         }
-        return(x)
+        return(paste0(x, collapse = ";"))
       }) %>%
       unlist()
     

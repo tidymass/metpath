@@ -1,4 +1,5 @@
 
+
 globalVariables(
   names = c(
     "CAS.ID",
@@ -37,6 +38,28 @@ globalVariables(
     "cutoff",
     "",
     "temp.ID",
-    "query_type"
+    "query_type",
+    "Adduct",
+    "Compound_name",
+    "HMDB_ID" ,
+    "KEGG_ID",
+    "Total_metabolite_id",
+    "degree",
+    "ecdf",
+    "edge_class",
+    "from",
+    "from_compound_KEGG_ID",
+    "isotope",
+    "mzError.ppm",
+    "node_class",
+    "peakIndex",
+    "polarity",
+    "rgamma",
+    "rt",
+    "rtError.s",
+    "score",
+    "to",
+    "to_compound_KEGG_ID",
+    "variable_id"
   )
 )
