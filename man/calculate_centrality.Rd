@@ -5,15 +5,44 @@
 \title{Calculate Node Centrality in a Graph}
 \usage{
 calculate_centrality(graph, type = c("degree", "betweenness"))
+
+calculate_centrality(graph, type = c("degree", "betweenness"))
 }
 \arguments{
 \item{graph}{An `igraph` object representing the network.}
 
-\item{type}{A character string specifying the type of centrality to calculate. Options are "degree" (default) or "betweenness".}
+\item{type}{A character string specifying the type of centrality to compute. Options are `"degree"` (default) or `"betweenness"`.}
 }
 \value{
 A named vector of centrality values for each node in the graph.
+
+A named numeric vector where names represent node IDs and values represent centrality scores.
 }
 \description{
 This function computes the centrality of nodes in a graph using either degree centrality or betweenness centrality.
+
+This function calculates the centrality of nodes in a given network graph based on either **degree centrality** or **betweenness centrality**.
+}
+\details{
+- **Degree centrality** measures the number of direct connections a node has.
+- **Betweenness centrality** measures the number of shortest paths passing through a node, indicating its role as a bridge in the network.
+- The function uses `igraph::degree()` for degree centrality and a custom approach for betweenness centrality using `igraph::shortest_paths()`.
+}
+\examples{
+\dontrun{
+library(igraph)
+
+# Create a sample graph
+g <- make_ring(10)
+V(g)$name <- paste0("Node", 1:10)
+
+# Calculate degree centrality
+degree_centrality <- calculate_centrality(g, type = "degree")
+print(degree_centrality)
+
+# Calculate betweenness centrality
+betweenness_centrality <- calculate_centrality(g, type = "betweenness")
+print(betweenness_centrality)
+}
+
 }

@@ -101,10 +101,12 @@ length.pathway_database <- function(x) {
 #' @return A list containing database metadata.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("database_info", function(object) standardGeneric("database_info"))
+
 setMethod(
   f = "database_info",
   signature = "pathway_database",
-  definition <- function(object) {
+  definition = function(object) {
     object@database_info
   }
 )
@@ -117,10 +119,11 @@ setMethod(
 #' @return A character vector of pathway IDs.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("pathway_id", function(object) standardGeneric("pathway_id"))
 setMethod(
   f = "pathway_id",
   signature = "pathway_database",
-  definition <- function(object) {
+  definition = function(object) {
     object@pathway_id
   }
 )
@@ -132,10 +135,11 @@ setMethod(
 #' @return A character vector of pathway names.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("pathway_name", function(object) standardGeneric("pathway_name"))
 setMethod(
   f = "pathway_name",
   signature = "pathway_database",
-  definition <- function(object) {
+  definition = function(object) {
     pathway_name = object@pathway_name
     names(pathway_name) = object@pathway_id
     pathway_name
@@ -148,6 +152,7 @@ setMethod(
 #' @return A character vector of pathway descriptions.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("describtion", function(object) standardGeneric("describtion"))
 setMethod(
   f = "describtion",
   signature = "pathway_database",
@@ -165,6 +170,7 @@ setMethod(
 #' @return A character vector of pathway classes.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("pathway_class", function(object) standardGeneric("pathway_class"))
 setMethod(
   f = "pathway_class",
   signature = "pathway_database",
@@ -182,6 +188,7 @@ setMethod(
 #' @return A list of gene sets for each pathway.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("gene_list", function(object) standardGeneric("gene_list"))
 setMethod(
   f = "gene_list",
   signature = "pathway_database",
@@ -199,6 +206,8 @@ setMethod(
 #' @return A list of compound sets for each pathway.
 #' @export
 #' @rdname extract-pathway_database
+
+setGeneric("compound_list", function(object) standardGeneric("compound_list"))
 setMethod(
   f = "compound_list",
   signature = "pathway_database",
@@ -218,6 +227,7 @@ setMethod(
 #' @return A list of references for each pathway.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("reference_list", function(object) standardGeneric("reference_list"))
 setMethod(
   f = "reference_list",
   signature = "pathway_database",
@@ -236,6 +246,7 @@ setMethod(
 #' @return A list of related diseases for each pathway.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("related_disease", function(object) standardGeneric("related_disease"))
 setMethod(
   f = "related_disease",
   signature = "pathway_database",
@@ -253,6 +264,7 @@ setMethod(
 #' @return A list of related modules for each pathway.
 #' @export
 #' @rdname extract-pathway_database
+setGeneric("related_module", function(object) standardGeneric("related_module"))
 setMethod(
   f = "related_module",
   signature = "pathway_database",

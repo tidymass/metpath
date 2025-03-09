@@ -10,7 +10,9 @@ plot_metabolic_module_fpa(
   include_feature = FALSE,
   include_hidden_metabolites = FALSE,
   add_compound_name = TRUE,
-  metabolic_module_index = 1
+  metabolic_module_index = 1,
+  layout = "fr",
+  add_pathways = FALSE
 )
 }
 \arguments{
@@ -32,6 +34,10 @@ the visualization. Default is `TRUE`.}
 
 \item{metabolic_module_index}{Numeric. The index of the metabolic module to
 visualize. Default is `1`.}
+
+\item{layout}{The layout of the network, such as `kk` or `fr`.}
+
+\item{add_pathways}{Add pathways beside of the network or not. Default is `FALSE`.}
 }
 \value{
 A `ggplot2` object representing the metabolic module network.

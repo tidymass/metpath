@@ -60,6 +60,8 @@ globalVariables(
     "score",
     "to",
     "to_compound_KEGG_ID",
-    "variable_id"
+    "variable_id",
+    "metabolic_module_name",
+    "module"
   )
 )

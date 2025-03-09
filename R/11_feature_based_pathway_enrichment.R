@@ -3,7 +3,7 @@
 # source("R/enrich_pathways.R")
 # source("R/7_utils.R")
 #
-# setwd("demo_data/smartd_project/")
+# setwd("demo_data/2_smartd_project")
 # load("peak_marker")
 # load("urine_metabolomics_data.rda")
 # # load("hmdb_compound_ms1.rda")
@@ -49,6 +49,32 @@
 # # node_data <-
 # #   node_data %>%
 # #   dplyr::filter(name %in% unique(c(edge_data$from, edge_data$to)))
+# #
+# # metabolic_network <-
+# #   tidygraph::tbl_graph(nodes = node_data,
+# #                        edges = edge_data,
+# #                        directed = FALSE)
+# #
+# # save(metabolic_network, file = "metabolic_network.rda")
+# # load("metabolic_network.rda")
+# #
+# ###remove duplicated edges
+# # node_data <- tidygraph::as_tibble(metabolic_network, active = "nodes")
+# # edge_data <- tidygraph::as_tibble(metabolic_network, active = "edges")
+# # edge_data <-
+# #   edge_data %>%
+# #   dplyr::mutate(from = from_compound_KEGG_ID, to = to_compound_KEGG_ID) %>%
+# #   dplyr::filter(from != to) %>%
+# #   dplyr::distinct(from, to, .keep_all = TRUE)
+# #
+# # edge_data <-
+# #   edge_data %>%
+# #   dplyr::mutate(rpair_id = apply(cbind(from, to), 1, function(x)
+# #     paste(sort(as.character(
+# #       x
+# #     )), collapse = "_"))) %>%
+# #   dplyr::distinct(rpair_id, .keep_all = TRUE)
+# #
 # #
 # # metabolic_network <-
 # #   tidygraph::tbl_graph(nodes = node_data,
@@ -175,8 +201,7 @@
 #   add_compound_name = TRUE,
 #   metabolic_module_index = 6
 # )
-
-
+#
 
 #' Perform Feature-based Pathway Analysis (FPA)
 #'
@@ -219,6 +244,9 @@ perform_fpa <-
            include_hidden_metabolites = FALSE,
            metabolic_network,
            pathway_database) {
+    ###check the feature_table_marker and feature_table_all
+    check_feature_table_marker(feature_table_marker)
+    check_feature_table_all(feature_table_all)
     ###metabolite annotation
     message("Annotating metabolites for feature table...\n")
     
@@ -287,18 +315,18 @@ perform_fpa <-
           
           rt_class <- paste(x$Lab.ID[1], rt_class$class, sep = "_")
           
-          x =
+          x <-
             data.frame(x,
                        compound_class = rt_class,
                        stringsAsFactors = FALSE)
           
-          x =
+          x <-
             unique(x$compound_class) %>%
             purrr::map(function(y) {
-              z =
+              z <-
                 x[x$compound_class == y, , drop = FALSE]
               score <- score_peak_group(z)
-              z = data.frame(z, score, stringsAsFactors = FALSE)
+              z <- data.frame(z, score, stringsAsFactors = FALSE)
               z
             }) %>%
             do.call(rbind, .) %>%
@@ -422,6 +450,14 @@ perform_fpa <-
       tidygraph::activate(what = "nodes") %>%
       dplyr::mutate(degree2 = tidygraph::centrality_degree())
     
+    # sub_metabolic_network2 <-
+    # igraph::subgraph(graph = metabolic_network,
+    #                  vids = total_metabolites) %>%
+    #   tidygraph::as_tbl_graph() %>%
+    #   dplyr::mutate(node_class = ifelse(name %in% detected_metabolites, "Detected", "Hidden")) %>%
+    #   tidygraph::activate(what = "nodes") %>%
+    #   dplyr::mutate(degree2 = tidygraph::centrality_degree())
+    
     ###metabolic_module detection
     #####detecting metabolic modules
     message("Detecting metabolic modules...\n")
@@ -434,9 +470,9 @@ perform_fpa <-
       )
     
     ###calculate activity scores and impacts of metabolic modules
-    message("Calculating activity scores of metabolic modules.\n")
+    message("Calculating quality scores of metabolic modules.\n")
     
-    activity_score <-
+    module_quality_score <-
       calculate_activity_socre(
         metabolic_modules = metabolic_modules,
         detected_metabolites = detected_metabolites,
@@ -445,30 +481,83 @@ perform_fpa <-
         threads = threads
       )
     
+    # module_quality_score <-
+    #   metabolic_modules %>%
+    #   purrr::map(function(x) {
+    #     calculate_module_quality(graph = sub_metabolic_network, nodes = x)$conductance
+    #   }) %>%
+    #   unlist()
+    
     ##Module impact
     message("Calculating impacts of metabolic modules...\n")
     
-    impact <-
-      lapply(metabolic_modules, function(temp.group) {
-        temp_graph <- igraph::subgraph(graph = sub_metabolic_network, v = temp.group)
-        centrality <- calcualte_centrality(graph = temp_graph, type = "d")
-        temp.idx <- which(temp.group %in% detected_metabolites)
-        impact <- sum(centrality[temp.idx]) / sum(centrality)
-        impact
+    module_impact <-
+      lapply(metabolic_modules, function(temp_group) {
+        temp_graph <-
+          igraph::subgraph(graph = sub_metabolic_network, v = temp_group)
+        centrality <- calculate_centrality(graph = temp_graph, type = "d")
+        temp_idx <- which(temp_group %in% detected_metabolites)
+        module_impact <- sum(centrality[temp_idx]) / sum(centrality)
+        module_impact
       })
     
-    impact <- unlist(impact)
+    module_impact <- unlist(module_impact)
+    
+    ####Hub Dominance Score (HDS) or Dominant Edge Ratio
+    ##DER = \frac{\sum_{\text{top } K} e_i}{|E|}
+    # where:
+    #  K  is a small fraction (e.g., top 10-20%) of nodes sorted by degree.
+    # 	 e_i  is the number of edges connected to those nodes.
+    # 	 |E|  is the total number of edges.
+    #
+    # Rationale: If the top nodes account for almost all edges, DER → 1.
+    message("Calculating Dominant Edge Ratio (DER) of metabolic modules...\n")
+    
+    module_dominant_edge_rate <-
+      lapply(metabolic_modules, function(temp_group) {
+        temp_graph <-
+          igraph::subgraph(graph = sub_metabolic_network, v = temp_group)
+        
+        all_degree <- igraph::degree(temp_graph)
+        
+        # Sort nodes by degree (descending)
+        sorted_degrees <- sort(all_degree, decreasing = TRUE)
+        
+        # Define top K nodes (e.g., top 20% most connected nodes)
+        # K <- ceiling(0.2 * length(V(temp_graph)))  # 20% of nodes
+        # top_nodes <- names(sorted_degrees)[1:K]
+        
+        top_nodes <-
+          names(all_degree[all_degree > quantile(sorted_degrees, probs = 0.9)])
+        if (length(top_nodes) == 0) {
+          top_nodes <- names(sorted_degrees)[1]
+        }
+        
+        
+        all_edges <-
+          igraph::as_edgelist(temp_graph)
+        
+        # Count edges where at least one node is in the top nodes
+        dominant_edges <-
+          sum(all_edges[, 1] %in% top_nodes |
+                all_edges[, 2] %in% top_nodes)
+        
+        # Compute Dominant Edge Ratio (DER)
+        total_edges <- igraph::gsize(temp_graph)
+        dominant_edges / total_edges
+      }) %>%
+      unlist()
     
     ##get NULL distribution
-    message("Identify null distributation of activity scores...\n")
+    message("Identify null distributation of metabolic module quality scores...\n")
     
-    null_activity_score <-
-      get_null_distribution(
+    null_quality_score <-
+      generate_null_activity_score_distribution(
         annotation_table_all = annotation_table_all,
         feature_table_marker = feature_table_marker,
         metabolite_database = metabolite_database,
         metabolic_network = metabolic_network,
-        permutation_times = 10,
+        permutation_times = 5,
         threads = threads,
         adduct.table = adduct.table,
         column = column,
@@ -477,28 +566,49 @@ perform_fpa <-
         include_hidden_metabolites = include_hidden_metabolites
       )
     
-    null_activity_score <-
-      unlist(null_activity_score)
+    # null_quality_score <-
+    #   generate_null_conductance_distribution(
+    #     annotation_table_all = annotation_table_all,
+    #     feature_table_marker = feature_table_marker,
+    #     metabolite_database = metabolite_database,
+    #     metabolic_network = metabolic_network,
+    #     permutation_times = 5,
+    #     threads = threads,
+    #     adduct.table = adduct.table,
+    #     column = column,
+    #     ms1.match.ppm = ms1.match.ppm,
+    #     mz.ppm.thr = mz.ppm.thr,
+    #     include_hidden_metabolites = include_hidden_metabolites
+    #   )
+    
+    null_quality_score <-
+      unlist(null_quality_score)
+    
+    # mean(module_quality_score)
+    # mean(null_quality_score)
+    # median(mean(module_quality_score))
+    # median(mean(null_quality_score))
     
     ####calculate the p values for each metabolic module
-    activity_score <- activity_score + 0.00000001
+    module_quality_score <- module_quality_score + 0.00000001
     
     ###
-    para <- MASS::fitdistr(x = null_activity_score, densfun = "gamma")[[1]]
-    # standard.distribution <- rgamma(n = length(null_activity_score), shape = para[1], rate = para[2])
+    para <- MASS::fitdistr(x = null_quality_score, densfun = "gamma")[[1]]
+    # standard.distribution <- rgamma(n = length(null_quality_score), shape = para[1], rate = para[2])
     standard.distribution <- rgamma(n = 100000,
                                     shape = para[1],
                                     rate = para[2])
-    # ks.test(x = null_activity_score, y = standard.distribution)
+    # ks.test(x = null_quality_score, y = standard.distribution)
     
     cdf <- ecdf(x = standard.distribution)
     
-    metabolic_module_p <- 1 - cdf(activity_score)
+    metabolic_module_p <- 1 - cdf(module_quality_score)
     
     #order module according to p value
-    metabolic_modules <- metabolic_modules[order(metabolic_module_p)]
-    impact <- impact[order(metabolic_module_p)]
-    metabolic_module_p <- metabolic_module_p[order(metabolic_module_p)]
+    # metabolic_modules <- metabolic_modules[order(metabolic_module_p)]
+    # module_impact <- module_impact[order(metabolic_module_p)]
+    # metabolic_module_p <- metabolic_module_p[order(metabolic_module_p)]
+    # module_dominant_edge_rate <- module_dominant_edge_rate[order(metabolic_module_p)]
     
     ## get information of each metabolic module
     metabolic_module_result <-
@@ -565,19 +675,25 @@ perform_fpa <-
         return(temp_result)
       })
     
-    metabolic_module_result <- do.call(rbind, metabolic_module_result)
-    metabolic_module_name <- paste("metabolic_module", 1:length(metabolic_modules), sep = "_")
-    metabolic_module_result <- data.frame(
-      metabolic_module_name,
-      impact,
-      metabolic_module_p,
-      metabolic_module_result,
-      stringsAsFactors = FALSE
-    )
+    metabolic_module_result <-
+      do.call(rbind, metabolic_module_result)
+    
+    metabolic_module_result <-
+      data.frame(
+        module_impact,
+        module_dominant_edge_rate,
+        metabolic_module_p,
+        metabolic_module_result,
+        stringsAsFactors = FALSE
+      ) %>%
+      dplyr::arrange(metabolic_module_p) %>%
+      dplyr::mutate(metabolic_module_name = paste("metabolic_module", 1:nrow(.), sep = "_")) %>%
+      dplyr::select(metabolic_module_name, dplyr::everything())
     
     colnames(metabolic_module_result) <- c(
-      "Metabolic_module_name",
-      "Metabolic_module_impact",
+      "Name",
+      "Impact",
+      "Dominant_edge_rate",
       "p_value",
       "Total_metabolite_number",
       "Detected_metabolite_number",
@@ -714,12 +830,21 @@ perform_fpa <-
       ))) %>%
       dplyr::distinct(name, .keep_all = TRUE)
     
+    final_edge_data <-
+      final_edge_data %>%
+      dplyr::filter(from %in% final_node_data$name &
+                      to %in% final_node_data$name)
+    
     final_metabolic_network <-
-      tidygraph::tbl_graph(nodes = final_node_data, edges = final_edge_data)
+      tidygraph::tbl_graph(nodes = final_node_data,
+                           edges = final_edge_data,
+                           directed = FALSE)
     
     ####Pathway enrichment for all the metabolites
     kegg_id <-
       annotation_table_final$KEGG.ID
+    
+    message("Enriching pathways for dysregulated metabolic network...\n")
     
     enriched_pathways <-
       enrich_pathways(
@@ -732,12 +857,37 @@ perform_fpa <-
         threads = threads
       )
     
+    message("Enriching pathways for each metabolic module...\n")
+    enriched_pathways_list <-
+      vector("list", length = nrow(metabolic_module_result))
+    names(enriched_pathways_list) <- metabolic_module_result$Name
+    
+    for (i in 1:sum(metabolic_module_result$p_value < 0.05)) {
+      cat(i, " ")
+      x <-
+        metabolic_module_result$Total_metabolite_id[i] %>%
+        stringr::str_split(pattern = "\\{\\}") %>%
+        unlist() %>%
+        unique()
+      enriched_pathways_list[[i]] <-
+        enrich_pathways(
+          query_id = x,
+          query_type = "compound",
+          id_type = "KEGG",
+          pathway_database = pathway_database,
+          p_cutoff = 0.05,
+          p_adjust_method = "fdr",
+          threads = threads
+        )
+    }
+    
     return(
       list(
         dysregulated_metabolic_module = metabolic_module_result,
         dysregulated_metabolic_network = final_metabolic_network,
         annotation_table = annotation_table_final,
-        enriched_pathways = enriched_pathways
+        enriched_pathways = enriched_pathways,
+        enriched_pathways_list = enriched_pathways_list
       )
     )
     
@@ -1456,7 +1606,7 @@ annotate_metabolites_fpa <-
 #'
 #' @export
 #'
-get_null_distribution <-
+generate_null_activity_score_distribution <-
   function(annotation_table_all,
            feature_table_marker,
            metabolite_database,
@@ -1478,11 +1628,23 @@ get_null_distribution <-
       cat(i, " ")
       
       # Randomly sample markers for permutation
-      temp_marker_variable_id <- sample(
-        x = unique(annotation_table_all$variable_id),
-        size = marker_number,
-        replace = FALSE
-      )
+      if (nrow(feature_table_marker) / length(unique(annotation_table_all$variable_id)) < 0.2) {
+        temp_marker_variable_id <- sample(
+          x = setdiff(
+            unique(annotation_table_all$variable_id),
+            feature_table_marker$variable_id
+          ),
+          size = marker_number,
+          replace = FALSE
+        )
+      } else{
+        temp_marker_variable_id <- sample(
+          x = unique(annotation_table_all$variable_id),
+          size = marker_number,
+          replace = FALSE
+        )
+      }
+      
       
       # Extract annotation information for sampled markers
       temp_annotation_table_marker <- annotation_table_all %>%
@@ -1921,6 +2083,8 @@ annotate_isotope <-
 #'   the visualization. Default is `TRUE`.
 #' @param metabolic_module_index Numeric. The index of the metabolic module to
 #'   visualize. Default is `1`.
+#' @param layout The layout of the network, such as `kk` or `fr`.
+#' @param add_pathways Add pathways beside of the network or not. Default is `FALSE`.
 #'
 #' @return A `ggplot2` object representing the metabolic module network.
 #'
@@ -1938,7 +2102,7 @@ annotate_isotope <-
 #' @importFrom dplyr filter pull mutate
 #' @importFrom tidygraph activate centrality_degree
 #' @importFrom ggraph ggraph geom_edge_arc geom_node_point geom_node_text theme_graph
-#' @importFrom ggraph scale_edge_color_manual scale_color_manual
+#' @importFrom ggraph scale_edge_color_manual
 #' @export
 
 
@@ -1948,7 +2112,9 @@ plot_metabolic_module_fpa <-
            include_feature = FALSE,
            include_hidden_metabolites = FALSE,
            add_compound_name = TRUE,
-           metabolic_module_index = 1) {
+           metabolic_module_index = 1,
+           layout = "fr",
+           add_pathways = FALSE) {
     dysregulated_metabolic_module <-
       fpa_result$dysregulated_metabolic_module
     
@@ -1970,11 +2136,16 @@ plot_metabolic_module_fpa <-
       dplyr::pull(variable_id) %>%
       unique()
     
+    remain_feature <-
+      remain_feature[remain_feature %in% igraph::V(dysregulated_metabolic_network)$name]
+    
     temp_graph <-
       dysregulated_metabolic_network %>%
       dplyr::filter(name %in% c(remain_compound, remain_feature)) %>%
       tidygraph::activate("nodes") %>%
-      dplyr::mutate(degree = tidygraph::centrality_degree())
+      dplyr::mutate(degree = tidygraph::centrality_degree()) %>%
+      tidygraph::activate("nodes") %>%
+      dplyr::filter(degree > 0)
     
     if (!include_feature) {
       temp_graph <-
@@ -1992,13 +2163,13 @@ plot_metabolic_module_fpa <-
     
     plot <-
       temp_graph %>%
-      ggraph::ggraph(layout = "fr") +
-      geom_edge_arc(strength = 0.1, aes(color = edge_class)) +
-      scale_edge_color_manual(values = c(
+      ggraph::ggraph(layout = layout) +
+      ggraph::geom_edge_arc(strength = 0.1, aes(color = edge_class)) +
+      ggraph::scale_edge_color_manual(values = c(
         "feature_metabolite" =  "#eaeaea",
         "metabolic_reaction" = "#6e8da9"
       )) +
-      geom_node_point(aes(
+      ggraph::geom_node_point(aes(
         color = node_class,
         shape = node_class,
         size = degree
@@ -2008,12 +2179,64 @@ plot_metabolic_module_fpa <-
         "Detected" = "#ff595e",
         "Hidden" = "#6e8da9"
       )) +
-      theme_graph()
+      ggraph::theme_graph()
     
     if (add_compound_name) {
       plot <- plot +
-        geom_node_text(aes(label = Compound_name), repel = TRUE)
+        ggraph::geom_node_text(aes(label = Compound_name), repel = TRUE)
     }
+    
+    Total_metabolite_number <-
+      fpa_result$dysregulated_metabolic_module$Total_metabolite_number[metabolic_module_index]
+    Impact <-
+      fpa_result$dysregulated_metabolic_module$Impact[metabolic_module_index]
+    Dominant_edge_rate <-
+      fpa_result$dysregulated_metabolic_module$Dominant_edge_rate[metabolic_module_index]
+    p_value <-
+      fpa_result$dysregulated_metabolic_module$p_value[metabolic_module_index]
+    Detected_metabolite_number <-
+      fpa_result$dysregulated_metabolic_module$Detected_metabolite_number[metabolic_module_index]
+    
+    plot <-
+      plot +
+      labs(
+        title = fpa_result$dysregulated_metabolic_module$Name[metabolic_module_index],
+        subtitle = paste0(
+          "Total Metabolite Number: ",
+          Total_metabolite_number,
+          "\n",
+          "Detected Metabolite Number: ",
+          Detected_metabolite_number,
+          "\n",
+          "Impact: ",
+          Impact,
+          "\n",
+          "Dominant Edge Rate: ",
+          round(Dominant_edge_rate, 3),
+          "\n",
+          "P-value: ",
+          p_value
+        )
+      )
+    
+    if (add_pathways) {
+      pathway <-
+        fpa_result$enriched_pathways_list[[metabolic_module_index]]
+      if (is.null(pathway)) {
+        plot_pathway <-
+          ggplot() +
+          theme_bw() +
+          labs(title = "No enriched pathways")
+      } else{
+        plot_pathway <-
+          enrich_scatter_plot(object = pathway, label = TRUE)
+      }
+      
+      plot <-
+        plot + patchwork::wrap_plots(plot_pathway, nrow = 1)
+      
+    }
+    
     plot
   }
 
@@ -2028,10 +2251,13 @@ plot_metabolic_module_fpa <-
 #' @param feature_table_marker Data frame. The feature table containing metabolic markers.
 #' @param include_feature Logical. Whether to include detected metabolic features in the plot.
 #'   Default is `FALSE`.
+#' @param node_color_by_module Logical. When doesn't include features (include_feature = FALSE),
+#' whether set the colors of the nodes by metabolics modules.
 #' @param include_hidden_metabolites Logical. Whether to include hidden metabolites in the plot.
 #'   Default is `FALSE`.
 #' @param add_compound_name Logical. Whether to add compound names as labels in
 #'   the visualization. Default is `TRUE`.
+#' @param layout The layout of the network, such as `kk` or `fr`.
 #'
 #' @return A `ggplot2` object representing the metabolic network.
 #'
@@ -2044,7 +2270,9 @@ plot_metabolic_module_fpa <-
 #' @importFrom tidygraph activate centrality_degree
 #' @importFrom dplyr mutate filter
 #' @importFrom ggraph ggraph geom_edge_arc geom_node_point geom_node_text theme_graph
-#' @importFrom ggplot2 scale_edge_color_manual scale_color_manual
+#' @importFrom ggplot2 scale_color_manual
+#' @importFrom grDevices colorRampPalette
+#' @importFrom stats quantile
 #' @export
 #'
 #' @examples
@@ -2064,8 +2292,10 @@ plot_metabolic_network_fpa <-
   function(fpa_result,
            feature_table_marker,
            include_feature = FALSE,
+           node_color_by_module = FALSE,
            include_hidden_metabolites = FALSE,
-           add_compound_name = TRUE) {
+           add_compound_name = TRUE,
+           layout = "fr") {
     dysregulated_metabolic_module <-
       fpa_result$dysregulated_metabolic_module
     
@@ -2085,6 +2315,29 @@ plot_metabolic_network_fpa <-
         temp_graph %>%
         tidygraph::activate("nodes") %>%
         dplyr::filter(node_class != "Feature")
+      if (node_color_by_module) {
+        temp_data <-
+          seq_len(nrow(dysregulated_metabolic_module)) %>%
+          purrr::map(function(i) {
+            data.frame(
+              module = dysregulated_metabolic_module$Name[i],
+              KEGG.ID = stringr::str_split(
+                dysregulated_metabolic_module$Total_metabolite_id[i],
+                "\\{\\}"
+              )[[1]]
+            ) %>%
+              dplyr::distinct(KEGG.ID, .keep_all = TRUE)
+          }) %>%
+          do.call(rbind, .) %>%
+          as.data.frame() %>%
+          dplyr::mutate(module = factor(module, levels = stringr::str_sort(unique(module), numeric = TRUE)))
+        
+        temp_graph <-
+          temp_graph %>%
+          tidygraph::activate("nodes") %>%
+          dplyr::left_join(temp_data, by = c("name" = "KEGG.ID"))
+        
+      }
     }
     
     if (!include_hidden_metabolites) {
@@ -2094,37 +2347,97 @@ plot_metabolic_network_fpa <-
         dplyr::filter(node_class != "Hidden")
     }
     
-    plot <-
-      temp_graph %>%
-      ggraph::ggraph(layout = "fr") +
-      geom_edge_arc(strength = 0.1, aes(color = edge_class)) +
-      scale_edge_color_manual(values = c(
-        "feature_metabolite" =  "#eaeaea",
-        "metabolic_reaction" = "#6e8da9"
-      )) +
-      geom_node_point(aes(
-        color = node_class,
-        shape = node_class,
-        size = degree
-      )) +
-      scale_color_manual(values = c(
-        "Feature" = "#ffca3a",
-        "Detected" = "#ff595e",
-        "Hidden" = "#6e8da9"
-      )) +
-      theme_graph()
+    if (!include_feature & node_color_by_module) {
+      plot <-
+        temp_graph %>%
+        ggraph::ggraph(layout = layout) +
+        ggraph::geom_edge_arc(strength = 0.1, aes(color = edge_class)) +
+        ggraph::scale_edge_color_manual(values = c(
+          "feature_metabolite" =  "#eaeaea",
+          "metabolic_reaction" = "#6e8da9"
+        )) +
+        ggraph::geom_node_point(aes(
+          color = module,
+          shape = node_class,
+          size = degree
+        )) +
+        scale_color_manual(values =
+                             colorRampPalette(ggsci::pal_aaas("default")(10))(length(unique(
+                               as.character(
+                                 tidygraph::as_tibble(temp_graph, active = "nodes") %>% pull(module)
+                               )
+                             )))) +
+        ggraph::theme_graph()
+    } else{
+      plot <-
+        temp_graph %>%
+        ggraph::ggraph(layout = layout) +
+        ggraph::geom_edge_arc(strength = 0.1, aes(color = edge_class)) +
+        ggraph::scale_edge_color_manual(values = c(
+          "feature_metabolite" =  "#eaeaea",
+          "metabolic_reaction" = "#6e8da9"
+        )) +
+        ggraph::geom_node_point(aes(
+          color = node_class,
+          shape = node_class,
+          size = degree
+        )) +
+        scale_color_manual(values = c(
+          "Feature" = "#ffca3a",
+          "Detected" = "#ff595e",
+          "Hidden" = "#6e8da9"
+        )) +
+        ggraph::theme_graph()
+    }
+    
     
     if (add_compound_name) {
       plot <- plot +
-        geom_node_text(aes(label = Compound_name), repel = TRUE)
+        ggraph::geom_node_text(aes(label = Compound_name), repel = TRUE)
     }
+    
     plot
   }
 
 
 
 
-calcualte_centrality <-
+#' Calculate Node Centrality in a Graph
+#'
+#' This function calculates the centrality of nodes in a given network graph based on either **degree centrality** or **betweenness centrality**.
+#'
+#' @param graph An `igraph` object representing the network.
+#' @param type A character string specifying the type of centrality to compute. Options are `"degree"` (default) or `"betweenness"`.
+#'
+#' @return A named numeric vector where names represent node IDs and values represent centrality scores.
+#'
+#' @details
+#' - **Degree centrality** measures the number of direct connections a node has.
+#' - **Betweenness centrality** measures the number of shortest paths passing through a node, indicating its role as a bridge in the network.
+#' - The function uses `igraph::degree()` for degree centrality and a custom approach for betweenness centrality using `igraph::shortest_paths()`.
+#'
+#' @importFrom igraph V degree shortest_paths
+#'
+#' @examples
+#' \dontrun{
+#' library(igraph)
+#'
+#' # Create a sample graph
+#' g <- make_ring(10)
+#' V(g)$name <- paste0("Node", 1:10)
+#'
+#' # Calculate degree centrality
+#' degree_centrality <- calculate_centrality(g, type = "degree")
+#' print(degree_centrality)
+#'
+#' # Calculate betweenness centrality
+#' betweenness_centrality <- calculate_centrality(g, type = "betweenness")
+#' print(betweenness_centrality)
+#' }
+#'
+#' @export
+
+calculate_centrality <-
   function(graph, type = c("degree", "betweenness")) {
     type = match.arg(type)
     node <- igraph::V(graph)$name
@@ -2165,7 +2478,61 @@ calcualte_centrality <-
 
 
 
-
+#' Calculate Activity Score for Metabolic Modules
+#'
+#' This function calculates an activity score for each metabolic module based on its detected and hidden metabolites,
+#' as well as its structure within a sub-metabolic network. The calculation incorporates modularity and degree-based
+#' weighting to assess the significance of the module.
+#'
+#' @param metabolic_modules A list of metabolic modules, where each module is represented as a vector of metabolite IDs.
+#' @param detected_metabolites A character vector of detected metabolite IDs.
+#' @param hidden_metabolites A character vector of hidden metabolite IDs.
+#' @param sub_metabolic_network An `igraph` object representing the sub-metabolic network.
+#' @param threads An integer specifying the number of threads to use for parallel computation. Default is 3.
+#'
+#' @return A numeric vector where each value represents the activity score of a corresponding metabolic module.
+#'
+#' @details
+#' The activity score is computed by assessing the modularity of each metabolic module within the sub-metabolic network.
+#' The function extracts the subgraph corresponding to each module and computes a modularity-based score adjusted for the
+#' total number of metabolites in the dataset.
+#'
+#' The computation is performed in parallel using `BiocParallel`, selecting either `MulticoreParam` (for Unix-based systems)
+#' or `SnowParam` (for Windows) to handle multi-threaded execution efficiently.
+#'
+#' @import igraph
+#' @importFrom BiocParallel bplapply MulticoreParam SnowParam
+#' @importFrom masstools get_os
+#'
+#' @examples
+#' \dontrun{
+#' library(igraph)
+#'
+#' # Example metabolic network
+#' g <- make_ring(10)
+#' V(g)$name <- paste0("M", 1:10)
+#'
+#' # Example input data
+#' metabolic_modules <- list(
+#'   c("M1", "M2", "M3"),
+#'   c("M4", "M5", "M6", "M7")
+#' )
+#' detected_metabolites <- c("M1", "M3", "M5", "M7")
+#' hidden_metabolites <- c("M2", "M6")
+#'
+#' # Compute activity scores
+#' scores <- calculate_activity_score(
+#'   metabolic_modules = metabolic_modules,
+#'   detected_metabolites = detected_metabolites,
+#'   hidden_metabolites = hidden_metabolites,
+#'   sub_metabolic_network = g,
+#'   threads = 2
+#' )
+#'
+#' print(scores)
+#' }
+#'
+#' @export
 
 calculate_activity_socre <-
   function(metabolic_modules,
@@ -2179,13 +2546,8 @@ calculate_activity_socre <-
                hidden_metabolites,
                total_metabolite_number,
                sub_metabolic_network = sub_metabolic_network) {
-        library(
-          igraph,
-          quietly = TRUE,
-          logical.return = FALSE,
-          warn.conflicts = FALSE
-        )
-        options(warn = -1)
+        requireNamespace("igraph", quietly = TRUE)
+        # options(warn = -1)
         
         temp_graph <- igraph::subgraph(graph = sub_metabolic_network, v = x)
         detected_number <- sum(x %in% detected_metabolites)
@@ -2197,12 +2559,12 @@ calculate_activity_socre <-
         node_name <- names(igraph::V(temp_graph))
         
         value <- sapply(node_name, function(node) {
-          temp.value <- sapply(node_name, function(x) {
+          temp_value <- sapply(node_name, function(x) {
             temp1 <- igraph::degree(graph = sub_metabolic_network, v = x)
             temp2 <- igraph::degree(graph = sub_metabolic_network, v = node)
             temp1 * temp2 / (4 * m^2)
           })
-          sum(temp.value)
+          sum(temp_value)
         })
         
         modularity <- e / m - sum(value)
@@ -2233,3 +2595,289 @@ calculate_activity_socre <-
     return(activity_score)
     
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Function to compute module quality metrics
+calculate_module_quality <-
+  function(graph, nodes) {
+    temp_graph <-
+      igraph::induced_subgraph(graph, vids = nodes)
+    internal_edges <- igraph::gsize(temp_graph)
+    external_edges <- sum(igraph::degree(graph, v = nodes)) - (2 * internal_edges)
+    
+    # Conductance
+    conductance <- ifelse((internal_edges + external_edges) == 0,
+                          0,
+                          external_edges / (internal_edges + external_edges)
+    )
+    
+    # Internal Density
+    num_nodes <- length(nodes)
+    internal_density <-
+      ifelse(num_nodes < 2, 0, (2 * internal_edges) / (num_nodes * (num_nodes - 1)))
+    
+    # Edge Density Ratio (EDR)
+    edge_density_ratio <-
+      ifelse(external_edges == 0, 1, internal_edges / external_edges)
+    
+    # Return metrics
+    return(
+      data.frame(
+        module_size = num_nodes,
+        internal_edges = internal_edges,
+        external_edges = external_edges,
+        conductance = conductance,
+        internal_density = internal_density,
+        edge_density_ratio = edge_density_ratio
+      )
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+generate_null_conductance_distribution <-
+  function(annotation_table_all,
+           feature_table_marker,
+           metabolite_database,
+           metabolic_network,
+           permutation_times = 5,
+           threads = 8,
+           adduct.table = NULL,
+           column = c("rp", "hilic"),
+           ms1.match.ppm = 25,
+           mz.ppm.thr = 400,
+           include_hidden_metabolites = FALSE) {
+    column <- match.arg(column)  # Ensure valid column type
+    
+    # Initialize list to store activity scores for each permutation
+    null_conductance <- vector(mode = "list", length = permutation_times)
+    marker_number <- nrow(feature_table_marker)  # Number of markers
+    
+    for (i in seq_len(permutation_times)) {
+      cat(i, " ")
+      
+      # Randomly sample markers for permutation
+      if (nrow(feature_table_marker) / length(unique(annotation_table_all$variable_id)) < 0.2) {
+        temp_marker_variable_id <- sample(
+          x = setdiff(
+            unique(annotation_table_all$variable_id),
+            feature_table_marker$variable_id
+          ),
+          size = marker_number,
+          replace = FALSE
+        )
+      } else{
+        temp_marker_variable_id <- sample(
+          x = unique(annotation_table_all$variable_id),
+          size = marker_number,
+          replace = FALSE
+        )
+      }
+      
+      
+      # Extract annotation information for sampled markers
+      temp_annotation_table_marker <- annotation_table_all %>%
+        dplyr::filter(variable_id %in% temp_marker_variable_id)
+      
+      # Extract detected metabolites from annotation table
+      temp_detected_metabolites <- unique(temp_annotation_table_marker$KEGG.ID)
+      
+      # Identify hidden metabolites connected to detected metabolites
+      if (include_hidden_metabolites) {
+        temp_hidden_metabolites <- get_hidden_metabolites(
+          metabolic_network = metabolic_network,
+          detected_metabolites = temp_detected_metabolites,
+          threads = threads,
+          max.reaction = 3
+        ) %>% unlist() %>% unique()
+      } else {
+        temp_hidden_metabolites <- NULL
+      }
+      
+      temp_total_metabolites <-
+        c(temp_detected_metabolites, temp_hidden_metabolites)
+      
+      # Extract subnetwork containing detected and hidden metabolites
+      temp_sub_metabolic_network <- metabolic_network %>%
+        tidygraph::activate("nodes") %>%
+        dplyr::filter(name %in% temp_total_metabolites) %>%
+        dplyr::mutate(node_class = ifelse(name %in% temp_detected_metabolites, "Detected", "Hidden")) %>%
+        tidygraph::mutate(degree2 = tidygraph::centrality_degree())
+      
+      # Identify metabolic modules in the subnetwork
+      temp_metabolic_modules <- identify_metabolic_modules(
+        sub_metabolic_network = temp_sub_metabolic_network,
+        detected_metabolites = temp_detected_metabolites,
+        hidden_metabolites = temp_hidden_metabolites
+      )
+      
+      # Calculate activity scores for the identified metabolic modules
+      temp_conductance <-
+        temp_metabolic_modules %>%
+        purrr::map(function(x) {
+          calculate_module_quality(graph = temp_sub_metabolic_network, nodes = x)$conductance
+        }) %>%
+        unlist()
+      
+      # Store the computed activity score in the list
+      null_conductance[[i]] <- temp_conductance
+    }
+    
+    return(null_conductance)
+  }
+
+
+
+
+
+
+
+check_feature_table_all <-
+  function(feature_table_all) {
+    ####feature_table_all
+    # 1. Check if it's a data frame
+    if (!is.data.frame(feature_table_all)) {
+      stop("Error: feature_table_all must be a data frame.")
+    }
+    
+    # 2. Check column names
+    expected_colnames <- c("variable_id", "mz", "rt", "polarity")
+    if (!identical(colnames(feature_table_all), expected_colnames)) {
+      stop("Error: Column names must be exactly: 'variable_id', 'mz', 'rt', 'polarity'.")
+    }
+    
+    # 3. Check if variable_id is unique
+    if (anyDuplicated(feature_table_all$variable_id) > 0) {
+      stop("Error: 'variable_id' column must have unique values.")
+    }
+    
+    # 4. Check if mz is numeric and has no NA
+    if (!is.numeric(feature_table_all$mz) ||
+        any(is.na(feature_table_all$mz))) {
+      stop("Error: 'mz' column must be numeric and contain no missing values.")
+    }
+    
+    # 5. Check if rt is numeric and has no NA
+    if (!is.numeric(feature_table_all$rt) ||
+        any(is.na(feature_table_all$rt))) {
+      stop("Error: 'rt' column must be numeric and contain no missing values.")
+    }
+    
+    # 6. Check if rt is in seconds (not in minutes)
+    max_rt <- max(feature_table_all$rt, na.rm = TRUE)  # Get the max retention time
+    if (max_rt < 100) {
+      # If max RT is too small, it might be in minutes
+      stop("Error: 'rt' values seem to be in minutes, but they should be in seconds.")
+    }
+    
+    # 7. Check polarity column
+    valid_polarity <- c("positive", "negative")
+    if (any(is.na(feature_table_all$polarity))) {
+      stop("Error: 'polarity' column must not contain NA values.")
+    }
+    if (any(grepl("\\s", feature_table_all$polarity))) {
+      stop("Error: 'polarity' column must not contain spaces.")
+    }
+    if (!all(feature_table_all$polarity %in% valid_polarity)) {
+      stop("Error: 'polarity' must only contain 'positive' or 'negative'.")
+    }
+    
+    # If all checks pass
+    message("feature_table_all is correct.\n")
+    
+  }
+
+
+check_feature_table_marker <-
+  function(feature_table_marker) {
+    # 1. Check if it's a data frame
+    if (!is.data.frame(feature_table_marker)) {
+      stop("Error: feature_table_marker must be a data frame.")
+    }
+    
+    # 2. Check column names
+    expected_colnames <- c("variable_id", "mz", "rt", "degree", "p_value", "polarity")
+    if (!identical(colnames(feature_table_marker), expected_colnames)) {
+      stop(
+        "Error: Column names must be exactly: 'variable_id', 'mz', 'rt', 'degree', 'p_value', 'polarity'."
+      )
+    }
+    
+    # 3. Check if variable_id is unique
+    if (anyDuplicated(feature_table_marker$variable_id) > 0) {
+      stop("Error: 'variable_id' column must have unique values.")
+    }
+    
+    # 4. Check if mz is numeric and has no NA
+    if (!is.numeric(feature_table_marker$mz) ||
+        any(is.na(feature_table_marker$mz))) {
+      stop("Error: 'mz' column must be numeric and contain no missing values.")
+    }
+    
+    # 5. Check if rt is numeric, has no NA, and represents time in seconds
+    if (!is.numeric(feature_table_marker$rt) ||
+        any(is.na(feature_table_marker$rt))) {
+      stop("Error: 'rt' column must be numeric and contain no missing values.")
+    }
+    
+    # 6. Ensure rt is in seconds (not minutes)
+    max_rt <- max(feature_table_marker$rt, na.rm = TRUE)  # Get the max retention time
+    if (max_rt < 100) {
+      # If max RT is too small, it might be in minutes
+      stop("Error: 'rt' values seem to be in minutes, but they should be in seconds.")
+    }
+    
+    # 7. Check if degree is numeric and has no NA
+    if (!is.numeric(feature_table_marker$degree) ||
+        any(is.na(feature_table_marker$degree))) {
+      stop("Error: 'degree' column must be numeric and contain no missing values.")
+    }
+    
+    # 8. Check if p_value is numeric and has no NA
+    if (!is.numeric(feature_table_marker$p_value) ||
+        any(is.na(feature_table_marker$p_value))) {
+      stop("Error: 'p_value' column must be numeric and contain no missing values.")
+    }
+    
+    # 9. Check polarity column
+    valid_polarity <- c("positive", "negative")
+    if (any(is.na(feature_table_marker$polarity))) {
+      stop("Error: 'polarity' column must not contain NA values.")
+    }
+    if (any(grepl("\\s", feature_table_marker$polarity))) {
+      stop("Error: 'polarity' column must not contain spaces.")
+    }
+    if (!all(feature_table_marker$polarity %in% valid_polarity)) {
+      stop("Error: 'polarity' must only contain 'positive' or 'negative'.")
+    }
+    
+    # If all checks pass
+    message("feature_table_marker is correct.")
+  }
+
+# Example usage:
+# check_feature_table_marker(feature_table_marker)

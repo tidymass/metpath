@@ -46,7 +46,12 @@ Imports:
     rlang,
     massdataset,
     Rdisop,
-    masstools
+    masstools,
+    patchwork,
+    BiocParallel,
+    igraph,
+    ggsci,
+    MASS
 License: GPL-2 | file LICENSE
 RoxygenNote: 7.3.2
 Suggests: 

@@ -7,7 +7,7 @@
 #' @param remain_idx Which pathways you want to remain (remain_idx).
 #' @export
 
-filter_pathway =
+filter_pathway <-
   function(object,
            class,
            remain_idx) {

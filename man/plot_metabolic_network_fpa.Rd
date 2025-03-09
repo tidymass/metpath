@@ -8,8 +8,10 @@ plot_metabolic_network_fpa(
   fpa_result,
   feature_table_marker,
   include_feature = FALSE,
+  node_color_by_module = FALSE,
   include_hidden_metabolites = FALSE,
-  add_compound_name = TRUE
+  add_compound_name = TRUE,
+  layout = "fr"
 )
 }
 \arguments{
@@ -22,11 +24,16 @@ and `annotation_table`.}
 \item{include_feature}{Logical. Whether to include detected metabolic features in the plot.
 Default is `FALSE`.}
 
+\item{node_color_by_module}{Logical. When doesn't include features (include_feature = FALSE),
+whether set the colors of the nodes by metabolics modules.}
+
 \item{include_hidden_metabolites}{Logical. Whether to include hidden metabolites in the plot.
 Default is `FALSE`.}
 
 \item{add_compound_name}{Logical. Whether to add compound names as labels in
 the visualization. Default is `TRUE`.}
+
+\item{layout}{The layout of the network, such as `kk` or `fr`.}
 }
 \value{
 A `ggplot2` object representing the metabolic network.
