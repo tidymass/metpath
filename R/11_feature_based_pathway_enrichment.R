@@ -731,7 +731,6 @@ perform_fpa <-
           KEGG.ID %in% final_metabolite_id
       )
     
-    
     # ####not in the workflow
     # calculate_redundance(annotation_table_final)
     #
@@ -858,8 +857,10 @@ perform_fpa <-
       )
     
     message("Enriching pathways for each metabolic module...\n")
+    
     enriched_pathways_list <-
       vector("list", length = nrow(metabolic_module_result))
+    
     names(enriched_pathways_list) <- metabolic_module_result$Name
     
     for (i in 1:sum(metabolic_module_result$p_value < 0.05)) {

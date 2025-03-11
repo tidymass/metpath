@@ -33,3 +33,8 @@
 # Version 1.0.9 (2025-03-03)
 
 * Add more pathways for enrich_pathways function.
+
+
+# Version 1.0.10 (2025-03-11)
+
+* Fix bug.

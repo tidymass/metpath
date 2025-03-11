@@ -1,8 +1,8 @@
 Package: metpath
 Type: Package
 Title: Pathway analysis for metabolomics data
-Version: 1.0.9
-Date: 2025-03-03
+Version: 1.0.10
+Date: 2025-03-11
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",

@@ -541,7 +541,7 @@ enrich_metabolic_pathway <-
           function_name = "enrich_hmdb()",
           parameter = list(
             query_id = query_id,
-            query_type = query_type,
+            query_type = "compound",
             id_type = id_type,
             pathway_database = paste(
               pathway_database@database_info$source,
